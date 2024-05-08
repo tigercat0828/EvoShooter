@@ -5,12 +5,12 @@ using Unity.VisualScripting;
 using UnityEditor.Search;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour {
-    // Here is Zombie
+public class Tank : MonoBehaviour {
+    // high health point, slow movement speed
     public Transform target;
     public float moveSpeed;
     public float rotateSpeed = 0.0025f;
-    
+
     private Rigidbody2D rb;
 
     private void Awake() {
@@ -44,7 +44,8 @@ public class Enemy : MonoBehaviour {
         if (other.gameObject.CompareTag("Player")) {
             Destroy(other.gameObject); // DoDamage
             target = null;
-        }else if (other.gameObject.CompareTag("Bullet") ){
+        }
+        else if (other.gameObject.CompareTag("Bullet")) {
             Destroy(other.gameObject);
             Destroy(gameObject);
         }

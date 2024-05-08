@@ -20,6 +20,7 @@ public class EnemySpawner : MonoBehaviour
             int random = Random.Range(0, enemyPrefab.Length);
             GameObject enemyToSpawn = enemyPrefab[random];
             Instantiate(enemyToSpawn, transform.position, Quaternion.identity);
+            Debug.Log("Spawn");
         }
     }
 
