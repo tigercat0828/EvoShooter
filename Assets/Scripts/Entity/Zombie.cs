@@ -43,9 +43,12 @@ public class Zombie : MonoBehaviour, IEntity {
         if (other.gameObject.CompareTag("Player")) {
             Destroy(other.gameObject); // DoDamage
             target = null;
-        }else if (other.gameObject.CompareTag("Bullet") ){
+            HumanPlayLevelManager.manager.GameOver();
+        }
+        else if (other.gameObject.CompareTag("Bullet") ){
             Destroy(other.gameObject);
             Destroy(gameObject);
+            HumanPlayLevelManager.manager.IncreaseScore(1);
         }
     }
 
