@@ -22,4 +22,9 @@ public class Bullet : MonoBehaviour
     private void FixedUpdate() {
         rigidbody.velocity = transform.up * speed;
     }
+    public void OnCollisionEnter2D(Collision2D collision) {
+        Debug.Log("bullet disappear");
+        Destroy(gameObject);
+    }
+
 }

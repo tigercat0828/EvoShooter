@@ -19,7 +19,7 @@ public class HumanPlayLevelManager : MonoBehaviour
     public SaveData data;
     private void Awake() {
         manager = this;
-        SaveSystem.Initialize();
+        SystemIO.Initialize();
         data = new SaveData(0);
         gameOverScreen.SetActive(false);
         
@@ -31,15 +31,7 @@ public class HumanPlayLevelManager : MonoBehaviour
 
         gameOverScreen.SetActive(true);
         scoreText.text = $"Score: {score}";
-        string loadedData = SaveSystem.Load("highscore");
-        if(loadedData != null) {
-            data = JsonUtility.FromJson<SaveData>(loadedData);
-        }
-        if(score > data.highScore) {
-            data.highScore = score;
-            string saveData = JsonUtility.ToJson(data);
-            SaveSystem.Save("highscore", saveData);
-        }
+        SystemIO.SaveHighscore(data,score);
         highScoreText.text = $"High Score : {data.highScore}";
     }
     public void ReplayGame() {
