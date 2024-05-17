@@ -1,15 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour
-{
+public class EnemySpawner : MonoBehaviour {
     [SerializeField] private float SpawnTime = 1f;
     [SerializeField] private GameObject[] enemyPrefab;
     private float spawnTimer = 0;
 
     private void Update() {
-        if(spawnTimer > SpawnTime) {
+        if (spawnTimer > SpawnTime) {
             spawnTimer = 0;
             int random = Random.Range(0, enemyPrefab.Length);
             GameObject enemyToSpawn = enemyPrefab[random];
@@ -17,6 +14,6 @@ public class EnemySpawner : MonoBehaviour
         }
         spawnTimer += Time.deltaTime;
     }
-    
+
 
 }

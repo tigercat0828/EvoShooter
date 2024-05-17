@@ -1,30 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
-{
+public class Bullet : MonoBehaviour {
     [Range(1, 10)]
     [SerializeField] private float speed = 10f;
 
     [Range(1, 10)]
     [SerializeField] private float lifeTime = 3f;
 
-    private Rigidbody2D rigidbody;
-
-    private void Awake() {
-        rigidbody = GetComponent<Rigidbody2D>();
-    }
+    public int Damage { get; set; } = 10;
 
     private void Start() {
         Destroy(gameObject, lifeTime);
     }
-    private void FixedUpdate() {
-        rigidbody.velocity = transform.up * speed;
+    private void Update() {
+        transform.position += transform.up * speed * Time.deltaTime;
     }
     public void OnCollisionEnter2D(Collision2D collision) {
-        Debug.Log("bullet disappear");
+        IEntity entity = collision.gameObject.GetComponent<IEntity>();
+        entity?.TakeDamage(Damage);
         Destroy(gameObject);
     }
-
 }

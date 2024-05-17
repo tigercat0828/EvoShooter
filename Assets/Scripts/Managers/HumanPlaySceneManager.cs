@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class HumanPlaySceneManager : MonoBehaviour
-{
+public class HumanPlaySceneManager : MonoBehaviour {
 
     public enum GameStates {
         Pause, Running, End
@@ -22,7 +19,7 @@ public class HumanPlaySceneManager : MonoBehaviour
         SystemIO.Initialize();
         data = new SaveData(0);
         //gameOverScreen.SetActive(false);
-        
+
     }
     private void Start() {
         GameState = GameStates.Running;
@@ -31,7 +28,7 @@ public class HumanPlaySceneManager : MonoBehaviour
 
         gameOverScreen.SetActive(true);
         scoreText.text = $"Score: {score}";
-        SystemIO.SaveHighscore(data,score);
+        SystemIO.SaveHighscore(data, score);
         highScoreText.text = $"High Score : {data.highScore}";
     }
     public void ReplayGame() {

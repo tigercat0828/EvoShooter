@@ -2,8 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ScrollingBackground : MonoBehaviour
-{
+public class ScrollingBackground : MonoBehaviour {
     [SerializeField] private RawImage image;
     [SerializeField] private float x, y;
 

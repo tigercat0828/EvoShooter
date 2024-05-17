@@ -203,11 +203,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc1d8e6ef71ffd646931b7c8a817d8d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  moveSpeed: 1
-  rotateSpeed: 0.05
-  bulletPrefab: {fileID: 525556104829182299, guid: 438672329d156e44ab9fdde42bb2f902, type: 3}
+  MoveSpeed: 2
+  RotateSpeed: 0.0025
+  FireRate: 1
+  ViewDistance: 10
   distanceToShoot: 8
   distanceToStop: 5
-  fireRate: 1
+  target: {fileID: 0}
+  bulletPrefab: {fileID: 525556104829182299, guid: 438672329d156e44ab9fdde42bb2f902, type: 3}
   FirePoint: {fileID: 434818951700819991}
