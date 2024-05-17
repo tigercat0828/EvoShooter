@@ -1,10 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
-using System;
-using UnityEditor;
-using UnityEngine.SocialPlatforms.Impl;
 public static class SystemIO
 {
     public static readonly string SAVE_FOLDER = Path.Combine(Application.persistentDataPath, "saves");

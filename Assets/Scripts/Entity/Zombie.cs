@@ -16,12 +16,12 @@ public class Zombie : Entity {
         if (other.gameObject.CompareTag("Player")) {
             Destroy(other.gameObject); // DoDamage
             Target = null;
-            HumanPlayLevelManager.manager.GameOver();
+            HumanPlaySceneManager.manager.GameOver();
         }
         else if (other.gameObject.CompareTag("Bullet") ){
             Destroy(other.gameObject);
             Destroy(gameObject);
-            HumanPlayLevelManager.manager.IncreaseScore(1);
+            HumanPlaySceneManager.manager.IncreaseScore(1);
         }
     }
 

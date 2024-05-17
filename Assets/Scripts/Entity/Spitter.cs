@@ -75,12 +75,12 @@ public class Spitter : MonoBehaviour {
             target = null;
 
             // TODO : fix as health system
-            HumanPlayLevelManager.manager.GameOver();
+            HumanPlaySceneManager.manager.GameOver();
         }
         else if (other.gameObject.CompareTag("Bullet")) {
             Destroy(other.gameObject);
             Destroy(gameObject);
-            HumanPlayLevelManager.manager.IncreaseScore(2);
+            HumanPlaySceneManager.manager.IncreaseScore(2);
         }
     }
 }

@@ -1439,7 +1439,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 948178034}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09025763094d42e43b1c9f79ebdfd2d1, type: 3}
+  m_Script: {fileID: 11500000, guid: 8b8e4fa06cfd2cb4baa09e8a45409de7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gameOverScreen: {fileID: 1869522895}
@@ -2214,7 +2214,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1869522896
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2319,7 +2319,7 @@ Transform:
   m_GameObject: {fileID: 2116347056}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 4.74, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

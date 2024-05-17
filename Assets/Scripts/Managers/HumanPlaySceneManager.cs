@@ -4,13 +4,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class HumanPlayLevelManager : MonoBehaviour
+public class HumanPlaySceneManager : MonoBehaviour
 {
 
     public enum GameStates {
         Pause, Running, End
     }
-    public static HumanPlayLevelManager manager;
+    public static HumanPlaySceneManager manager;
     public GameObject gameOverScreen;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI highScoreText;
@@ -21,7 +21,7 @@ public class HumanPlayLevelManager : MonoBehaviour
         manager = this;
         SystemIO.Initialize();
         data = new SaveData(0);
-        gameOverScreen.SetActive(false);
+        //gameOverScreen.SetActive(false);
         
     }
     private void Start() {

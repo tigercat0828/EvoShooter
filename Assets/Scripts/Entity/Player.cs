@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+
     [SerializeField] private float _moveSpeed = 5f;
 
     [SerializeField] private float _fireRate = 0.1f;
@@ -13,6 +14,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform gunBarrel;
 
     private Rigidbody2D _rigidbody;
+    
     
     private float mx;
     private float my;
@@ -49,7 +51,7 @@ public class Player : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.CompareTag("EnemyBullet")) {
             Destroy(gameObject);
-            HumanPlayLevelManager.manager.GameOver();
+            HumanPlaySceneManager.manager.GameOver();
         }
     }
 }
