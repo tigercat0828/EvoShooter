@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour, IEntity {
@@ -15,15 +14,18 @@ public class Player : MonoBehaviour, IEntity {
 
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform gunBarrel;
-    private float mx;
-    private float my;
-    private Vector2 mousePos;
+
+
+    private Vector2 _moveInput;
+    private Vector3 _mousePosition;
     private float fireTimer;
     private float fireInterval;
     private float damageTimer;
     private readonly float damageInterval = 0.5f;
+    private Rigidbody2D _rigidbody;
 
     private void Awake() {
+        _rigidbody = GetComponent<Rigidbody2D>();
         fireInterval = 1 / FireRate;
         CurrentHP = HealthPoint;
     }
@@ -34,18 +36,19 @@ public class Player : MonoBehaviour, IEntity {
         Steer();
         Shoot();
     }
-
+    private void FixedUpdate() {
+        _rigidbody.AddForce(MoveSpeed * _moveInput);
+    }
     private void Move() {
-        mx = Input.GetAxisRaw("Horizontal");
-        my = Input.GetAxisRaw("Vertical");
-        Vector2 direction = MoveSpeed * Time.deltaTime * new Vector2(mx, my).normalized;
-        transform.position += (Vector3)direction;
+
+        _moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
     }
     private void Steer() {
-        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        float angle = Mathf.Atan2(mousePos.y - transform.position.y, mousePos.x - transform.position.x) * Mathf.Rad2Deg - 90f;
+        _mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        _mousePosition.z = 0;
+        float angle = Mathf.Atan2(_mousePosition.y - transform.position.y, _mousePosition.x - transform.position.x) * Mathf.Rad2Deg-90f ;
         Quaternion targetRotation = Quaternion.Euler(0, 0, angle);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, RotateSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, RotateSpeed * Time.deltaTime);
     }
     private void Shoot() {
 
@@ -55,11 +58,7 @@ public class Player : MonoBehaviour, IEntity {
             bullet.GetComponent<Bullet>().Damage = AttackPoint;
         }
     }
-    private void OnCollisionEnter2D(Collision2D other) {
-        if (other.gameObject.CompareTag("EnemyBullet")) {
-            TakeDamage(10);
-        }
-    }
+
     public void TakeDamage(int amount) {
         if (damageTimer < 0) {
             damageTimer = damageInterval;
@@ -76,16 +75,9 @@ public class Player : MonoBehaviour, IEntity {
             CurrentHP = HealthPoint;
         }
     }
-    public void SetGene(Gene gene) {
-        HealthPoint = gene.HealthPoint;
-        AttackPoint = gene.AttackPoint;
-        FireRate = gene.FireRate;
-        MagazineSize = gene.MagazineSize;
-        MoveSpeed = gene.MoveSpeed;
-        RotateSpeed = gene.RotateSpeed;
-        ViewDistance = gene.ViewDistance;
-    }
-    public Gene GetGene() {
-        return new Gene(HealthPoint, AttackPoint, FireRate, MagazineSize, MoveSpeed, RotateSpeed, ViewDistance);
+
+
+    public void KnockBack(Vector2 direction, float strength) {
+        _rigidbody.AddForce(direction * strength, ForceMode2D.Impulse);
     }
 }

@@ -65,18 +65,4 @@ public class Spitter : MonoBehaviour {
         transform.localRotation = Quaternion.Slerp(transform.localRotation, q, RotateSpeed);
     }
 
-    private void OnCollisionEnter2D(Collision2D other) {
-        if (other.gameObject.CompareTag("Player")) {
-            Destroy(other.gameObject); // DoDamage
-            target = null;
-
-            // TODO : fix as health system
-            HumanPlaySceneManager.manager.GameOver();
-        }
-        else if (other.gameObject.CompareTag("Bullet")) {
-            Destroy(other.gameObject);
-            Destroy(gameObject);
-            HumanPlaySceneManager.manager.IncreaseScore(2);
-        }
-    }
 }

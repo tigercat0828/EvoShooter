@@ -16,8 +16,12 @@ public class Bullet : MonoBehaviour {
         transform.position += transform.up * speed * Time.deltaTime;
     }
     public void OnCollisionEnter2D(Collision2D collision) {
-        IEntity entity = collision.gameObject.GetComponent<IEntity>();
-        entity?.TakeDamage(Damage);
+
+        if(collision.gameObject.TryGetComponent<IEntity>(out var entity)) {
+            Vector2 Direction = (collision.transform.position - transform.position).normalized;
+            entity.TakeDamage(Damage);
+            entity.KnockBack(Direction.normalized, 50);
+        }
         Destroy(gameObject);
     }
 }
