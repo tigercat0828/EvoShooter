@@ -99,11 +99,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e33e750628e319a4d81f6ad9c2d22ca2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 3
-  RotateSpeed: 0.05
-  HealthPoint: 100
-  AttackPoint: 10
-  CurrentHP: 100
+  gHealthPoint: 100
+  gAttackPoint: 10
+  gMoveSpeed: 10
+  gRotateSpeed: 30
+  _CurrentHP: 0
 --- !u!61 &2333647117597884103
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -162,8 +162,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_LinearDrag: 3
+  m_AngularDrag: 100
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:

@@ -2,42 +2,39 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, IEntity {
 
-    public int HealthPoint = 100;
-    public int AttackPoint = 10;
-    public float FireRate = 2;
-    public int MagazineSize = 10;
-    public float MoveSpeed = 3;
-    public float RotateSpeed = 3f;
-    public float ViewDistance = 10;
+    public int gHealthPoint = 100;
+    public int gAttackPoint = 10;
+    public float gMoveSpeed = 15;
+    public float gRotateSpeed = 60f;
+    public float gFireRate = 2;
+    public int gMagazineSize = 10;
+    public float gViewDistance = 10;
 
-    public int CurrentHP;
+    public int _CurrentHP;
 
-    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private Bullet bulletPrefab;
     [SerializeField] private Transform gunBarrel;
-
 
     private Vector2 _moveInput;
     private Vector3 _mousePosition;
-    private float fireTimer;
-    private float fireInterval;
-    private float damageTimer;
-    private readonly float damageInterval = 0.5f;
+
+    private float _fireTimer;
+    private float _fireInterval;
     private Rigidbody2D _rigidbody;
 
     private void Awake() {
         _rigidbody = GetComponent<Rigidbody2D>();
-        fireInterval = 1 / FireRate;
-        CurrentHP = HealthPoint;
+        _fireInterval = 1 / gFireRate;
+        _CurrentHP = gHealthPoint;
     }
     private void Update() {
-        fireTimer -= Time.deltaTime;
-        damageTimer -= Time.deltaTime;
+        _fireTimer -= Time.deltaTime;
         Move();
         Steer();
         Shoot();
     }
     private void FixedUpdate() {
-        _rigidbody.AddForce(MoveSpeed * _moveInput);
+        _rigidbody.AddForce(gMoveSpeed * _moveInput);
     }
     private void Move() {
 
@@ -48,31 +45,28 @@ public class Player : MonoBehaviour, IEntity {
         _mousePosition.z = 0;
         float angle = Mathf.Atan2(_mousePosition.y - transform.position.y, _mousePosition.x - transform.position.x) * Mathf.Rad2Deg-90f ;
         Quaternion targetRotation = Quaternion.Euler(0, 0, angle);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, RotateSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, gRotateSpeed * Time.deltaTime);
     }
     private void Shoot() {
 
-        if (Input.GetMouseButton(0) && fireTimer < 0f) {
-            fireTimer = fireInterval;
-            var bullet = Instantiate(bulletPrefab, gunBarrel.position, gunBarrel.rotation);
-            bullet.GetComponent<Bullet>().Damage = AttackPoint;
+        if (Input.GetMouseButton(0) && _fireTimer < 0f) {
+            _fireTimer = _fireInterval;
+            Bullet bullet = Instantiate(bulletPrefab, gunBarrel.position, gunBarrel.rotation);
+            bullet.Damage = gAttackPoint;
         }
     }
 
     public void TakeDamage(int amount) {
-        if (damageTimer < 0) {
-            damageTimer = damageInterval;
-            CurrentHP -= amount;
-            if (CurrentHP < 0) {
-                Destroy(gameObject);
-                HumanPlaySceneManager.manager.GameOver();
-            }
+        _CurrentHP -= amount;
+        if (_CurrentHP < 0) {
+            Destroy(gameObject);
+            HumanPlaySceneManager.manager.GameOver();
         }
     }
     public void TakeHeal(int amount) {
-        CurrentHP += amount;
-        if (CurrentHP > HealthPoint) {
-            CurrentHP = HealthPoint;
+        _CurrentHP += amount;
+        if (_CurrentHP > gHealthPoint) {
+            _CurrentHP = gHealthPoint;
         }
     }
 

@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 4037267182118097027}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.00000011921, y: 0.633, z: 0}
+  m_LocalPosition: {x: -0.00000011921, y: 0.77, z: 0}
   m_LocalScale: {x: 0.13, y: 0.55, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -189,8 +189,8 @@ MonoBehaviour:
   AttackPoint: 10
   FireRate: 2
   MagazineSize: 10
-  MoveSpeed: 30
-  RotateSpeed: 0.05
+  MoveSpeed: 10
+  RotateSpeed: 60
   ViewDistance: 10
   CurrentHP: 0
   bulletPrefab: {fileID: 525556104829182299, guid: 1cbfe2046c5150349ab09e404af6d681, type: 3}
@@ -243,8 +243,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 2
-  m_AngularDrag: 0.05
+  m_LinearDrag: 3
+  m_AngularDrag: 100
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -268,7 +268,7 @@ GameObject:
   - component: {fileID: 6509976476613767811}
   - component: {fileID: 3958213296159056808}
   m_Layer: 0
-  m_Name: Nought
+  m_Name: Aim
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -327,8 +327,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2079211819
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f0b8e687734d112409d4f0ab3f0f05c0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

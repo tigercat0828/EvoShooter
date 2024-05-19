@@ -18,9 +18,8 @@ public class Bullet : MonoBehaviour {
     public void OnCollisionEnter2D(Collision2D collision) {
 
         if(collision.gameObject.TryGetComponent<IEntity>(out var entity)) {
-            Vector2 Direction = (collision.transform.position - transform.position).normalized;
             entity.TakeDamage(Damage);
-            entity.KnockBack(Direction.normalized, 50);
+            entity.KnockBack(transform.up, 8);
         }
         Destroy(gameObject);
     }

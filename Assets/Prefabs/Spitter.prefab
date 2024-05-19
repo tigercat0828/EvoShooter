@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 8652775327964647390}
   - component: {fileID: 3667316420926337195}
   - component: {fileID: 1884065056795480458}
+  - component: {fileID: 6994770213929743409}
   m_Layer: 0
   m_Name: Spitter
   m_TagString: Untagged
@@ -132,8 +133,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_LinearDrag: 3
+  m_AngularDrag: 100
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -203,12 +204,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc1d8e6ef71ffd646931b7c8a817d8d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 2
-  RotateSpeed: 0.0025
-  FireRate: 1
-  ViewDistance: 10
-  distanceToShoot: 8
-  distanceToStop: 5
-  target: {fileID: 0}
-  bulletPrefab: {fileID: 525556104829182299, guid: 438672329d156e44ab9fdde42bb2f902, type: 3}
-  FirePoint: {fileID: 434818951700819991}
+  gHealthPoint: 100
+  gAttackPoint: 10
+  gMoveSpeed: 8
+  gRotateSpeed: 60
+  gViewDistance: 5
+  gFireRate: 1
+  _CurrentHP: 0
+  _bulletPrefab: {fileID: 439943050817960331, guid: 438672329d156e44ab9fdde42bb2f902, type: 3}
+  _FirePoint: {fileID: 434818951700819991}
+  _distanceToStop: 0
+--- !u!114 &6994770213929743409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5596511319873272239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95413b3f04023414283c612281038689, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 0
