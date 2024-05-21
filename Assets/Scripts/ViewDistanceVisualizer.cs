@@ -6,7 +6,7 @@ public class ViewDistanceVisualizer : MonoBehaviour
 {
     public float radius;
     public void Start() {
-        radius =  GetComponentInParent<Spitter>().gViewDistance;
+        radius =  GetComponentInParent<Spitter>().ViewDistance;
     }
     private void OnDrawGizmos() {
         Gizmos.color = Color.red;

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1675489045238247837}
   m_Layer: 0
   m_Name: Zombie
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,10 +99,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e33e750628e319a4d81f6ad9c2d22ca2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gHealthPoint: 100
-  gAttackPoint: 10
-  gMoveSpeed: 10
-  gRotateSpeed: 30
+  HealthPoint: 100
+  AttackPoint: 10
+  MoveSpeed: 10
+  RotateSpeed: 30
   _CurrentHP: 0
 --- !u!61 &2333647117597884103
 BoxCollider2D:

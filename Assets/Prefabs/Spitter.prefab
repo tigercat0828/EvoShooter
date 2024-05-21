@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 6994770213929743409}
   m_Layer: 0
   m_Name: Spitter
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -204,16 +204,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc1d8e6ef71ffd646931b7c8a817d8d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gHealthPoint: 100
-  gAttackPoint: 10
-  gMoveSpeed: 8
-  gRotateSpeed: 60
-  gViewDistance: 5
-  gFireRate: 1
+  HealthPoint: 80
+  AttackPoint: 10
+  MoveSpeed: 10
+  RotateSpeed: 50
+  ViewDistance: 8
+  FireRate: 1
+  _state: 0
   _CurrentHP: 0
   _bulletPrefab: {fileID: 439943050817960331, guid: 438672329d156e44ab9fdde42bb2f902, type: 3}
   _FirePoint: {fileID: 434818951700819991}
-  _distanceToStop: 0
+  _WanderDirectionChangeInterval: 3
 --- !u!114 &6994770213929743409
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,78 +1,86 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Spitter : MonoBehaviour, IEntity {
-    // Here is Zombie
-    public int gHealthPoint = 100;
-    public int gAttackPoint = 10;
-    public float gMoveSpeed = 10;
-    public float gRotateSpeed = 60f;
-    public float gViewDistance = 5f;
-    public float gFireRate = 1;
+    // Basic status
+    public int HealthPoint = 80;
+    public int AttackPoint = 10;
+    public float MoveSpeed = 10;
+    public float RotateSpeed = 50f;
+    //------------------------------
+    public float ViewDistance = 5f;
+    public float FireRate = 1;
 
-
-    [SerializeField] private int _CurrentHP;
+    [SerializeField] Estate _state;
+    [SerializeField] protected int _CurrentHP;
     [SerializeField] private Bullet _bulletPrefab;
     [SerializeField] private Transform _FirePoint;
+
     private Transform _target;
     private Rigidbody2D _rigidbody;
-    
-    public float _distanceToStop;
-    private bool IsTargetFound;
+
+    private float _distanceToStop;
     private float _fireInterval;
     private float _fireTimer;
     // wander
     private Vector2 _wanderDirection;
-    [SerializeField] private float _timeToChangeDirection = 2f;
-    private float _directionChangeTimer;
+    [SerializeField] private float _WanderDirectionChangeInterval = 6f;
+    private float _WanderDirectionChangeTimer;
 
     private void Awake() {
         _rigidbody = GetComponent<Rigidbody2D>();
-        _distanceToStop = gViewDistance * 0.8f;
-        _fireInterval = 1 / gFireRate;
-        _CurrentHP = gHealthPoint;
+        _distanceToStop = ViewDistance * 0.8f;
+        _fireInterval = 1 / FireRate;
+        _CurrentHP = HealthPoint;
     }
     private void Start() {
-        LocateTarget();
+        
+        LocateTarget(0);
+        _state = Estate.Wander;  
     }
     private void Update() {
         _fireTimer -= Time.deltaTime;
         AwareAgent();
-        if(IsTargetFound ) { 
-            RotateToTarget();
+
+        Quaternion targetRotation =new();
+        if (_state == Estate.TargetFound ) {
             Shoot();
+            // Rotate toward target
+            Vector2 targetDirection = _target.position - transform.position;
+            float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg - 90;
+            targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
         }
-        else {
-            Wander();
+        if (_state == Estate.Wander) { 
+            _WanderDirectionChangeTimer -= Time.deltaTime;
+            if (_WanderDirectionChangeTimer <= 0) {
+                _WanderDirectionChangeTimer = _WanderDirectionChangeInterval;
+                ChangeWanderDirection();
+            }
+            targetRotation = Quaternion.LookRotation(Vector3.forward, _wanderDirection);
         }
-        
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, RotateSpeed * Time.deltaTime);
     }
 
     private void Shoot() {
-        if (_fireTimer < 0f) {
+        float angle = Vector2.Angle(transform.up, _target.position - transform.position);
+        
+        if (_fireTimer < 0f && angle < 30) {
             _fireTimer = _fireInterval;
             Bullet bullet = Instantiate(_bulletPrefab, _FirePoint.position, _FirePoint.rotation);
-            bullet.Damage = gAttackPoint;
+            bullet.Damage = AttackPoint;
         }
-
     }
     private void FixedUpdate() {
-        if (IsTargetFound && Vector2.Distance(transform.position, _target.position) > _distanceToStop) {
-            _rigidbody.AddForce(transform.up * gMoveSpeed);
+        // 進入射程不會再向Agent靠近
+        if (_state == Estate.TargetFound && Vector2.Distance(transform.position, _target.position) > _distanceToStop) {
+            _rigidbody.AddForce(transform.up * MoveSpeed);
         }
-        if (!IsTargetFound) {
-            _rigidbody.AddForce(_wanderDirection.normalized * gMoveSpeed);
+        if (_state == Estate.Wander) {
+            //_rigidbody.AddForce(_wanderDirection.normalized * MoveSpeed);
+            _rigidbody.AddForce(transform.up * MoveSpeed);
         }
     }
-    private void LocateTarget() {
+    protected void LocateTarget(int group) {
         _target = GameObject.FindGameObjectWithTag("Player").transform;
-    }
-
-    private void RotateToTarget() {
-        Vector2 targetDirection = _target.position - transform.position;
-        float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg - 90;
-        Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
-        transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, gRotateSpeed);
     }
 
     public void TakeDamage(int amount) {
@@ -85,40 +93,23 @@ public class Spitter : MonoBehaviour, IEntity {
 
     public void TakeHeal(int amount) {
         _CurrentHP += amount;
-        if (_CurrentHP > gHealthPoint) {
-            _CurrentHP = gHealthPoint;
+        if (_CurrentHP > HealthPoint) {
+            _CurrentHP = HealthPoint;
         }
     }
 
     public void KnockBack(Vector2 direction, float strength) {
         _rigidbody.AddForce(direction * strength, ForceMode2D.Impulse);
     }
-    public void AwareAgent() {
-        if(Vector2.Distance(transform.position,_target.position) < gViewDistance) {
-            IsTargetFound = true;
+    protected void AwareAgent() {
+        if(Vector2.Distance(transform.position,_target.position) < ViewDistance) {
+            _state = Estate.TargetFound;
         }
         else {
-            IsTargetFound = false;
+            _state = Estate.Wander;
         }
     }
-    private void Wander() {
-        _directionChangeTimer -= Time.fixedDeltaTime;
-
-        if (_directionChangeTimer <= 0) {
-            ChangeWanderDirection();
-            _directionChangeTimer = _timeToChangeDirection;
-        }
-
-        // Apply the wandering direction as force
-        //_rigidbody.AddForce(_wanderDirection.normalized * gMoveSpeed);
-        //_rigidbody.AddForce(transform.up * gMoveSpeed);
-        // Optionally, you could also rotate towards the wander direction to make it look more natural
-        Quaternion toRotation = Quaternion.LookRotation(Vector3.forward, _wanderDirection);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, gRotateSpeed * Time.fixedDeltaTime);
-    }
-
-    private void ChangeWanderDirection() {
-        // Generate a new direction by choosing a random angle
+    protected void ChangeWanderDirection() {
         float angle = Random.Range(0, 360) * Mathf.Deg2Rad;
         _wanderDirection = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
     }
