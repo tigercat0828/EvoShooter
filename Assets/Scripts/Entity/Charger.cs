@@ -1,6 +1,8 @@
+
+using System.Collections;
 using UnityEngine;
 
-public class Spitter : MonoBehaviour, IEntity {
+public class Charger : MonoBehaviour, IEntity {
     // Basic status
     [SerializeField] Estate _state;
     public int HealthPoint = 80;
@@ -8,19 +10,19 @@ public class Spitter : MonoBehaviour, IEntity {
     public float MoveSpeed = 10;
     public float RotateSpeed = 50f;
     //------------------------------
-    public float ViewDistance = 10f;
-    public float FireRate = 1;
+    public float ViewDistance = 30f;
+    public float FireRate = 0.5f;
 
     [SerializeField] protected int _CurrentHP;
-    [SerializeField] private Bullet _bulletPrefab;
-    [SerializeField] private Transform _FirePoint;
 
     private Transform _target;
     private Rigidbody2D _rigidbody;
 
     private float _distanceToStop;
+    [SerializeField] public float _chargeStrength = 10;
     private float _fireInterval;
     private float _fireTimer;
+
     // wander
     private Vector2 _wanderDirection;
     [SerializeField] private float _WanderDirectionChangeInterval = 6f;
@@ -43,7 +45,7 @@ public class Spitter : MonoBehaviour, IEntity {
 
         Quaternion targetRotation = new();
         if (_state == Estate.TargetFound) {
-            Shoot();
+            Charge();
             // Rotate toward target
             Vector2 targetDirection = _target.position - transform.position;
             float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg - 90;
@@ -60,13 +62,20 @@ public class Spitter : MonoBehaviour, IEntity {
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, RotateSpeed * Time.deltaTime);
     }
 
-    private void Shoot() {
+    private void Charge() {
+        
         float angle = Vector2.Angle(transform.up, _target.position - transform.position);
 
-        if (_fireTimer < 0f && angle < 30) {
+        if (_fireTimer < 0f && angle < 10) {
             _fireTimer = _fireInterval;
-            Bullet bullet = Instantiate(_bulletPrefab, _FirePoint.position, _FirePoint.rotation);
-            bullet.SetStatus(AttackPoint, 10, BulletType.Enemy);
+            _rigidbody.AddForce(transform.up*_chargeStrength, ForceMode2D.Impulse);
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D other) {
+        if (other.gameObject.CompareTag("Player")) {
+            IEntity player = other.gameObject.GetComponent<IEntity>();
+            player.TakeDamage(AttackPoint);
+            player.KnockBack(transform.up, 16);
         }
     }
     private void FixedUpdate() {
@@ -111,5 +120,4 @@ public class Spitter : MonoBehaviour, IEntity {
         float angle = Random.Range(0, 360) * Mathf.Deg2Rad;
         _wanderDirection = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
     }
-
 }

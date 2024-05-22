@@ -18,6 +18,9 @@ public class HumanPlaySceneManager : MonoBehaviour {
         manager = this;
         SystemIO.Initialize();
         data = new SaveData(0);
+        score = 0;
+        GameSettings.LoadSettings();
+
         //gameOverScreen.SetActive(false);
 
     }

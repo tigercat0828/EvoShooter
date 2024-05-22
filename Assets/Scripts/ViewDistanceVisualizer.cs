@@ -1,12 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
-public class ViewDistanceVisualizer : MonoBehaviour
-{
+public class ViewDistanceVisualizer : MonoBehaviour {
     public float radius;
     public void Start() {
-        radius =  GetComponentInParent<Spitter>().ViewDistance;
+        if (TryGetComponent<Spitter>(out var spitter)) {
+            radius = spitter.ViewDistance;
+        }
+        else if (TryGetComponent<Tank>(out var tank)) {
+            radius = tank.ViewDistance;
+        }
+        else if (TryGetComponent<Charger>(out var charger)) {
+            radius = charger.ViewDistance;
+        }
     }
     private void OnDrawGizmos() {
         Gizmos.color = Color.red;

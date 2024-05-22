@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public static class GameSettingManager {
+public static class GameSettings {
     public static SettingData options = new();
     public readonly static string SETTINGS_FILENAME = "GamesSettings";
     public static void LoadSettings() {

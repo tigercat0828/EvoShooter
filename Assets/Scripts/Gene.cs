@@ -6,7 +6,7 @@ public class Gene {
     public float MoveSpeed;
     public float RotateSpeed;
     public float ViewDistance;
-    
+
     public Gene(int healthPoint, int attackPoint, float fireRate, int magazineSize, float moveSpeed, float rotateSpeed, float viewDistance) {
         HealthPoint = healthPoint;
         AttackPoint = attackPoint;

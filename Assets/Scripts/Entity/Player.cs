@@ -7,6 +7,7 @@ public class Player : MonoBehaviour, IEntity {
     public float gMoveSpeed = 15;
     public float gRotateSpeed = 60f;
     public float gFireRate = 2;
+    public float gBulletSpeed = 10;
     public int gMagazineSize = 10;
     public float gViewDistance = 10;
 
@@ -43,7 +44,7 @@ public class Player : MonoBehaviour, IEntity {
     private void Steer() {
         _mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         _mousePosition.z = 0;
-        float angle = Mathf.Atan2(_mousePosition.y - transform.position.y, _mousePosition.x - transform.position.x) * Mathf.Rad2Deg-90f ;
+        float angle = Mathf.Atan2(_mousePosition.y - transform.position.y, _mousePosition.x - transform.position.x) * Mathf.Rad2Deg - 90f;
         Quaternion targetRotation = Quaternion.Euler(0, 0, angle);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, gRotateSpeed * Time.deltaTime);
     }
@@ -52,7 +53,7 @@ public class Player : MonoBehaviour, IEntity {
         if (Input.GetMouseButton(0) && _fireTimer < 0f) {
             _fireTimer = _fireInterval;
             Bullet bullet = Instantiate(bulletPrefab, gunBarrel.position, gunBarrel.rotation);
-            bullet.Damage = gAttackPoint;
+            bullet.SetStatus(gAttackPoint, gBulletSpeed);
         }
     }
 
