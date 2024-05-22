@@ -3,13 +3,12 @@ using UnityEngine;
 public class Spitter : MonoBehaviour, IEntity {
     // Basic status
     [SerializeField] Estate _state;
-    public int HealthPoint = 80;
-    public int AttackPoint = 10;
-    public float MoveSpeed = 10;
-    public float RotateSpeed = 50f;
-    //------------------------------
-    public float ViewDistance = 10f;
-    public float FireRate = 1;
+    public int      HealthPoint          ;
+    public int      AttackPoint          ;
+    public float    MoveSpeed          ;
+    public float    RotateSpeed        ;
+    public float    ViewDistance       ;
+    public float    FireRate;
 
     [SerializeField] protected int _CurrentHP;
     [SerializeField] private Bullet _bulletPrefab;
@@ -23,14 +22,21 @@ public class Spitter : MonoBehaviour, IEntity {
     private float _fireTimer;
     // wander
     private Vector2 _wanderDirection;
-    [SerializeField] private float _WanderDirectionChangeInterval = 6f;
-    private float _WanderDirectionChangeTimer;
+    [SerializeField] private float _wanderDirectionChangeInterval = 6f;
+    private float _wanderDirectionChangeTimer;
 
     private void Awake() {
         _rigidbody = GetComponent<Rigidbody2D>();
+        _CurrentHP = HealthPoint;
+        HealthPoint = GameSettings.options.Spitter_HealthPoint;
+        AttackPoint = GameSettings.options.Spitter_AttackPoint;
+        MoveSpeed = GameSettings.options.Spitter_MoveSpeed;
+        RotateSpeed = GameSettings.options.Spitter_RotateSpeed;
+        ViewDistance = GameSettings.options.Spitter_ViewDistance;
+        FireRate = GameSettings.options.Spitter_FireRate;
+
         _distanceToStop = ViewDistance * 0.8f;
         _fireInterval = 1 / FireRate;
-        _CurrentHP = HealthPoint;
     }
     private void Start() {
 
@@ -50,9 +56,9 @@ public class Spitter : MonoBehaviour, IEntity {
             targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
         }
         if (_state == Estate.Wander) {
-            _WanderDirectionChangeTimer -= Time.deltaTime;
-            if (_WanderDirectionChangeTimer <= 0) {
-                _WanderDirectionChangeTimer = _WanderDirectionChangeInterval;
+            _wanderDirectionChangeTimer -= Time.deltaTime;
+            if (_wanderDirectionChangeTimer <= 0) {
+                _wanderDirectionChangeTimer = _wanderDirectionChangeInterval;
                 ChangeWanderDirection();
             }
             targetRotation = Quaternion.LookRotation(Vector3.forward, _wanderDirection);
@@ -79,7 +85,11 @@ public class Spitter : MonoBehaviour, IEntity {
     protected void LocateTarget(int group) {
         _target = GameObject.FindGameObjectWithTag("Player").transform;
     }
-
+    public void OnCollisionEnter2D(Collision2D other) {
+        if (other.gameObject.CompareTag("Wall")) {
+            TurnBack();
+        }
+    }
     public void TakeDamage(int amount) {
         _CurrentHP -= amount;
         if (_CurrentHP < 0) {
@@ -111,5 +121,14 @@ public class Spitter : MonoBehaviour, IEntity {
         float angle = Random.Range(0, 360) * Mathf.Deg2Rad;
         _wanderDirection = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
     }
+    private void TurnBack() {
+        // Reverse direction by rotating 180 degrees
+        transform.Rotate(0f, 0f, 180f);
 
+        // Optionally change wander direction to avoid getting stuck
+        ChangeWanderDirection();
+
+        // Reset any forces applied during charge
+        _rigidbody.velocity = Vector2.zero;
+    }
 }

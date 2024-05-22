@@ -5,13 +5,13 @@ using UnityEngine;
 public class Charger : MonoBehaviour, IEntity {
     // Basic status
     [SerializeField] Estate _state;
-    public int HealthPoint = 80;
-    public int AttackPoint = 10;
-    public float MoveSpeed = 10;
-    public float RotateSpeed = 50f;
-    //------------------------------
-    public float ViewDistance = 30f;
-    public float FireRate = 0.5f;
+    public int HealthPoint;
+    public int AttackPoint;
+    public float MoveSpeed;
+    public float RotateSpeed;
+    public float ChargeSpeed;
+    public float ViewDistance;
+    public float FireRate;
 
     [SerializeField] protected int _CurrentHP;
 
@@ -19,20 +19,26 @@ public class Charger : MonoBehaviour, IEntity {
     private Rigidbody2D _rigidbody;
 
     private float _distanceToStop;
-    [SerializeField] public float _chargeStrength = 10;
     private float _fireInterval;
     private float _fireTimer;
-
     // wander
     private Vector2 _wanderDirection;
-    [SerializeField] private float _WanderDirectionChangeInterval = 6f;
-    private float _WanderDirectionChangeTimer;
+    [SerializeField] private float _wanderDirectionChangeInterval = 6f;
+    private float _wanderDirectionChangeTimer;
 
     private void Awake() {
         _rigidbody = GetComponent<Rigidbody2D>();
+        _CurrentHP = HealthPoint;
+        HealthPoint = GameSettings.options.Charger_HealthPoint;
+        AttackPoint = GameSettings.options.Charger_AttackPoint;
+        MoveSpeed = GameSettings.options.Charger_MoveSpeed;
+        RotateSpeed = GameSettings.options.Charger_RotateSpeed;
+        ChargeSpeed = GameSettings.options.Charger_ChargeSpeed;
+        ViewDistance = GameSettings.options.Charger_ViewDistance;
+        FireRate = GameSettings.options.Charger_FireRate;
+
         _distanceToStop = ViewDistance * 0.8f;
         _fireInterval = 1 / FireRate;
-        _CurrentHP = HealthPoint;
     }
     private void Start() {
 
@@ -52,9 +58,9 @@ public class Charger : MonoBehaviour, IEntity {
             targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
         }
         if (_state == Estate.Wander) {
-            _WanderDirectionChangeTimer -= Time.deltaTime;
-            if (_WanderDirectionChangeTimer <= 0) {
-                _WanderDirectionChangeTimer = _WanderDirectionChangeInterval;
+            _wanderDirectionChangeTimer -= Time.deltaTime;
+            if (_wanderDirectionChangeTimer <= 0) {
+                _wanderDirectionChangeTimer = _wanderDirectionChangeInterval;
                 ChangeWanderDirection();
             }
             targetRotation = Quaternion.LookRotation(Vector3.forward, _wanderDirection);
@@ -63,12 +69,12 @@ public class Charger : MonoBehaviour, IEntity {
     }
 
     private void Charge() {
-        
+
         float angle = Vector2.Angle(transform.up, _target.position - transform.position);
 
         if (_fireTimer < 0f && angle < 10) {
             _fireTimer = _fireInterval;
-            _rigidbody.AddForce(transform.up*_chargeStrength, ForceMode2D.Impulse);
+            _rigidbody.AddForce(transform.up * ChargeSpeed, ForceMode2D.Impulse);
         }
     }
     private void OnCollisionEnter2D(Collision2D other) {
@@ -76,6 +82,9 @@ public class Charger : MonoBehaviour, IEntity {
             IEntity player = other.gameObject.GetComponent<IEntity>();
             player.TakeDamage(AttackPoint);
             player.KnockBack(transform.up, 16);
+        }
+        else if (other.gameObject.CompareTag("Wall")) {
+            TurnBack();
         }
     }
     private void FixedUpdate() {
@@ -107,6 +116,16 @@ public class Charger : MonoBehaviour, IEntity {
 
     public void KnockBack(Vector2 direction, float strength) {
         _rigidbody.AddForce(direction * strength, ForceMode2D.Impulse);
+    }
+    private void TurnBack() {
+        // Reverse direction by rotating 180 degrees
+        transform.Rotate(0f, 0f, 180f);
+
+        // Optionally change wander direction to avoid getting stuck
+        ChangeWanderDirection();
+
+        // Reset any forces applied during charge
+        _rigidbody.velocity = Vector2.zero;
     }
     protected void AwareAgent() {
         if (Vector2.Distance(transform.position, _target.position) < ViewDistance) {

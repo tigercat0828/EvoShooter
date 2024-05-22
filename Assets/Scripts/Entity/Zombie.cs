@@ -2,34 +2,36 @@ using UnityEngine;
 
 
 public class Zombie : MonoBehaviour, IEntity {
-    public int HealthPoint = 100;
-    public int AttackPoint = 10;
-    public float MoveSpeed = 10f;
-    public float RotateSpeed = 30f;
+    public int HealthPoint;
+    public int AttackPoint;
+    public float MoveSpeed;
+    public float RotateSpeed;
 
     [SerializeField] private int _CurrentHP;
     private Transform _target;
     private Rigidbody2D _rigidbody;
 
-
     private void Awake() {
         _rigidbody = GetComponent<Rigidbody2D>();
         _CurrentHP = HealthPoint;
+        HealthPoint = GameSettings.options.Zombie_HealthPoint;
+        AttackPoint = GameSettings.options.Zombie_AttackPoint;
+        MoveSpeed = GameSettings.options.Zombie_MoveSpeed;
+        RotateSpeed = GameSettings.options.Zombie_RotateSpeed;
     }
     private void Start() {
         LocateTarget(0);
     }
     private void Update() {
-        RotateToTarget();
-    }
-    private void FixedUpdate() {
-        _rigidbody.AddForce(transform.up * MoveSpeed);
-    }
-    protected void RotateToTarget() {
+        // Rotate toward target
         Vector2 targetDirection = _target.position - transform.position;
         float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg - 90;
         Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, RotateSpeed * Time.deltaTime);
+
+    }
+    private void FixedUpdate() {
+        _rigidbody.AddForce(transform.up * MoveSpeed);
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
@@ -50,7 +52,6 @@ public class Zombie : MonoBehaviour, IEntity {
             HumanPlaySceneManager.manager.IncreaseScore(score);
         }
     }
-
     public void TakeHeal(int amount) {
         _CurrentHP += amount;
         if (_CurrentHP > HealthPoint) {

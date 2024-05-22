@@ -27,24 +27,16 @@ public class OptionSceneManager : MonoBehaviour {
     public TMP_InputField Score_Spitter;
     public TMP_InputField Score_Tank;
     public TMP_InputField Score_Charger;
-    public TMP_InputField Score_Wanderer;
     // Spawn Rate
     public TMP_InputField SpawnRate_Zombie;
     public TMP_InputField SpawnRate_Spitter;
     public TMP_InputField SpawnRate_Tank;
     public TMP_InputField SpawnRate_Charger;
-    public TMP_InputField SpawnRate_Wanderer;
     // Zombie Status
     public TMP_InputField Zombie_HealthPoint;
     public TMP_InputField Zombie_AttackPoint;
     public TMP_InputField Zombie_MoveSpeed;
     public TMP_InputField Zombie_RotateSpeed;
-    // Wander Status
-    public TMP_InputField Wanderer_HealthPoint;
-    public TMP_InputField Wanderer_AttackPoint;
-    public TMP_InputField Wanderer_MoveSpeed;
-    public TMP_InputField Wanderer_RotateSpeed;
-    public TMP_InputField Wanderer_ViewDistance;
     // Tank Status
     public TMP_InputField Tank_HealthPoint;
     public TMP_InputField Tank_AttackPoint;
@@ -99,13 +91,11 @@ public class OptionSceneManager : MonoBehaviour {
         GameSettings.options.SpawnRate_Zombie = int.Parse(SpawnRate_Zombie.text);
         GameSettings.options.SpawnRate_Spitter = int.Parse(SpawnRate_Spitter.text);
         GameSettings.options.SpawnRate_Tank = int.Parse(SpawnRate_Tank.text);
-        GameSettings.options.SpawnRate_Wanderer = int.Parse(SpawnRate_Wanderer.text);
         GameSettings.options.SpawnRate_Charger = int.Parse(SpawnRate_Charger.text);
 
         GameSettings.options.Score_Zombie = int.Parse(Score_Zombie.text);
         GameSettings.options.Score_Spitter = int.Parse(Score_Spitter.text);
         GameSettings.options.Score_Tank = int.Parse(Score_Tank.text);
-        GameSettings.options.Score_Wanderer = int.Parse(Score_Wanderer.text);
         GameSettings.options.Score_Charger = int.Parse(Score_Charger.text);
 
         GameSettings.options.Zombie_HealthPoint = int.Parse(Zombie_HealthPoint.text);
@@ -134,11 +124,6 @@ public class OptionSceneManager : MonoBehaviour {
         GameSettings.options.Charger_FireRate = float.Parse(Charger_FireRate.text);
         GameSettings.options.Charger_ViewDistance = float.Parse(Charger_ViewDistance.text);
 
-        GameSettings.options.Wanderer_HealthPoint = int.Parse(Wanderer_HealthPoint.text);
-        GameSettings.options.Wanderer_AttackPoint = int.Parse(Wanderer_AttackPoint.text);
-        GameSettings.options.Wanderer_MoveSpeed = float.Parse(Wanderer_MoveSpeed.text);
-        GameSettings.options.Wanderer_RotateSpeed = float.Parse(Wanderer_RotateSpeed.text);
-        GameSettings.options.Wanderer_ViewDistance = float.Parse(Wanderer_ViewDistance.text);
         GameSettings.SaveSettings();
     }
     public void LoadSettings() {
@@ -164,13 +149,11 @@ public class OptionSceneManager : MonoBehaviour {
         SpawnRate_Zombie.text = GameSettings.options.SpawnRate_Zombie.ToString();
         SpawnRate_Tank.text = GameSettings.options.SpawnRate_Tank.ToString();
         SpawnRate_Spitter.text = GameSettings.options.SpawnRate_Spitter.ToString();
-        SpawnRate_Wanderer.text = GameSettings.options.SpawnRate_Wanderer.ToString();
         SpawnRate_Charger.text = GameSettings.options.SpawnRate_Charger.ToString();
 
         Score_Zombie.text = GameSettings.options  .Score_Zombie.ToString();
         Score_Tank.text = GameSettings.options    .Score_Tank.ToString();
         Score_Spitter.text = GameSettings.options .Score_Spitter.ToString();
-        Score_Wanderer.text = GameSettings.options.Score_Wanderer.ToString();
         Score_Charger.text = GameSettings.options .Score_Charger.ToString();
 
         Zombie_HealthPoint.text = GameSettings.options.Zombie_HealthPoint.ToString();
@@ -197,14 +180,7 @@ public class OptionSceneManager : MonoBehaviour {
         Charger_RotateSpeed.text = GameSettings.options.Charger_RotateSpeed.ToString();
         Charger_ChargeSpeed.text = GameSettings.options.Charger_ChargeSpeed.ToString();
         Charger_FireRate.text = GameSettings.options.Charger_FireRate.ToString();
-        Charger_ViewDistance.text = GameSettings.options.Charger_ViewDistance.ToString();
-
-        Wanderer_HealthPoint.text = GameSettings.options.Wanderer_HealthPoint.ToString();
-        Wanderer_AttackPoint.text = GameSettings.options.Wanderer_AttackPoint.ToString();
-        Wanderer_MoveSpeed.text = GameSettings.options.Wanderer_MoveSpeed.ToString();
-        Wanderer_RotateSpeed.text = GameSettings.options.Wanderer_RotateSpeed.ToString();
-        Wanderer_ViewDistance.text = GameSettings.options.Wanderer_ViewDistance.ToString();
-
+        Charger_ViewDistance.text = GameSettings.options.Charger_ViewDistance.ToString();   
     }
 
 

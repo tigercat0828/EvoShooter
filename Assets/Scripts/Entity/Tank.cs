@@ -3,13 +3,14 @@ using UnityEngine;
 public class Tank : MonoBehaviour, IEntity {
 
     [SerializeField] Estate _state;
-    public int HealthPoint = 200;
-    public int AttackPoint = 20;
-    public float MoveSpeed = 5f;
-    public float RotateSpeed = 25f;
-    public float ViewDistance = 10f;
+    public int HealthPoint;
+    public int AttackPoint;
+    public float MoveSpeed;
+    public float RotateSpeed;
+    public float ViewDistance;
+
     [SerializeField] private int _CurrentHP;
-    [SerializeField] private float KnockResistance = 0.5f;
+    [SerializeField] private float _KnockResistance = 0.2f;
     private Transform _target;
     private Rigidbody2D _rigidbody;
 
@@ -21,6 +22,11 @@ public class Tank : MonoBehaviour, IEntity {
     private void Awake() {
         _rigidbody = GetComponent<Rigidbody2D>();
         _CurrentHP = HealthPoint;
+        HealthPoint = GameSettings.options.Tank_HealthPoint;
+        AttackPoint = GameSettings.options.Tank_AttackPoint;
+        MoveSpeed = GameSettings.options.Tank_MoveSpeed;
+        RotateSpeed = GameSettings.options.Tank_RotateSpeed;
+        ViewDistance = GameSettings.options.Tank_ViewDistance;
     }
     private void Start() {
         LocateTarget(0);
@@ -55,6 +61,9 @@ public class Tank : MonoBehaviour, IEntity {
             player.TakeDamage(AttackPoint);
             player.KnockBack(transform.up, 8);
         }
+        else if (other.gameObject.CompareTag("Wall")) {
+            TurnBack();
+        }
     }
     public void LocateTarget(int group) {
         _target = GameObject.FindGameObjectWithTag("Player").transform;
@@ -75,7 +84,7 @@ public class Tank : MonoBehaviour, IEntity {
         }
     }
     public void KnockBack(Vector2 direction, float strength) {
-        _rigidbody.AddForce(direction * strength * KnockResistance, ForceMode2D.Impulse);
+        _rigidbody.AddForce(_KnockResistance * strength * direction, ForceMode2D.Impulse);
     }
 
     protected void AwareAgent() {
@@ -89,5 +98,16 @@ public class Tank : MonoBehaviour, IEntity {
     protected void ChangeWanderDirection() {
         float angle = Random.Range(0, 360) * Mathf.Deg2Rad;
         _wanderDirection = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+    }
+
+    private void TurnBack() {
+        // Reverse direction by rotating 180 degrees
+        transform.Rotate(0f, 0f, 180f);
+
+        // Optionally change wander direction to avoid getting stuck
+        ChangeWanderDirection();
+
+        // Reset any forces applied during charge
+        _rigidbody.velocity = Vector2.zero;
     }
 }

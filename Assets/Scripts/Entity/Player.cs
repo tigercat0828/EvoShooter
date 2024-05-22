@@ -29,6 +29,7 @@ public class Player : MonoBehaviour, IEntity {
         _CurrentHP = gHealthPoint;
     }
     private void Update() {
+
         _fireTimer -= Time.deltaTime;
         Move();
         Steer();

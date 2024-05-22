@@ -5,6 +5,11 @@ public class EnemySpawner : MonoBehaviour {
     [SerializeField] private GameObject[] enemyPrefab;
     private float spawnTimer = 0;
 
+    private void Start() {
+        int random = Random.Range(0, enemyPrefab.Length);
+        GameObject enemyToSpawn = enemyPrefab[random];
+        Instantiate(enemyToSpawn, transform.position, Quaternion.identity);
+    }
     private void Update() {
         if (spawnTimer > SpawnTime) {
             spawnTimer = 0;
@@ -14,6 +19,4 @@ public class EnemySpawner : MonoBehaviour {
         }
         spawnTimer += Time.deltaTime;
     }
-
-
 }
