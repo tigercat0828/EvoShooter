@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, IEntity {
 
+    public int SlotNo = 0;
     public int gHealthPoint = 100;
     public int gAttackPoint = 10;
     public float gMoveSpeed = 15;
@@ -13,6 +14,8 @@ public class Player : MonoBehaviour, IEntity {
     public float gViewDistance = 10;
     public float gReloadTime = 3;
 
+
+    public int fitness = 0;
 
     [SerializeField] private Bullet bulletPrefab;
     [SerializeField] private Transform gunBarrel;
@@ -87,8 +90,9 @@ public class Player : MonoBehaviour, IEntity {
     }
     public void TakeDamage(int amount) {
         _CurrentHP -= amount;
-        if (_CurrentHP < 0) {
+        if (_CurrentHP < 0) {   // Die
             Destroy(gameObject);
+            HumanGameManager.manager.SetScore(fitness);
             HumanGameManager.manager.GameOver();
         }
     }

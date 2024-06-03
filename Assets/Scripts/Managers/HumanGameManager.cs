@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class HumanGameManager : MonoBehaviour {
 
@@ -21,6 +22,7 @@ public class HumanGameManager : MonoBehaviour {
         manager = this;
         SystemIO.Initialize();
         data = new SaveData(0);
+
         score = 0;
         GameSettings.LoadSettings();
 
@@ -65,6 +67,9 @@ public class HumanGameManager : MonoBehaviour {
     }
     public void ChangeToMenuScene() {
         SceneManager.LoadScene("Menu");
+    }
+    public void SetScore(int score) {
+        this.score = score;
     }
     public void IncreaseScore(int amount) {
         score += amount;

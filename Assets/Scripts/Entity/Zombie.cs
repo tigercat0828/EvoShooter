@@ -3,6 +3,8 @@ using UnityEngine;
 
 
 public class Zombie : MonoBehaviour, IEntity {
+
+    public int SlotNo = 0;
     public int  HealthPoint;
     public int  AttackPoint;
     public float MoveSpeed;
@@ -11,6 +13,8 @@ public class Zombie : MonoBehaviour, IEntity {
     [SerializeField] private int _CurrentHP;
     private Transform _target;
     private Rigidbody2D _rigidbody;
+
+    public HumanGameManager Manager;
 
     private void Awake() {
         LoadGameSettings();
