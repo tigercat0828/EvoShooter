@@ -3,11 +3,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class OptionSceneManager : MonoBehaviour {
+
+    public TMP_Text popupText;
     // Agent Status
     public TMP_InputField Agent_HealthPoint;
     public TMP_InputField Agent_AttackPoint;
     public TMP_InputField Agent_FireRate;
     public TMP_InputField Agent_MagazineSize;
+    public TMP_InputField Agent_ReloadTime;
     public TMP_InputField Agent_MoveSpeed;
     public TMP_InputField Agent_RotateSpeed;
     public TMP_InputField Agent_ViewDistance;
@@ -17,12 +20,12 @@ public class OptionSceneManager : MonoBehaviour {
     public TMP_InputField Ability_AttackPoint;
     public TMP_InputField Ability_FireRate;
     public TMP_InputField Ability_MagazineSize;
+    public TMP_InputField Ability_ReloadTime;
     public TMP_InputField Ability_MoveSpeed;
     public TMP_InputField Ability_RotateSpeed;
     public TMP_InputField Ability_ViewDistance;
     public TMP_InputField Ability_BulletSpeed;
     // Enemy Score
-    // Spawn Rate
     public TMP_InputField Score_Zombie;
     public TMP_InputField Score_Spitter;
     public TMP_InputField Score_Tank;
@@ -62,18 +65,28 @@ public class OptionSceneManager : MonoBehaviour {
     private void Awake() {
         LoadSettings();
     }
+    public void Start() {
+        HidePopup();
+    }
+    public void ShowPopupText() {
+        popupText.gameObject.SetActive(true);
+        Invoke(nameof(HidePopup), 2f); 
+    }
 
+    private void HidePopup() {
+        popupText.gameObject.SetActive(false);
+    }
     public void ChangeToMenuScene() {
         SceneManager.LoadScene("Menu");
     }
 
     public void ApplySettings() {
 
-
         GameSettings.options.Agent_HealthPoint = int.Parse(Agent_HealthPoint.text);
         GameSettings.options.Agent_AttackPoint = int.Parse(Agent_AttackPoint.text);
         GameSettings.options.Agent_FireRate = float.Parse(Agent_FireRate.text);
         GameSettings.options.Agent_MagazineSize = int.Parse(Agent_MagazineSize.text);
+        GameSettings.options.Agent_ReloadTime = float.Parse(Agent_ReloadTime.text);
         GameSettings.options.Agent_MoveSpeed = float.Parse(Agent_MoveSpeed.text);
         GameSettings.options.Agent_RotateSpeed = float.Parse(Agent_RotateSpeed.text);
         GameSettings.options.Agent_ViewDistance = float.Parse(Agent_ViewDistance.text);
@@ -83,6 +96,7 @@ public class OptionSceneManager : MonoBehaviour {
         GameSettings.options.Ability_AttackPoint = int.Parse(Ability_AttackPoint.text);
         GameSettings.options.Ability_FireRate = float.Parse(Ability_FireRate.text);
         GameSettings.options.Ability_MagazineSize = int.Parse(Ability_MagazineSize.text);
+        GameSettings.options.Ability_ReloadTime = float.Parse(Ability_ReloadTime.text);
         GameSettings.options.Ability_MoveSpeed = float.Parse(Ability_MoveSpeed.text);
         GameSettings.options.Ability_RotateSpeed = float.Parse(Ability_RotateSpeed.text);
         GameSettings.options.Ability_ViewDistance = float.Parse(Ability_ViewDistance.text);
@@ -125,6 +139,7 @@ public class OptionSceneManager : MonoBehaviour {
         GameSettings.options.Charger_ViewDistance = float.Parse(Charger_ViewDistance.text);
 
         GameSettings.SaveSettings();
+
     }
     public void LoadSettings() {
         GameSettings.LoadSettings();
@@ -132,6 +147,7 @@ public class OptionSceneManager : MonoBehaviour {
         Agent_AttackPoint.text = GameSettings.options.Agent_AttackPoint.ToString();
         Agent_FireRate.text = GameSettings.options.Agent_FireRate.ToString();
         Agent_MagazineSize.text = GameSettings.options.Agent_MagazineSize.ToString();
+        Agent_ReloadTime.text = GameSettings.options.Agent_ReloadTime.ToString();
         Agent_MoveSpeed.text = GameSettings.options.Agent_MoveSpeed.ToString();
         Agent_RotateSpeed.text = GameSettings.options.Agent_RotateSpeed.ToString();
         Agent_ViewDistance.text = GameSettings.options.Agent_ViewDistance.ToString();
@@ -141,6 +157,7 @@ public class OptionSceneManager : MonoBehaviour {
         Ability_AttackPoint.text = GameSettings.options.Ability_AttackPoint.ToString();
         Ability_FireRate.text = GameSettings.options.Ability_FireRate.ToString();
         Ability_MagazineSize.text = GameSettings.options.Ability_MagazineSize.ToString();
+        Ability_ReloadTime.text = GameSettings.options.Ability_ReloadTime.ToString();
         Ability_MoveSpeed.text = GameSettings.options.Ability_MoveSpeed.ToString();
         Ability_RotateSpeed.text = GameSettings.options.Ability_RotateSpeed.ToString();
         Ability_ViewDistance.text = GameSettings.options.Ability_ViewDistance.ToString();
@@ -151,10 +168,10 @@ public class OptionSceneManager : MonoBehaviour {
         SpawnRate_Spitter.text = GameSettings.options.SpawnRate_Spitter.ToString();
         SpawnRate_Charger.text = GameSettings.options.SpawnRate_Charger.ToString();
 
-        Score_Zombie.text = GameSettings.options  .Score_Zombie.ToString();
-        Score_Tank.text = GameSettings.options    .Score_Tank.ToString();
-        Score_Spitter.text = GameSettings.options .Score_Spitter.ToString();
-        Score_Charger.text = GameSettings.options .Score_Charger.ToString();
+        Score_Zombie.text = GameSettings.options.Score_Zombie.ToString();
+        Score_Tank.text = GameSettings.options.Score_Tank.ToString();
+        Score_Spitter.text = GameSettings.options.Score_Spitter.ToString();
+        Score_Charger.text = GameSettings.options.Score_Charger.ToString();
 
         Zombie_HealthPoint.text = GameSettings.options.Zombie_HealthPoint.ToString();
         Zombie_AttackPoint.text = GameSettings.options.Zombie_AttackPoint.ToString();
@@ -180,7 +197,7 @@ public class OptionSceneManager : MonoBehaviour {
         Charger_RotateSpeed.text = GameSettings.options.Charger_RotateSpeed.ToString();
         Charger_ChargeSpeed.text = GameSettings.options.Charger_ChargeSpeed.ToString();
         Charger_FireRate.text = GameSettings.options.Charger_FireRate.ToString();
-        Charger_ViewDistance.text = GameSettings.options.Charger_ViewDistance.ToString();   
+        Charger_ViewDistance.text = GameSettings.options.Charger_ViewDistance.ToString();
     }
 
 

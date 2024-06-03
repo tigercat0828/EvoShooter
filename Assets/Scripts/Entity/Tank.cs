@@ -20,6 +20,7 @@ public class Tank : MonoBehaviour, IEntity {
     private float _WanderDirectionChangeTimer;
 
     private void Awake() {
+        LoadGameSettings();
         _rigidbody = GetComponent<Rigidbody2D>();
         _CurrentHP = HealthPoint;
         HealthPoint = GameSettings.options.Tank_HealthPoint;
@@ -73,7 +74,7 @@ public class Tank : MonoBehaviour, IEntity {
         if (_CurrentHP < 0) {
             Destroy(gameObject);
             int score = GameSettings.options.Score_Tank;
-            HumanPlaySceneManager.manager.IncreaseScore(score);
+            HumanGameManager.manager.IncreaseScore(score);
         }
     }
 
@@ -109,5 +110,13 @@ public class Tank : MonoBehaviour, IEntity {
 
         // Reset any forces applied during charge
         _rigidbody.velocity = Vector2.zero;
+    }
+
+    public void LoadGameSettings() {
+        HealthPoint = GameSettings.options.Tank_HealthPoint;
+        AttackPoint = GameSettings.options.Tank_AttackPoint;
+        MoveSpeed = GameSettings.options.Tank_MoveSpeed;
+        RotateSpeed = GameSettings.options.Tank_RotateSpeed; 
+        ViewDistance = GameSettings.options.Tank_ViewDistance;
     }
 }

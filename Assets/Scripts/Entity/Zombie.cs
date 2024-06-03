@@ -1,9 +1,10 @@
 using UnityEngine;
 
 
+
 public class Zombie : MonoBehaviour, IEntity {
-    public int HealthPoint;
-    public int AttackPoint;
+    public int  HealthPoint;
+    public int  AttackPoint;
     public float MoveSpeed;
     public float RotateSpeed;
 
@@ -12,6 +13,7 @@ public class Zombie : MonoBehaviour, IEntity {
     private Rigidbody2D _rigidbody;
 
     private void Awake() {
+        LoadGameSettings();
         _rigidbody = GetComponent<Rigidbody2D>();
         _CurrentHP = HealthPoint;
         HealthPoint = GameSettings.options.Zombie_HealthPoint;
@@ -49,7 +51,7 @@ public class Zombie : MonoBehaviour, IEntity {
         if (_CurrentHP < 0) {
             Destroy(gameObject);
             int score = GameSettings.options.Score_Zombie;
-            HumanPlaySceneManager.manager.IncreaseScore(score);
+            HumanGameManager.manager.IncreaseScore(score);
         }
     }
     public void TakeHeal(int amount) {
@@ -60,5 +62,12 @@ public class Zombie : MonoBehaviour, IEntity {
     }
     public void KnockBack(Vector2 direction, float strength) {
         _rigidbody.AddForce(direction * strength, ForceMode2D.Impulse);
+    }
+
+    public void LoadGameSettings() {
+        HealthPoint = GameSettings.options.Zombie_HealthPoint;
+        AttackPoint = GameSettings.options.Zombie_AttackPoint;
+        MoveSpeed = GameSettings.options.Zombie_MoveSpeed;
+        RotateSpeed = GameSettings.options.Zombie_RotateSpeed;
     }
 }

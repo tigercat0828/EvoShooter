@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Player : MonoBehaviour, IEntity {
@@ -10,23 +11,35 @@ public class Player : MonoBehaviour, IEntity {
     public float gBulletSpeed = 10;
     public int gMagazineSize = 10;
     public float gViewDistance = 10;
+    public float gReloadTime = 3;
 
-    public int _CurrentHP;
 
     [SerializeField] private Bullet bulletPrefab;
     [SerializeField] private Transform gunBarrel;
+    [SerializeField] private SpriteRenderer reloadingSprite; // Add this line
 
     private Vector2 _moveInput;
     private Vector3 _mousePosition;
 
     private float _fireTimer;
     private float _fireInterval;
+
+    [SerializeField] private int _CurrentHP;
+    [SerializeField] private int _remainingBullet = 0;
+    [SerializeField] private bool _isReloading = false;
+
     private Rigidbody2D _rigidbody;
 
     private void Awake() {
+        LoadGameSettings();
         _rigidbody = GetComponent<Rigidbody2D>();
+
         _fireInterval = 1 / gFireRate;
         _CurrentHP = gHealthPoint;
+        _remainingBullet = gMagazineSize;
+        reloadingSprite.gameObject.SetActive(false); // Ensure the loading sprite is initially hidden
+
+        
     }
     private void Update() {
 
@@ -50,19 +63,33 @@ public class Player : MonoBehaviour, IEntity {
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, gRotateSpeed * Time.deltaTime);
     }
     private void Shoot() {
+        if (_isReloading) return;
 
-        if (Input.GetMouseButton(0) && _fireTimer < 0f) {
+        if (Input.GetMouseButton(0) && _fireTimer < 0f && _remainingBullet > 0) {
+
             _fireTimer = _fireInterval;
             Bullet bullet = Instantiate(bulletPrefab, gunBarrel.position, gunBarrel.rotation);
             bullet.SetStatus(gAttackPoint, gBulletSpeed);
+            _remainingBullet--;
+
+            if (_remainingBullet == 0) {
+                StartCoroutine(Reload());
+            }
         }
     }
-
+    private IEnumerator Reload() {
+        _isReloading = true;
+        reloadingSprite.gameObject.SetActive(true); // Show the loading sprite
+        yield return new WaitForSeconds(gReloadTime);
+        _remainingBullet = gMagazineSize;
+        _isReloading = false;
+        reloadingSprite.gameObject.SetActive(false); // Hide the loading sprite
+    }
     public void TakeDamage(int amount) {
         _CurrentHP -= amount;
         if (_CurrentHP < 0) {
             Destroy(gameObject);
-            HumanPlaySceneManager.manager.GameOver();
+            HumanGameManager.manager.GameOver();
         }
     }
     public void TakeHeal(int amount) {
@@ -75,5 +102,19 @@ public class Player : MonoBehaviour, IEntity {
 
     public void KnockBack(Vector2 direction, float strength) {
         _rigidbody.AddForce(direction * strength, ForceMode2D.Impulse);
+    }
+
+    public void LoadGameSettings() {
+        GameSettings.LoadSettings();
+        gHealthPoint = GameSettings.options.Agent_HealthPoint;
+        gAttackPoint = GameSettings.options.Agent_AttackPoint;
+        gMoveSpeed = GameSettings.options.Agent_MoveSpeed;
+        gRotateSpeed = GameSettings.options.Agent_RotateSpeed;
+        gBulletSpeed = GameSettings.options.Agent_BulletSpeed;
+        gReloadTime = GameSettings.options.Agent_ReloadTime;
+        gFireRate = GameSettings.options.Agent_FireRate;
+        gMagazineSize = GameSettings.options.Agent_MagazineSize;
+        gViewDistance = GameSettings.options.Agent_ViewDistance;
+
     }
 }

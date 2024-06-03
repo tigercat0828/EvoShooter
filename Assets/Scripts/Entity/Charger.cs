@@ -1,5 +1,3 @@
-
-using System.Collections;
 using UnityEngine;
 
 public class Charger : MonoBehaviour, IEntity {
@@ -27,6 +25,7 @@ public class Charger : MonoBehaviour, IEntity {
     private float _wanderDirectionChangeTimer;
 
     private void Awake() {
+        LoadGameSettings();
         _rigidbody = GetComponent<Rigidbody2D>();
         _CurrentHP = HealthPoint;
         HealthPoint = GameSettings.options.Charger_HealthPoint;
@@ -103,7 +102,7 @@ public class Charger : MonoBehaviour, IEntity {
         if (_CurrentHP < 0) {
             Destroy(gameObject);
             int score = GameSettings.options.Score_Spitter;
-            HumanPlaySceneManager.manager.IncreaseScore(score);
+            HumanGameManager.manager.IncreaseScore(score);
         }
     }
 
@@ -138,5 +137,15 @@ public class Charger : MonoBehaviour, IEntity {
     protected void ChangeWanderDirection() {
         float angle = Random.Range(0, 360) * Mathf.Deg2Rad;
         _wanderDirection = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+    }
+
+    public void LoadGameSettings() {
+        HealthPoint = GameSettings.options.Charger_HealthPoint;
+        AttackPoint = GameSettings.options.Charger_AttackPoint;
+        MoveSpeed = GameSettings.options.Charger_MoveSpeed;
+        RotateSpeed = GameSettings.options.Charger_RotateSpeed;
+        ChargeSpeed = GameSettings.options.Charger_ChargeSpeed;
+        ViewDistance = GameSettings.options.Charger_ViewDistance;
+        FireRate = GameSettings.options.Charger_FireRate;
     }
 }

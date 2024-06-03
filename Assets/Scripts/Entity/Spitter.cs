@@ -3,12 +3,12 @@ using UnityEngine;
 public class Spitter : MonoBehaviour, IEntity {
     // Basic status
     [SerializeField] Estate _state;
-    public int      HealthPoint          ;
-    public int      AttackPoint          ;
-    public float    MoveSpeed          ;
-    public float    RotateSpeed        ;
-    public float    ViewDistance       ;
-    public float    FireRate;
+    public int   HealthPoint;
+    public int   AttackPoint;
+    public float MoveSpeed;
+    public float RotateSpeed;
+    public float ViewDistance;
+    public float FireRate;
 
     [SerializeField] protected int _CurrentHP;
     [SerializeField] private Bullet _bulletPrefab;
@@ -26,15 +26,9 @@ public class Spitter : MonoBehaviour, IEntity {
     private float _wanderDirectionChangeTimer;
 
     private void Awake() {
+        LoadGameSettings();
         _rigidbody = GetComponent<Rigidbody2D>();
         _CurrentHP = HealthPoint;
-        HealthPoint = GameSettings.options.Spitter_HealthPoint;
-        AttackPoint = GameSettings.options.Spitter_AttackPoint;
-        MoveSpeed = GameSettings.options.Spitter_MoveSpeed;
-        RotateSpeed = GameSettings.options.Spitter_RotateSpeed;
-        ViewDistance = GameSettings.options.Spitter_ViewDistance;
-        FireRate = GameSettings.options.Spitter_FireRate;
-
         _distanceToStop = ViewDistance * 0.8f;
         _fireInterval = 1 / FireRate;
     }
@@ -95,7 +89,7 @@ public class Spitter : MonoBehaviour, IEntity {
         if (_CurrentHP < 0) {
             Destroy(gameObject);
             int score = GameSettings.options.Score_Spitter;
-            HumanPlaySceneManager.manager.IncreaseScore(score);
+            HumanGameManager.manager.IncreaseScore(score);
         }
     }
 
@@ -130,5 +124,14 @@ public class Spitter : MonoBehaviour, IEntity {
 
         // Reset any forces applied during charge
         _rigidbody.velocity = Vector2.zero;
+    }
+
+    public void LoadGameSettings() {
+        HealthPoint = GameSettings.options.Spitter_HealthPoint;
+        AttackPoint = GameSettings.options.Spitter_AttackPoint ;
+        MoveSpeed = GameSettings.options.Spitter_MoveSpeed;
+        RotateSpeed = GameSettings.options.Spitter_RotateSpeed;
+        ViewDistance = GameSettings.options.Spitter_ViewDistance;
+        FireRate = GameSettings.options.Spitter_FireRate;
     }
 }
