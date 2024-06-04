@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Assertions.Must;
 using UnityEngine.Rendering;
+
 
 
 public class Agent : MonoBehaviour, IEntity {
@@ -9,6 +9,7 @@ public class Agent : MonoBehaviour, IEntity {
     // 視野內敵人如果距離過遠 => 追擊敵人並開火?
     // 視野內無敵人 => Wander
     [SerializeField] private int SlotNo = 0;
+    int IEntity.SlotNo => SlotNo;
     [SerializeField] Estate _state;
     public int      Fitness = 0;
     public int      gHealthPoint = 100;
@@ -23,7 +24,12 @@ public class Agent : MonoBehaviour, IEntity {
 
     private float _fireTimer;
     private float _fireInterval;
-    private float _distanceToStop;
+    private float _distanceToKeepAway;
+    private float _distanceToDodge;
+    public float KeepAwayFactor = 0.8f;
+    public float DodgeFactor = 0.2f;
+    [SerializeField] private float _dodgeStrength = 3;
+
 
     // wander
     private Vector2 _wanderDirection;
@@ -40,9 +46,11 @@ public class Agent : MonoBehaviour, IEntity {
     [SerializeField] private Transform gunBarrel;
     [SerializeField] private SpriteRenderer reloadingSprite;
 
-    private Transform _target;
+    [SerializeField] private Transform _target;
 
     Transform[] _trackedEnemy;
+
+
 
     private void Awake() {
         LoadGameSettings();
@@ -50,16 +58,17 @@ public class Agent : MonoBehaviour, IEntity {
         _fireInterval = 1 / gFireRate;
         _CurrentHP = gHealthPoint;
         _remainingBullet = gMagazineSize;
-        _distanceToStop =gViewDistance * 0.8f;
+        _distanceToKeepAway = gViewDistance * KeepAwayFactor;
+        _distanceToDodge = gViewDistance * DodgeFactor;
         reloadingSprite.gameObject.SetActive(false); 
     }
     private void Update() {
 
         _fireTimer -= Time.deltaTime;
-        SenseEnviroment();
-        // TODO : finish state transfer
+        FindTarget();
+        DodgeBullet();
         Quaternion targetRotation = new();
-        if (_state == Estate.TargetFound) {
+        if (_state == Estate.Pursue || _state == Estate.Escape) {
             Shoot();
             // Rotate toward target
             Vector2 targetDirection = _target.position - transform.position;
@@ -67,6 +76,9 @@ public class Agent : MonoBehaviour, IEntity {
             targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
         }
         if (_state == Estate.Wander) {
+            if (_remainingBullet != gMagazineSize) {
+                StartCoroutine(Reload());
+            }
             _wanderDirectionChangeTimer -= Time.deltaTime;
             if (_wanderDirectionChangeTimer <= 0) {
                 _wanderDirectionChangeTimer = _wanderDirectionChangeInterval;
@@ -78,27 +90,27 @@ public class Agent : MonoBehaviour, IEntity {
     }
     private void FixedUpdate() {
         // 進入射程不會再向target靠近
-        if ((_state == Estate.TargetFound && Vector2.Distance(transform.position, _target.position) > _distanceToStop)
-            || _state == Estate.Wander) {
+        if (_state == Estate.Pursue || _state == Estate.Wander) {
             _rigidbody.AddForce(transform.up * gMoveSpeed);
+        }
+        else if (_state == Estate.Escape) {
+            _rigidbody.AddForce(-transform.up * gMoveSpeed);
         }
     }
 
-    private void Steer() {
-        Vector2 targetDirection = _target.position - transform.position;
-        float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg - 90f;
-        Quaternion targetRotation = Quaternion.Euler(0, 0, angle);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, gRotateSpeed * Time.deltaTime);
-    }
     private void Shoot() {
         if (_isReloading) return;
-        if (Input.GetMouseButton(0) && _fireTimer < 0f && _remainingBullet > 0) {
-            _fireTimer = _fireInterval;
-            Bullet bullet = Instantiate(bulletPrefab, gunBarrel.position, gunBarrel.rotation);
-            bullet.SetStatus(gAttackPoint, gBulletSpeed);
-            _remainingBullet--;
-            if (_remainingBullet == 0) {
-                StartCoroutine(Reload());
+        if(_target != null) {
+            // 槍口與敵人的夾角
+            float angle = Vector2.Angle(transform.up, _target.position - transform.position);
+            if (angle < 5f && _fireTimer < 0f && _remainingBullet > 0) {
+                _fireTimer = _fireInterval;
+                Bullet bullet = Instantiate(bulletPrefab, gunBarrel.position, gunBarrel.rotation);
+                bullet.SetStatus(gAttackPoint, gBulletSpeed);
+                _remainingBullet--;
+                if (_remainingBullet == 0) {
+                    StartCoroutine(Reload());
+                }
             }
         }
     }
@@ -123,8 +135,23 @@ public class Agent : MonoBehaviour, IEntity {
             _CurrentHP = gHealthPoint;
         }
     }
-
-    protected void SenseEnviroment() {
+    private void DodgeBullet() {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, _distanceToDodge);
+        foreach (Collider2D collider in colliders) {
+            Transform t = collider.transform;
+            if (t.CompareTag("EnemyBullet")) {
+                Vector3 dodgeDirection = (Vector3)Vector2.Perpendicular(t.up).normalized;
+                float rnd = Random.Range(0, 1);
+                if(rnd > 0.5) {
+                    dodgeDirection = -dodgeDirection;
+                }
+                Debug.Log("Dodging bullet");
+                _rigidbody.AddForce(dodgeDirection * _dodgeStrength, ForceMode2D.Impulse);
+                break;
+            }
+        }
+    }
+    private void FindTarget() {
         Collider2D[] colliders =  Physics2D.OverlapCircleAll(transform.position, gViewDistance);
 
         _target = null;
@@ -132,6 +159,8 @@ public class Agent : MonoBehaviour, IEntity {
         float dSqrToTarget = 0;
         foreach (Collider2D collider in colliders) {
             Transform t = collider.transform;
+            if (t.CompareTag("EnemyBullet") || t.CompareTag("Player") ||t.CompareTag("Wall" ) ) continue;
+            
             Vector2 directionToTarget = (Vector2)(t.position - transform.position);
             dSqrToTarget = directionToTarget.sqrMagnitude; // Using square magnitude for efficiency
 
@@ -144,16 +173,12 @@ public class Agent : MonoBehaviour, IEntity {
         if (_target == null) {
             _state = Estate.Wander;
         }
-        else if (_target.CompareTag("EnemyBullet")) {
-            _state = Estate.Dodge;  // Dodge enemy bullet
-            Debug.Log("Dodging Enemy Bullet");
-        }
-        else {
-            if (Mathf.Sqrt(dSqrToTarget) < _distanceToStop) {
+        else { 
+            if (Mathf.Sqrt(dSqrToTarget) < _distanceToKeepAway) {   // 離敵人太近=>遠離
                 _state = Estate.Escape;
             }
-            else {
-                _state = Estate.Pursue;
+            else {  // 離敵人太遠 追擊
+                _state = Estate.Pursue;                                 
             }
         }
     }
@@ -175,7 +200,6 @@ public class Agent : MonoBehaviour, IEntity {
         gReloadTime = GameSettings.options.Agent_ReloadTime;
 
     }
-
 
     public void SetSlot(int slot) {
         SlotNo = slot;

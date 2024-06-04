@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class ViewDistanceVisualizer : MonoBehaviour {
     public float radius;
+    public Color color = Color.red;
     public void Start() {
         if (TryGetComponent<Spitter>(out var spitter)) {
             radius = spitter.ViewDistance;
@@ -13,9 +14,13 @@ public class ViewDistanceVisualizer : MonoBehaviour {
         else if (TryGetComponent<Charger>(out var charger)) {
             radius = charger.ViewDistance;
         }
+        else if (TryGetComponent<Agent>(out var agent)) {
+            radius = agent.gViewDistance;
+            color = Color.blue;
+        }
     }
     private void OnDrawGizmos() {
-        Gizmos.color = Color.red;
+        Gizmos.color = color;
         DrawGizmoCircle(transform.position, radius);
     }
     void DrawGizmoCircle(Vector3 center, float radius) {

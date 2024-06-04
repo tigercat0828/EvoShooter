@@ -1,3 +1,4 @@
-﻿public enum Estate {    // Enmey Entitiy State
-    Wander, TargetFound, Escape
+﻿public enum Estate {        // Entitiy State
+    Wander, TargetFound,    // for enemy 
+    Pursue ,Escape,         // for agnet
 }

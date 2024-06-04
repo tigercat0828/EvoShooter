@@ -7,4 +7,6 @@ public interface IEntity {
     public void KnockBack(Vector2 direction, float strength);
     public void LoadGameSettings();
     public void SetSlot(int slot);
+
+    public int SlotNo { get; }
 }

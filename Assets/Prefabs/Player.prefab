@@ -270,6 +270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed425a6daca5135418764ee3d263fd7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SlotNo: 0
   gHealthPoint: 100
   gAttackPoint: 20
   gMoveSpeed: 15
@@ -278,7 +279,8 @@ MonoBehaviour:
   gBulletSpeed: 20
   gMagazineSize: 10
   gViewDistance: 10
-  gReloadingTime: 3
+  gReloadTime: 3
+  Fitness: 0
   bulletPrefab: {fileID: 439943050817960331, guid: 1cbfe2046c5150349ab09e404af6d681, type: 3}
   gunBarrel: {fileID: 7652657765033211419}
   reloadingSprite: {fileID: 4988752079114438440}

@@ -3,6 +3,7 @@ using UnityEngine;
 public class Spitter : MonoBehaviour, IEntity {
 
     [SerializeField] private int SlotNo = 0;
+    int IEntity.SlotNo => SlotNo;
     // Basic status
     [SerializeField] Estate _state;
     public int   HealthPoint;
@@ -79,7 +80,16 @@ public class Spitter : MonoBehaviour, IEntity {
         }
     }
     protected void LocateTarget(int slot) {
-        _target = GameObject.FindGameObjectWithTag("Player").transform;
+        // _target = GameObject.FindGameObjectWithTag("Player").transform;
+        GameObject[] objectsWithTag = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject obj in objectsWithTag) {
+            IEntity agents = obj.GetComponent<IEntity>();
+            if (agents != null && agents.SlotNo == SlotNo) {
+                _target = obj.transform;
+                break;
+            }
+        }
+
     }
     public void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.CompareTag("Wall")) {
@@ -123,6 +133,7 @@ public class Spitter : MonoBehaviour, IEntity {
     }
 
     public void LoadGameSettings() {
+        GameSettings.LoadSettings();
         HealthPoint = GameSettings.options.Spitter_HealthPoint;
         AttackPoint = GameSettings.options.Spitter_AttackPoint ;
         MoveSpeed = GameSettings.options.Spitter_MoveSpeed;

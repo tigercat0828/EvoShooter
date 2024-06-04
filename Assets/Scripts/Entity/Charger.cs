@@ -3,6 +3,7 @@ using UnityEngine;
 public class Charger : MonoBehaviour, IEntity {
 
     [SerializeField] private int SlotNo = 0;
+    int IEntity.SlotNo => SlotNo;
     // Basic status
     [SerializeField] Estate _state;
     public int HealthPoint;
@@ -15,7 +16,7 @@ public class Charger : MonoBehaviour, IEntity {
 
     [SerializeField] protected int _CurrentHP;
 
-    private Transform _target;
+    [SerializeField] private Transform _target;
     private Rigidbody2D _rigidbody;
 
     private float _distanceToStop;
@@ -96,7 +97,16 @@ public class Charger : MonoBehaviour, IEntity {
         }
     }
     protected void LocateTarget(int group) {
-        _target = GameObject.FindGameObjectWithTag("Player").transform;
+        //_target = GameObject.FindGameObjectWithTag("Player").transform;
+        GameObject[] objectsWithTag = GameObject.FindGameObjectsWithTag("Player");
+
+        foreach (GameObject obj in objectsWithTag) {
+            IEntity agents = obj.GetComponent<IEntity>();
+            if (agents != null && agents.SlotNo == SlotNo) {
+                _target = obj.transform;
+                break;
+            }
+        }
     }
 
     public void TakeDamage(int amount) {
@@ -142,6 +152,7 @@ public class Charger : MonoBehaviour, IEntity {
     }
 
     public void LoadGameSettings() {
+        GameSettings.LoadSettings();
         HealthPoint = GameSettings.options.Charger_HealthPoint;
         AttackPoint = GameSettings.options.Charger_AttackPoint;
         MoveSpeed = GameSettings.options.Charger_MoveSpeed;

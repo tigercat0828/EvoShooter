@@ -4,6 +4,7 @@ public class Tank : MonoBehaviour, IEntity {
 
 
     [SerializeField] private int SlotNo  = 0;
+    int IEntity.SlotNo => SlotNo;
     [SerializeField] Estate _state;
     public int HealthPoint;
     public int AttackPoint;
@@ -70,7 +71,16 @@ public class Tank : MonoBehaviour, IEntity {
         }
     }
     public void LocateTarget(int group) {
-        _target = GameObject.FindGameObjectWithTag("Player").transform;
+        //_target = GameObject.FindGameObjectWithTag("Player").transform;
+
+        GameObject[] objectsWithTag = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject obj in objectsWithTag) {
+            IEntity agents = obj.GetComponent<IEntity>();
+            if (agents != null && agents.SlotNo == SlotNo) {
+                _target = obj.transform;
+                break;
+            }
+        }
     }
     public void TakeDamage(int amount) {
         _CurrentHP -= amount;
@@ -115,6 +125,7 @@ public class Tank : MonoBehaviour, IEntity {
     }
 
     public void LoadGameSettings() {
+        GameSettings.LoadSettings();
         HealthPoint = GameSettings.options.Tank_HealthPoint;
         AttackPoint = GameSettings.options.Tank_AttackPoint;
         MoveSpeed = GameSettings.options.Tank_MoveSpeed;

@@ -4,6 +4,7 @@ using UnityEngine;
 public class Player : MonoBehaviour, IEntity {
 
     [SerializeField] private int SlotNo = 0;
+    int IEntity.SlotNo => SlotNo;
     public int gHealthPoint = 100;
     public int gAttackPoint = 10;
     public float gMoveSpeed = 15;
@@ -33,7 +34,7 @@ public class Player : MonoBehaviour, IEntity {
 
     private Rigidbody2D _rigidbody;
 
-    
+
 
     private void Awake() {
         LoadGameSettings();

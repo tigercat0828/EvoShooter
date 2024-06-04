@@ -5,16 +5,16 @@ using UnityEngine;
 public class Zombie : MonoBehaviour, IEntity {
 
     [SerializeField] private int SlotNo = 0;
+    int IEntity.SlotNo => SlotNo;
     public int  HealthPoint;
     public int  AttackPoint;
     public float MoveSpeed;
     public float RotateSpeed;
 
     [SerializeField] private int _CurrentHP;
-    private Transform _target;
+    [SerializeField] private Transform _target;
     private Rigidbody2D _rigidbody;
 
-    public HumanGameManager Manager;
     public void SetSlotNo(int slot) {
         SlotNo = slot;
     }
@@ -49,7 +49,15 @@ public class Zombie : MonoBehaviour, IEntity {
         }
     }
     public void LocateTarget(int group) {
-        _target = GameObject.FindGameObjectWithTag("Player").transform;
+        //_target = GameObject.FindGameObjectWithTag("Player").transform;
+        GameObject[] objectsWithTag = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject obj in objectsWithTag) {
+            IEntity agents = obj.GetComponent<IEntity>();
+            if (agents != null && agents.SlotNo == SlotNo) {
+                _target = obj.transform;
+                break;
+            }
+        }
     }
     public void TakeDamage(int amount) {
         _CurrentHP -= amount;
@@ -69,6 +77,7 @@ public class Zombie : MonoBehaviour, IEntity {
     }
 
     public void LoadGameSettings() {
+        GameSettings.LoadSettings();
         HealthPoint = GameSettings.options.Zombie_HealthPoint;
         AttackPoint = GameSettings.options.Zombie_AttackPoint;
         MoveSpeed = GameSettings.options.Zombie_MoveSpeed;
