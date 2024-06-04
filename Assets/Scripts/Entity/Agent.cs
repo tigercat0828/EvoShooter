@@ -141,8 +141,8 @@ public class Agent : MonoBehaviour, IEntity {
             Transform t = collider.transform;
             if (t.CompareTag("EnemyBullet")) {
                 Vector3 dodgeDirection = (Vector3)Vector2.Perpendicular(t.up).normalized;
-                float rnd = Random.Range(0, 1);
-                if(rnd > 0.5) {
+                Vector3 directionToSpit = t.transform.position - transform.position;
+                if(Vector3.Dot(directionToSpit, dodgeDirection) > 0 ) {
                     dodgeDirection = -dodgeDirection;
                 }
                 Debug.Log("Dodging bullet");

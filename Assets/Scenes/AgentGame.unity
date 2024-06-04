@@ -2198,11 +2198,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3235977683919609443, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: SlotNo
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: SlotNo
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: enemyPrefab.Array.data[2]
@@ -2218,7 +2218,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: SlotNo
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: enemyPrefab.Array.data[2]
@@ -2238,7 +2238,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7283710791424492856, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: SlotNo
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7283710791424492856, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: enemyPrefab.Array.data[2]
