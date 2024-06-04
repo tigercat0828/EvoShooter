@@ -47,6 +47,7 @@ public class Zombie : MonoBehaviour, IEntity {
             player.TakeDamage(AttackPoint);
             player.KnockBack(transform.up, 8);
         }
+      
     }
     public void LocateTarget(int group) {
         //_target = GameObject.FindGameObjectWithTag("Player").transform;

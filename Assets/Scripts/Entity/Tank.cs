@@ -70,6 +70,7 @@ public class Tank : MonoBehaviour, IEntity {
             TurnBack();
         }
     }
+
     public void LocateTarget(int group) {
         //_target = GameObject.FindGameObjectWithTag("Player").transform;
 

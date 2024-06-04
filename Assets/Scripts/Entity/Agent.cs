@@ -103,7 +103,7 @@ public class Agent : MonoBehaviour, IEntity {
         if(_target != null) {
             // 槍口與敵人的夾角
             float angle = Vector2.Angle(transform.up, _target.position - transform.position);
-            if (angle < 5f && _fireTimer < 0f && _remainingBullet > 0) {
+            if (angle < 3f && _fireTimer < 0f && _remainingBullet > 0) {
                 _fireTimer = _fireInterval;
                 Bullet bullet = Instantiate(bulletPrefab, gunBarrel.position, gunBarrel.rotation);
                 bullet.SetStatus(gAttackPoint, gBulletSpeed);
@@ -159,7 +159,7 @@ public class Agent : MonoBehaviour, IEntity {
         float dSqrToTarget = 0;
         foreach (Collider2D collider in colliders) {
             Transform t = collider.transform;
-            if (t.CompareTag("EnemyBullet") || t.CompareTag("Player") ||t.CompareTag("Wall" ) ) continue;
+            if (t.CompareTag("EnemyBullet") || t.CompareTag("Player") ||t.CompareTag("Wall" ) || t.CompareTag("Bullet")) continue;
             
             Vector2 directionToTarget = (Vector2)(t.position - transform.position);
             dSqrToTarget = directionToTarget.sqrMagnitude; // Using square magnitude for efficiency
@@ -204,17 +204,7 @@ public class Agent : MonoBehaviour, IEntity {
     public void SetSlot(int slot) {
         SlotNo = slot;
     }
-
-    public void OnCollisionEnter2D(Collision2D other) {
-        if (other.gameObject.CompareTag("Wall")) {
-            TurnBack();
-        }
-    }
-    private void TurnBack() {
-        transform.Rotate(0f, 0f, 180f);
-        ChangeWanderDirection();
-        _rigidbody.velocity = Vector2.zero;
-    }
+   
     protected void ChangeWanderDirection() {
         float angle = Random.Range(0, 360) * Mathf.Deg2Rad;
         _wanderDirection = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
