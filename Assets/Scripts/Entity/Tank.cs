@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Tank : MonoBehaviour, IEntity {
 
+
+    [SerializeField] private int SlotNo  = 0;
     [SerializeField] Estate _state;
     public int HealthPoint;
     public int AttackPoint;
@@ -18,6 +20,7 @@ public class Tank : MonoBehaviour, IEntity {
     private Vector2 _wanderDirection;
     [SerializeField] private float _WanderDirectionChangeInterval = 6f;
     private float _WanderDirectionChangeTimer;
+
 
     private void Awake() {
         LoadGameSettings();
@@ -73,8 +76,7 @@ public class Tank : MonoBehaviour, IEntity {
         _CurrentHP -= amount;
         if (_CurrentHP < 0) {
             Destroy(gameObject);
-            int score = GameSettings.options.Score_Tank;
-            HumanGameManager.manager.IncreaseScore(score);
+            Globals.AddScore(SlotNo, GameSettings.options.Score_Tank);
         }
     }
 
@@ -118,5 +120,8 @@ public class Tank : MonoBehaviour, IEntity {
         MoveSpeed = GameSettings.options.Tank_MoveSpeed;
         RotateSpeed = GameSettings.options.Tank_RotateSpeed; 
         ViewDistance = GameSettings.options.Tank_ViewDistance;
+    }
+    public void SetSlot(int slot) {
+        SlotNo = slot;
     }
 }

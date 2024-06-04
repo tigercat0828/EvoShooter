@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Zombie : MonoBehaviour, IEntity {
 
-    public int SlotNo = 0;
+    [SerializeField] private int SlotNo = 0;
     public int  HealthPoint;
     public int  AttackPoint;
     public float MoveSpeed;
@@ -15,7 +15,9 @@ public class Zombie : MonoBehaviour, IEntity {
     private Rigidbody2D _rigidbody;
 
     public HumanGameManager Manager;
-
+    public void SetSlotNo(int slot) {
+        SlotNo = slot;
+    }
     private void Awake() {
         LoadGameSettings();
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -29,7 +31,6 @@ public class Zombie : MonoBehaviour, IEntity {
         LocateTarget(0);
     }
     private void Update() {
-        // Rotate toward target
         Vector2 targetDirection = _target.position - transform.position;
         float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg - 90;
         Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
@@ -54,8 +55,7 @@ public class Zombie : MonoBehaviour, IEntity {
         _CurrentHP -= amount;
         if (_CurrentHP < 0) {
             Destroy(gameObject);
-            int score = GameSettings.options.Score_Zombie;
-            HumanGameManager.manager.IncreaseScore(score);
+            Globals.AddScore(SlotNo, GameSettings.options.Score_Zombie);
         }
     }
     public void TakeHeal(int amount) {
@@ -73,5 +73,8 @@ public class Zombie : MonoBehaviour, IEntity {
         AttackPoint = GameSettings.options.Zombie_AttackPoint;
         MoveSpeed = GameSettings.options.Zombie_MoveSpeed;
         RotateSpeed = GameSettings.options.Zombie_RotateSpeed;
+    }
+    public void SetSlot(int slot) {
+        SlotNo = slot;
     }
 }

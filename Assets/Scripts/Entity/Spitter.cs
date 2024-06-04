@@ -1,6 +1,8 @@
 using UnityEngine;
 
 public class Spitter : MonoBehaviour, IEntity {
+
+    [SerializeField] private int SlotNo = 0;
     // Basic status
     [SerializeField] Estate _state;
     public int   HealthPoint;
@@ -76,7 +78,7 @@ public class Spitter : MonoBehaviour, IEntity {
             _rigidbody.AddForce(transform.up * MoveSpeed);
         }
     }
-    protected void LocateTarget(int group) {
+    protected void LocateTarget(int slot) {
         _target = GameObject.FindGameObjectWithTag("Player").transform;
     }
     public void OnCollisionEnter2D(Collision2D other) {
@@ -88,8 +90,7 @@ public class Spitter : MonoBehaviour, IEntity {
         _CurrentHP -= amount;
         if (_CurrentHP < 0) {
             Destroy(gameObject);
-            int score = GameSettings.options.Score_Spitter;
-            HumanGameManager.manager.IncreaseScore(score);
+            Globals.AddScore(SlotNo, GameSettings.options.Score_Spitter);
         }
     }
 
@@ -116,13 +117,8 @@ public class Spitter : MonoBehaviour, IEntity {
         _wanderDirection = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
     }
     private void TurnBack() {
-        // Reverse direction by rotating 180 degrees
         transform.Rotate(0f, 0f, 180f);
-
-        // Optionally change wander direction to avoid getting stuck
         ChangeWanderDirection();
-
-        // Reset any forces applied during charge
         _rigidbody.velocity = Vector2.zero;
     }
 
@@ -133,5 +129,9 @@ public class Spitter : MonoBehaviour, IEntity {
         RotateSpeed = GameSettings.options.Spitter_RotateSpeed;
         ViewDistance = GameSettings.options.Spitter_ViewDistance;
         FireRate = GameSettings.options.Spitter_FireRate;
+    }
+
+    public void SetSlot(int slot) {
+        SlotNo = slot;
     }
 }

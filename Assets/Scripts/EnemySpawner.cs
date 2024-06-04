@@ -1,6 +1,8 @@
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour {
+
+    public int SlotNo = 0;
     [SerializeField] private float SpawnTime = 1f;
     [SerializeField] private GameObject[] enemyPrefab;
     private float spawnTimer = 0;
@@ -25,6 +27,7 @@ public class EnemySpawner : MonoBehaviour {
         if (enemyPrefab.Length > 2) cumulativeRatios[2] = cumulativeRatios[1] + ratioCharger;
         if (enemyPrefab.Length > 3) cumulativeRatios[3] = cumulativeRatios[2] + ratioTank;
     }
+
     private void SpawnEnemy() {
         int totalRatio = cumulativeRatios[cumulativeRatios.Length - 1];
         int randomValue = Random.Range(0, totalRatio);
@@ -38,7 +41,8 @@ public class EnemySpawner : MonoBehaviour {
             }
         }
 
-        Instantiate(enemyToSpawn, transform.position, Quaternion.identity);
+        IEntity entity = Instantiate(enemyToSpawn, transform.position, Quaternion.identity).GetComponent<IEntity>();
+        entity.SetSlot(SlotNo);
     }
     private void Start() {
         SpawnEnemy();

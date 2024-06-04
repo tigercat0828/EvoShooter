@@ -1,6 +1,8 @@
 using UnityEngine;
 
 public class Charger : MonoBehaviour, IEntity {
+
+    [SerializeField] private int SlotNo = 0;
     // Basic status
     [SerializeField] Estate _state;
     public int HealthPoint;
@@ -101,8 +103,8 @@ public class Charger : MonoBehaviour, IEntity {
         _CurrentHP -= amount;
         if (_CurrentHP < 0) {
             Destroy(gameObject);
-            int score = GameSettings.options.Score_Spitter;
-            HumanGameManager.manager.IncreaseScore(score);
+            
+            Globals.AddScore(SlotNo, GameSettings.options.Score_Charger);
         }
     }
 
@@ -147,5 +149,9 @@ public class Charger : MonoBehaviour, IEntity {
         ChargeSpeed = GameSettings.options.Charger_ChargeSpeed;
         ViewDistance = GameSettings.options.Charger_ViewDistance;
         FireRate = GameSettings.options.Charger_FireRate;
+    }
+
+    public void SetSlot(int slot) {
+        SlotNo = slot;
     }
 }

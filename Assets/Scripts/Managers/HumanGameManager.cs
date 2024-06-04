@@ -1,7 +1,6 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class HumanGameManager : MonoBehaviour {
 
@@ -11,7 +10,6 @@ public class HumanGameManager : MonoBehaviour {
     public GameObject gamePausePanel;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI highScoreText;
-    public int score;
     public SaveData data;
 
 
@@ -19,11 +17,10 @@ public class HumanGameManager : MonoBehaviour {
     private float previousTimeScale;
 
     private void Awake() {
+        Globals.ResetScores();
         manager = this;
         SystemIO.Initialize();
         data = new SaveData(0);
-
-        score = 0;
         GameSettings.LoadSettings();
 
         gameOverPanel.SetActive(false);
@@ -47,7 +44,8 @@ public class HumanGameManager : MonoBehaviour {
     public void GameOver() {
 
         gameOverPanel.SetActive(true);
-        scoreText.text = $"Score: {score}";
+        int score = Globals.GetScore(0);
+        scoreText.text = $"Score: {Globals.GetScore(0)}";
         SystemIO.SaveHighscore(data, score);
         highScoreText.text = $"High Score : {data.highScore}";
     }
@@ -67,15 +65,6 @@ public class HumanGameManager : MonoBehaviour {
     }
     public void ChangeToMenuScene() {
         SceneManager.LoadScene("Menu");
-    }
-    public void SetScore(int score) {
-        this.score = score;
-    }
-    public void IncreaseScore(int amount) {
-        score += amount;
-    }
-    public void DecreaseScore(int amount) {
-        score -= amount; 
     }
 
 }

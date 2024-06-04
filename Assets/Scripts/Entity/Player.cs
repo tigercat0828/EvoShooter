@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, IEntity {
 
-    public int SlotNo = 0;
+    [SerializeField] private int SlotNo = 0;
     public int gHealthPoint = 100;
     public int gAttackPoint = 10;
     public float gMoveSpeed = 15;
@@ -15,7 +15,7 @@ public class Player : MonoBehaviour, IEntity {
     public float gReloadTime = 3;
 
 
-    public int fitness = 0;
+    public int Fitness = 0;
 
     [SerializeField] private Bullet bulletPrefab;
     [SerializeField] private Transform gunBarrel;
@@ -32,6 +32,8 @@ public class Player : MonoBehaviour, IEntity {
     [SerializeField] private bool _isReloading = false;
 
     private Rigidbody2D _rigidbody;
+
+    
 
     private void Awake() {
         LoadGameSettings();
@@ -92,7 +94,7 @@ public class Player : MonoBehaviour, IEntity {
         _CurrentHP -= amount;
         if (_CurrentHP < 0) {   // Die
             Destroy(gameObject);
-            HumanGameManager.manager.SetScore(fitness);
+            Fitness = Globals.GetScore(SlotNo);
             HumanGameManager.manager.GameOver();
         }
     }
@@ -120,5 +122,8 @@ public class Player : MonoBehaviour, IEntity {
         gMagazineSize = GameSettings.options.Agent_MagazineSize;
         gViewDistance = GameSettings.options.Agent_ViewDistance;
 
+    }
+    public void SetSlot(int slot) {
+        SlotNo = slot;
     }
 }
