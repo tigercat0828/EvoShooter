@@ -53,14 +53,17 @@ public class Agent : MonoBehaviour, IEntity {
 
 
     private void Awake() {
-        LoadGameSettings();
         _rigidbody = GetComponent<Rigidbody2D>();
+       
+    }
+    private void Start() {
+        LoadGameSettings();
         _fireInterval = 1 / gFireRate;
         _CurrentHP = gHealthPoint;
         _remainingBullet = gMagazineSize;
         _distanceToKeepAway = gViewDistance * KeepAwayFactor;
         _distanceToDodge = gViewDistance * DodgeFactor;
-        reloadingSprite.gameObject.SetActive(false); 
+        reloadingSprite.gameObject.SetActive(false);
     }
     private void Update() {
 
@@ -126,7 +129,7 @@ public class Agent : MonoBehaviour, IEntity {
         _CurrentHP -= amount;
         if (_CurrentHP < 0) {
             Destroy(gameObject);
-            HumanGameManager.manager.GameOver();
+            GameLevelManager.manager.GameOver();
         }
     }
     public void TakeHeal(int amount) {

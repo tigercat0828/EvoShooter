@@ -680,7 +680,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
-  damping: 0.1
+  damping: 0.4
   target: {fileID: 436358503}
 --- !u!114 &519420034
 MonoBehaviour:
@@ -1345,7 +1345,6 @@ MonoBehaviour:
   gameOverPanel: {fileID: 1869522895}
   gamePausePanel: {fileID: 1754126427}
   scoreText: {fileID: 744102503}
-  highScoreText: {fileID: 895559587}
   data:
     highScore: 0
 --- !u!4 &948178036

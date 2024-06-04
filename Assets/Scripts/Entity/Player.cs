@@ -96,7 +96,7 @@ public class Player : MonoBehaviour, IEntity {
         if (_CurrentHP < 0) {   // Die
             Destroy(gameObject);
             Fitness = Globals.GetScore(SlotNo);
-            HumanGameManager.manager.GameOver();
+            GameLevelManager.manager.GameOver();
         }
     }
     public void TakeHeal(int amount) {

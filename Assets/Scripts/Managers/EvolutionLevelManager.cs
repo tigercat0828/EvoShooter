@@ -2,14 +2,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class HumanGameManager : MonoBehaviour {
+public class EvolutionLevelManager : MonoBehaviour {
 
-
-    public static HumanGameManager manager;
+    public static EvolutionLevelManager manager;
     public GameObject gameOverPanel;
     public GameObject gamePausePanel;
     public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI highScoreText;
     public SaveData data;
 
 
@@ -28,8 +26,7 @@ public class HumanGameManager : MonoBehaviour {
         Time.timeScale = 1f;
 
     }
-    private void Start() {
-    }
+
     public void Update() {
         // click ESC so can pause the game
         if (Input.GetKeyDown(KeyCode.Escape)) {
@@ -44,10 +41,7 @@ public class HumanGameManager : MonoBehaviour {
     public void GameOver() {
 
         gameOverPanel.SetActive(true);
-        int score = Globals.GetScore(0);
         scoreText.text = $"Score: {Globals.GetScore(0)}";
-        SystemIO.SaveHighscore(data, score);
-        highScoreText.text = $"High Score : {data.highScore}";
     }
     public void ReplayGame() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
