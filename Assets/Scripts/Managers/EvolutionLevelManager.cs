@@ -22,6 +22,7 @@ public class EvolutionLevelManager : MonoBehaviour {
     private void Awake() {
         manager = this;
         GameSettings.LoadSettings();
+        
     }
     private void Start() {
         Globals.instance.ResetAllStatus();
@@ -58,8 +59,8 @@ public class EvolutionLevelManager : MonoBehaviour {
             agent.SetSlot(i);
             agent.IsInEvoScene = true;
             agent.name = $"Agent ({i})";
-            //Gene gene = Gene.GenRandomGene();
-            //agent.SetGene(gene);
+            Gene gene = Gene.GenRandomGene();
+            agent.SetGene(gene);
         }
     }
   

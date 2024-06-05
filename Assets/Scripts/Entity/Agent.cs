@@ -63,7 +63,6 @@ public class Agent : MonoBehaviour, IEntity {
        
     }
     private void Start() {
-        LoadGameSettings();
         _fireInterval = 1 / gFireRate;
         _CurrentHP = gHealthPoint;
         _remainingBullet = gMagazineSize;
@@ -218,7 +217,6 @@ public class Agent : MonoBehaviour, IEntity {
     }
 
     public void LoadGameSettings() {
-        //GameSettings.LoadSettings();
         gHealthPoint = GameSettings.options.Agent_HealthPoint;
         gAttackPoint = GameSettings.options.Agent_AttackPoint;
         gMoveSpeed = GameSettings.options.Agent_MoveSpeed;
@@ -228,7 +226,6 @@ public class Agent : MonoBehaviour, IEntity {
         gMagazineSize = GameSettings.options.Agent_MagazineSize;
         gViewDistance = GameSettings.options.Agent_ViewDistance;
         gReloadTime = GameSettings.options.Agent_ReloadTime;
-
     }
 
     public void SetSlot(int slot) {
@@ -243,16 +240,16 @@ public class Agent : MonoBehaviour, IEntity {
     public void SetGene(Gene gene) {
         Gene = gene;
         gHealthPoint += gene.HealthPoint * GameSettings.options.Ability_HealthPoint;
-        gAttackPoint = gene.AttackPoint * GameSettings.options.Ability_AttackPoint;
-        gMoveSpeed = gene.MoveSpeed * GameSettings.options.Ability_MoveSpeed;
-        gRotateSpeed = gene.RotateSpeed * GameSettings.options.Ability_RotateSpeed;
-        gFireRate = gene.FireRate * GameSettings.options.Ability_FireRate;
-        gReloadTime = gene.ReloadTime * GameSettings.options.Ability_ReloadTime;
-        gBulletSpeed = gene.BulletSpeed * GameSettings.options.Ability_BulletSpeed;
-        gMagazineSize = gene.MagazineSize * GameSettings.options.Ability_MagazineSize;
-        gViewDistance = gene.ViewDistance * GameSettings.options.Ability_ViewDistance;
+        gAttackPoint += gene.AttackPoint * GameSettings.options.Ability_AttackPoint;
+        gMoveSpeed += gene.MoveSpeed * GameSettings.options.Ability_MoveSpeed;
+        gRotateSpeed += gene.RotateSpeed * GameSettings.options.Ability_RotateSpeed;
+        gFireRate += gene.FireRate * GameSettings.options.Ability_FireRate;
+        gReloadTime += gene.ReloadTime * GameSettings.options.Ability_ReloadTime;
+        gBulletSpeed += gene.BulletSpeed * GameSettings.options.Ability_BulletSpeed;
+        gMagazineSize += gene.MagazineSize * GameSettings.options.Ability_MagazineSize;
+        gViewDistance += gene.ViewDistance * GameSettings.options.Ability_ViewDistance;
     }
     public Gene GetNumericGene() {
-        return new Gene(gHealthPoint, gAttackPoint, gFireRate, gMagazineSize, gReloadTime, gBulletSpeed, gMoveSpeed, gRotateSpeed, gViewDistance);
+        return Gene;
     }
 }
