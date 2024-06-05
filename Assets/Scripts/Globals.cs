@@ -9,7 +9,7 @@ public class Globals : MonoBehaviour
     public bool[] ArenaClosed = new bool[MAX_SLOT_NUM];
 
     
-    public static Globals intance;
+    public static Globals instance;
 
     public void ResetAllStatus() { 
         // reset score
@@ -18,7 +18,7 @@ public class Globals : MonoBehaviour
         Array.Fill(ArenaClosed, false);
     }
     public void Awake() {
-        intance = this;
+        instance = this;
         ResetAllStatus();
     }
     public int GetScore(int slot) {

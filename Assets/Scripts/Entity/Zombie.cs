@@ -31,7 +31,7 @@ public class Zombie : MonoBehaviour, IEntity {
         LocateTarget(0);
     }
     private void Update() {
-        if (Globals.intance.ArenaClosed[SlotNo]) {
+        if (Globals.instance.ArenaClosed[SlotNo]) {
             Destroy(gameObject);
             return;
         }
@@ -79,7 +79,7 @@ public class Zombie : MonoBehaviour, IEntity {
         _CurrentHP -= amount;
         if (_CurrentHP < 0) {
             Destroy(gameObject);
-            Globals.intance.AddScore(SlotNo, GameSettings.options.Score_Zombie);
+            Globals.instance.AddScore(SlotNo, GameSettings.options.Score_Zombie);
         }
     }
     public void TakeHeal(int amount) {

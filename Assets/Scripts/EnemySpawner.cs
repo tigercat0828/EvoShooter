@@ -6,7 +6,7 @@ public class EnemySpawner : MonoBehaviour {
     public int SlotNo = 0;
     [SerializeField] private float SpawnTime = 1f;
     [SerializeField] private GameObject[] enemyPrefab;
-    public Transform EntityDish;
+    public Transform EntityGroup;
     private float spawnTimer = 0;
     int ratioZombie;
     int ratioSpitter;
@@ -28,7 +28,7 @@ public class EnemySpawner : MonoBehaviour {
         StartCoroutine(SpawnEnemyAfterDelay(3f));
     }
     private void Update() {
-        if (!Globals.intance.ArenaClosed[SlotNo]) {
+        if (!Globals.instance.ArenaClosed[SlotNo]) {
 
             if (spawnTimer > SpawnTime) {
                 spawnTimer = 0;
@@ -56,7 +56,7 @@ public class EnemySpawner : MonoBehaviour {
             }
         }
 
-        IEntity entity = Instantiate(enemyToSpawn, transform.position, Quaternion.identity, EntityDish).GetComponent<IEntity>();
+        IEntity entity = Instantiate(enemyToSpawn, transform.position, Quaternion.identity, EntityGroup).GetComponent<IEntity>();
         entity.SetSlot(SlotNo);
     }
     private void CalculateSpawnRatios() {

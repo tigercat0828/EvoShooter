@@ -48,8 +48,8 @@ public class Charger : MonoBehaviour, IEntity {
         _state = Estate.Wander;
     }
     private void Update() {
+        if (!AwareAgent()) return;
         _fireTimer -= Time.deltaTime;
-        AwareAgent();
 
         Quaternion targetRotation = new();
         if (_state == Estate.TargetFound) {
@@ -124,7 +124,7 @@ public class Charger : MonoBehaviour, IEntity {
         if (_CurrentHP < 0) {
             Destroy(gameObject);
             
-            Globals.intance.AddScore(SlotNo, GameSettings.options.Score_Charger);
+            Globals.instance.AddScore(SlotNo, GameSettings.options.Score_Charger);
         }
     }
 
@@ -138,19 +138,19 @@ public class Charger : MonoBehaviour, IEntity {
     public void KnockBack(Vector2 direction, float strength) {
         _rigidbody.AddForce(direction * strength, ForceMode2D.Impulse);
     }
-    
-    protected void AwareAgent() {
-        if (Globals.intance.ArenaClosed[SlotNo]) {
-            Destroy(gameObject);
-            return;
-        }
 
+    protected bool AwareAgent() {
+        if (Globals.instance.ArenaClosed[SlotNo]) {
+            Destroy(gameObject);
+            return false;
+        }
         if (Vector2.Distance(transform.position, _target.position) < ViewDistance) {
             _state = Estate.TargetFound;
         }
         else {
             _state = Estate.Wander;
         }
+        return true;
     }
     protected void ChangeWanderDirection() {
         float angle = Random.Range(0, 360) * Mathf.Deg2Rad;

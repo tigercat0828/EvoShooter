@@ -5,11 +5,15 @@ public class Agent : MonoBehaviour, IEntity {
     // 視野內敵人如果距離過近 => 遠離敵人並開火
     // 視野內敵人如果距離過遠 => 追擊敵人並開火?
     // 視野內無敵人 => Wander
-    public bool IsInEvoScene = true;
+
+
 
     [SerializeField] private int SlotNo = 0;
     int IEntity.SlotNo => SlotNo;
     [SerializeField] Estate _state;
+
+    [SerializeField] public Gene Gene;
+
     public int      Fitness = 0;
     public int      gHealthPoint = 100;
     public int      gAttackPoint = 10;
@@ -20,13 +24,18 @@ public class Agent : MonoBehaviour, IEntity {
     public float    gReloadTime = 3;
     public float    gBulletSpeed = 10;
     public float    gViewDistance = 10;
-
+    
+    public float    KeepAwayFactor = 0.8f;
+    public float    DodgeFactor = 0.2f;
+    
+    
     private float _fireTimer;
     private float _fireInterval;
     private float _distanceToKeepAway;
     private float _distanceToDodge;
-    public float KeepAwayFactor = 0.8f;
-    public float DodgeFactor = 0.2f;
+
+    
+    public bool IsInEvoScene = true;
     [SerializeField] private float _dodgeStrength = 3;
 
 
@@ -48,8 +57,6 @@ public class Agent : MonoBehaviour, IEntity {
     [SerializeField] private Transform _target;
 
     Transform[] _trackedEnemy;
-
-
 
     private void Awake() {
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -131,8 +138,8 @@ public class Agent : MonoBehaviour, IEntity {
             if (!IsInEvoScene) {
                 GameLevelManager.manager.GameOver();    // TODO : fix here
             }
-            Fitness = Globals.intance.GetScore(SlotNo);
-            Globals.intance.ArenaClosed[SlotNo] = true;
+            Fitness = Globals.instance.GetScore(SlotNo);
+            Globals.instance.ArenaClosed[SlotNo] = true;
 
             
         }
@@ -233,7 +240,8 @@ public class Agent : MonoBehaviour, IEntity {
         _wanderDirection = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
     }
 
-    public void SetNumericGene(NumericGene gene) {
+    public void SetGene(Gene gene) {
+        Gene = gene;
         gHealthPoint += gene.HealthPoint * GameSettings.options.Ability_HealthPoint;
         gAttackPoint = gene.AttackPoint * GameSettings.options.Ability_AttackPoint;
         gMoveSpeed = gene.MoveSpeed * GameSettings.options.Ability_MoveSpeed;
@@ -244,7 +252,7 @@ public class Agent : MonoBehaviour, IEntity {
         gMagazineSize = gene.MagazineSize * GameSettings.options.Ability_MagazineSize;
         gViewDistance = gene.ViewDistance * GameSettings.options.Ability_ViewDistance;
     }
-    public NumericGene GetNumericGene() {
-        return new NumericGene(gHealthPoint, gAttackPoint, gFireRate, gMagazineSize, gReloadTime, gBulletSpeed, gMoveSpeed, gRotateSpeed, gViewDistance);
+    public Gene GetNumericGene() {
+        return new Gene(gHealthPoint, gAttackPoint, gFireRate, gMagazineSize, gReloadTime, gBulletSpeed, gMoveSpeed, gRotateSpeed, gViewDistance);
     }
 }

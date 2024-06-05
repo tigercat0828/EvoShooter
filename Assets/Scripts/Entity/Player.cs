@@ -95,8 +95,8 @@ public class Player : MonoBehaviour, IEntity {
         _CurrentHP -= amount;
         if (_CurrentHP < 0) {   // Die
             Destroy(gameObject);
-            Fitness = Globals.intance.GetScore(SlotNo);
-            Globals.intance.ArenaClosed[SlotNo] = true;
+            Fitness = Globals.instance.GetScore(SlotNo);
+            Globals.instance.ArenaClosed[SlotNo] = true;
             GameLevelManager.manager.GameOver();
         }
     }

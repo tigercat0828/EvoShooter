@@ -1,75 +1,68 @@
+using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.SceneManagement;
 
 public class EvolutionLevelManager : MonoBehaviour {
 
-    private const int MAX_SLOTS_NUM =2;
     public static EvolutionLevelManager manager;
-    public GameObject gamePausePanel;
     public TextMeshProUGUI TimerText;
     public TextMeshProUGUI GenerationText;
 
-
-    private bool isPaused = false;
-    private float previousTimeScale;
+    [SerializeField] public int ArenaNum { get; private set; }
 
 
+    public Transform[] EntityGroup;
+    Gene[] selectedGenes;
+    public float CheckPeriod = 10f;
+    public float CheckTimer;
+
+    public Transform AgentGroup;
     public GameObject AgentPrefab;
-    public Transform[] EntityDish = new Transform[MAX_SLOTS_NUM];
-
+    
     private void Awake() {
         manager = this;
-       
         GameSettings.LoadSettings();
-        gamePausePanel.SetActive(false);
-        Time.timeScale = 1f;
     }
     private void Start() {
-        Globals.intance.ResetAllStatus();
-        SpawnAgents();
+        Globals.instance.ResetAllStatus();
+        ArenaNum = EntityGroup.Length;
+        //selectedGenes = new Gene[ArenaNum];
+        SpawnInitialAgents();
     }
     public void Update() {
-        // click ESC so can pause the game
-        if (Input.GetKeyDown(KeyCode.Escape)) {
-            if (isPaused) {
-                ResumeGame();
-            }
-            else {
-                PauseGame();
+        CheckTimer += Time.deltaTime;
+        if (CheckTimer > CheckPeriod) {
+            bool allClosed = CheckAllArenaAreClosed();
+            if (allClosed) {
+                NextGeneration();
             }
         }
     }
-    public void SpawnAgents() {
-        for (int i = 0; i < EntityDish.Length; i++) {
-            Agent agent = Instantiate(AgentPrefab, EntityDish[i].position, Quaternion.identity, EntityDish[i]).GetComponent<Agent>();
+
+    private void NextGeneration() {
+        
+    }
+
+    private bool CheckAllArenaAreClosed() {
+        for (int i = 0; i < ArenaNum; i++) {
+            if (!Globals.instance.ArenaClosed[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void SpawnInitialAgents() {
+        for (int i = 0; i < EntityGroup.Length; i++) {
+            Agent agent = Instantiate(AgentPrefab, EntityGroup[i].position, Quaternion.identity, AgentGroup).GetComponent<Agent>();
             agent.SetSlot(i);
             agent.IsInEvoScene = true;
+            agent.name = $"Agent ({i})";
+            //Gene gene = Gene.GenRandomGene();
+            //agent.SetGene(gene);
         }
     }
-
-
-    // Scene Control
-    // ==============================================================================================================
-    public void ReplayGame() {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-    public void PauseGame() {
-        isPaused = true;
-        previousTimeScale = Time.timeScale;
-        Time.timeScale = 0f;
-        gamePausePanel.SetActive(true); 
-    }
-    public void ResumeGame() {
-        isPaused = false;
-        Time.timeScale = previousTimeScale; 
-        gamePausePanel.SetActive(false); 
-    }
-    public void ChangeToMenuScene() {
-        SceneManager.LoadScene("Menu");
-    }
-
+  
 }
 
 

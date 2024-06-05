@@ -1,6 +1,7 @@
 using UnityEngine;
 
-public class NumericGene {
+[System.Serializable]
+public class Gene {
     public int HealthPoint;
     public int AttackPoint;
     public float FireRate;
@@ -11,8 +12,8 @@ public class NumericGene {
     public float RotateSpeed;
     public float ViewDistance;
 
-    public static NumericGene DefaultGene;
-    static NumericGene() {
+    public static Gene DefaultGene;
+    static Gene() {
         GameSettings.LoadSettings();
         DefaultGene.HealthPoint = GameSettings.options.Agent_HealthPoint;
         DefaultGene.AttackPoint = GameSettings.options.Agent_AttackPoint;
@@ -26,7 +27,7 @@ public class NumericGene {
         
     }
 
-    public NumericGene(int healthPoint, int attackPoint, float fireRate, int magazineSize, float reloadTime, float bulletSpeed,float moveSpeed, float rotateSpeed, float viewDistance) {
+    public Gene(int healthPoint, int attackPoint, float fireRate, int magazineSize, float reloadTime, float bulletSpeed,float moveSpeed, float rotateSpeed, float viewDistance) {
         HealthPoint = healthPoint;
         AttackPoint = attackPoint;
         FireRate = fireRate;
@@ -38,7 +39,7 @@ public class NumericGene {
         ViewDistance = viewDistance;
     }
 
-    public NumericGene RandomNumericGene() {
+    public static Gene GenRandomGene() {
 
         int[] stats = new int[9];
         int total = 0;
@@ -61,7 +62,7 @@ public class NumericGene {
         if (total != 100) {
             stats[^1] += 100 - total;
         }
-        return new NumericGene(
+        return new Gene(
              stats[0] ,
              stats[1] ,
              stats[2] ,

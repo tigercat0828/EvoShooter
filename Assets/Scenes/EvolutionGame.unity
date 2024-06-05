@@ -123,11 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!4 &46933315 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9133491521631472139, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
-  m_PrefabInstance: {fileID: 73519905}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &73519905
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -143,7 +138,11 @@ PrefabInstance:
     - target: {fileID: 3235977683919609443, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 46933315}
+      objectReference: {fileID: 0}
+    - target: {fileID: 3235977683919609443, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 217991794}
     - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: SlotNo
       value: 8
@@ -151,10 +150,14 @@ PrefabInstance:
     - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 46933315}
+      objectReference: {fileID: 0}
+    - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 217991794}
     - target: {fileID: 4618703097165997650, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_Name
-      value: EntityDish (8)
+      value: EntityList (8)
       objectReference: {fileID: 0}
     - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: SlotNo
@@ -163,7 +166,11 @@ PrefabInstance:
     - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 46933315}
+      objectReference: {fileID: 0}
+    - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 217991794}
     - target: {fileID: 6397329840306338455, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_Name
       value: Arena (8)
@@ -175,7 +182,11 @@ PrefabInstance:
     - target: {fileID: 7283710791424492856, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 46933315}
+      objectReference: {fileID: 0}
+    - target: {fileID: 7283710791424492856, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 217991794}
     - target: {fileID: 7604529432980039782, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -304,8 +315,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: HumanGameManager, Assembly-CSharp
+      - m_Target: {fileID: 948178038}
+        m_TargetAssemblyTypeName: GamePause, Assembly-CSharp
         m_MethodName: ResumeGame
         m_Mode: 1
         m_Arguments:
@@ -354,10 +365,15 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 80081070}
   m_CullTransparentMesh: 1
---- !u!4 &98805199 stripped
+--- !u!4 &85774328 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 9133491521631472139, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
-  m_PrefabInstance: {fileID: 414660699}
+  m_CorrespondingSourceObject: {fileID: 7604529432980039782, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+  m_PrefabInstance: {fileID: 1924739295}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &101273896 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7604529432980039782, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+  m_PrefabInstance: {fileID: 652329144}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &211344155
 PrefabInstance:
@@ -374,7 +390,11 @@ PrefabInstance:
     - target: {fileID: 3235977683919609443, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 1865707027}
+      objectReference: {fileID: 0}
+    - target: {fileID: 3235977683919609443, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 2069310044}
     - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: SlotNo
       value: 9
@@ -382,7 +402,11 @@ PrefabInstance:
     - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 1865707027}
+      objectReference: {fileID: 0}
+    - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 2069310044}
     - target: {fileID: 4618703097165997650, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_Name
       value: EntityDish (9)
@@ -394,7 +418,11 @@ PrefabInstance:
     - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 1865707027}
+      objectReference: {fileID: 0}
+    - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 2069310044}
     - target: {fileID: 6397329840306338455, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_Name
       value: Arena (9)
@@ -406,7 +434,11 @@ PrefabInstance:
     - target: {fileID: 7283710791424492856, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 1865707027}
+      objectReference: {fileID: 0}
+    - target: {fileID: 7283710791424492856, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 2069310044}
     - target: {fileID: 7604529432980039782, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 100
@@ -452,6 +484,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+--- !u!4 &217991794 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7604529432980039782, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+  m_PrefabInstance: {fileID: 73519905}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &225652421
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,10 +623,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 225652421}
   m_CullTransparentMesh: 1
---- !u!4 &278867913 stripped
+--- !u!1 &318463720
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 318463721}
+  m_Layer: 0
+  m_Name: AgentGroup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &318463721
 Transform:
-  m_CorrespondingSourceObject: {fileID: 9133491521631472139, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
-  m_PrefabInstance: {fileID: 942896321}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 318463720}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -75.99376, y: -110.797935, z: -5.352293}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &385926634 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7604529432980039782, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+  m_PrefabInstance: {fileID: 1066079052}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &414660699
 PrefabInstance:
@@ -604,29 +672,29 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3235977683919609443, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
-      propertyPath: EntityDish
+      propertyPath: EntityGroup
       value: 
-      objectReference: {fileID: 98805199}
+      objectReference: {fileID: 1983517382}
     - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: SlotNo
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
-      propertyPath: EntityDish
+      propertyPath: EntityGroup
       value: 
-      objectReference: {fileID: 98805199}
+      objectReference: {fileID: 1983517382}
     - target: {fileID: 4618703097165997650, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_Name
-      value: EntityDish (3)
+      value: EntityList (3)
       objectReference: {fileID: 0}
     - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: SlotNo
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
-      propertyPath: EntityDish
+      propertyPath: EntityGroup
       value: 
-      objectReference: {fileID: 98805199}
+      objectReference: {fileID: 1983517382}
     - target: {fileID: 6397329840306338455, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_Name
       value: Arena (3)
@@ -636,9 +704,9 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7283710791424492856, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
-      propertyPath: EntityDish
+      propertyPath: EntityGroup
       value: 
-      objectReference: {fileID: 98805199}
+      objectReference: {fileID: 1983517382}
     - target: {fileID: 7604529432980039782, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 300
@@ -684,10 +752,10 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
---- !u!4 &514236436 stripped
+--- !u!4 &490658862 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 9133491521631472139, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
-  m_PrefabInstance: {fileID: 7592019036839378137}
+  m_CorrespondingSourceObject: {fileID: 7604529432980039782, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+  m_PrefabInstance: {fileID: 1521418676}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
@@ -854,10 +922,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113b1cba55908e24484313cb8fe2010f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DragSpeed: 4
-  ZoomSpeed: 4
+  DragSpeed: 12
+  ZoomSpeed: 12
   MinZoom: 5
-  MaxZoom: 50
+  MaxZoom: 200
 --- !u!1 &592730743
 GameObject:
   m_ObjectHideFlags: 0
@@ -1001,7 +1069,11 @@ PrefabInstance:
     - target: {fileID: 3235977683919609443, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 1853901539}
+      objectReference: {fileID: 0}
+    - target: {fileID: 3235977683919609443, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 101273896}
     - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: SlotNo
       value: 7
@@ -1009,10 +1081,14 @@ PrefabInstance:
     - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 1853901539}
+      objectReference: {fileID: 0}
+    - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 101273896}
     - target: {fileID: 4618703097165997650, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_Name
-      value: EntityDish (7)
+      value: EntityList (7)
       objectReference: {fileID: 0}
     - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: SlotNo
@@ -1021,7 +1097,11 @@ PrefabInstance:
     - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 1853901539}
+      objectReference: {fileID: 0}
+    - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 101273896}
     - target: {fileID: 6397329840306338455, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_Name
       value: Arena (7)
@@ -1033,7 +1113,11 @@ PrefabInstance:
     - target: {fileID: 7283710791424492856, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 1853901539}
+      objectReference: {fileID: 0}
+    - target: {fileID: 7283710791424492856, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 101273896}
     - target: {fileID: 7604529432980039782, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 300
@@ -1089,60 +1173,76 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3235977683919609443, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: SlotNo
-      value: 3
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 3235977683919609443, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: SpawnTime
-      value: 14
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 3235977683919609443, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 987003988}
+      objectReference: {fileID: 0}
+    - target: {fileID: 3235977683919609443, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 1117666935}
     - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: SlotNo
-      value: 3
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: SpawnTime
-      value: 14
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 987003988}
+      objectReference: {fileID: 0}
+    - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 1117666935}
     - target: {fileID: 4618703097165997650, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_Name
-      value: EntityDish (14)
+      value: EntityList (14)
       objectReference: {fileID: 0}
     - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: SlotNo
-      value: 3
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: SpawnTime
-      value: 14
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 987003988}
+      objectReference: {fileID: 0}
+    - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 1117666935}
     - target: {fileID: 6397329840306338455, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_Name
       value: Arena (14)
       objectReference: {fileID: 0}
     - target: {fileID: 7283710791424492856, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: SlotNo
-      value: 3
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 7283710791424492856, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: SpawnTime
-      value: 14
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 7283710791424492856, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 987003988}
+      objectReference: {fileID: 0}
+    - target: {fileID: 7283710791424492856, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 1117666935}
     - target: {fileID: 7604529432980039782, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 200
@@ -1188,15 +1288,15 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
---- !u!4 &745134666 stripped
+--- !u!4 &745533537 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 9133491521631472139, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
-  m_PrefabInstance: {fileID: 2026573170}
+  m_CorrespondingSourceObject: {fileID: 7604529432980039782, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+  m_PrefabInstance: {fileID: 7592019036839378137}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &807004899 stripped
+--- !u!4 &774141864 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 9133491521631472139, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
-  m_PrefabInstance: {fileID: 1289139128}
+  m_CorrespondingSourceObject: {fileID: 7604529432980039782, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+  m_PrefabInstance: {fileID: 1802413129}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &938995921
 PrefabInstance:
@@ -1213,7 +1313,11 @@ PrefabInstance:
     - target: {fileID: 3235977683919609443, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 1807784112}
+      objectReference: {fileID: 0}
+    - target: {fileID: 3235977683919609443, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 1385028310}
     - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: SlotNo
       value: 12
@@ -1221,10 +1325,14 @@ PrefabInstance:
     - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 1807784112}
+      objectReference: {fileID: 0}
+    - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 1385028310}
     - target: {fileID: 4618703097165997650, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_Name
-      value: EntityDish (12)
+      value: EntityList (12)
       objectReference: {fileID: 0}
     - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: SlotNo
@@ -1233,7 +1341,11 @@ PrefabInstance:
     - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 1807784112}
+      objectReference: {fileID: 0}
+    - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 1385028310}
     - target: {fileID: 6397329840306338455, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_Name
       value: Arena (12)
@@ -1245,7 +1357,11 @@ PrefabInstance:
     - target: {fileID: 7283710791424492856, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 1807784112}
+      objectReference: {fileID: 0}
+    - target: {fileID: 7283710791424492856, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 1385028310}
     - target: {fileID: 7604529432980039782, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1306,7 +1422,11 @@ PrefabInstance:
     - target: {fileID: 3235977683919609443, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 278867913}
+      objectReference: {fileID: 0}
+    - target: {fileID: 3235977683919609443, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 1350979618}
     - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: SlotNo
       value: 6
@@ -1314,10 +1434,14 @@ PrefabInstance:
     - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 278867913}
+      objectReference: {fileID: 0}
+    - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 1350979618}
     - target: {fileID: 4618703097165997650, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_Name
-      value: EntityDish (6)
+      value: EntityList (6)
       objectReference: {fileID: 0}
     - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: SlotNo
@@ -1326,7 +1450,11 @@ PrefabInstance:
     - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 278867913}
+      objectReference: {fileID: 0}
+    - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 1350979618}
     - target: {fileID: 6397329840306338455, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_Name
       value: Arena (6)
@@ -1338,7 +1466,11 @@ PrefabInstance:
     - target: {fileID: 7283710791424492856, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 278867913}
+      objectReference: {fileID: 0}
+    - target: {fileID: 7283710791424492856, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 1350979618}
     - target: {fileID: 7604529432980039782, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 200
@@ -1394,6 +1526,7 @@ GameObject:
   m_Component:
   - component: {fileID: 948178036}
   - component: {fileID: 948178037}
+  - component: {fileID: 948178038}
   m_Layer: 0
   m_Name: EvolutionLevelManager
   m_TagString: Untagged
@@ -1428,32 +1561,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48ea007b616a50f48bd4be029a10dca4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gamePausePanel: {fileID: 1754126427}
   TimerText: {fileID: 0}
   GenerationText: {fileID: 0}
+  EntityGroup:
+  - {fileID: 745533537}
+  - {fileID: 1680425199}
+  - {fileID: 1441416335}
+  - {fileID: 1983517382}
+  - {fileID: 1563129229}
+  - {fileID: 85774328}
+  - {fileID: 1350979618}
+  - {fileID: 101273896}
+  - {fileID: 217991794}
+  - {fileID: 2069310044}
+  - {fileID: 774141864}
+  - {fileID: 490658862}
+  - {fileID: 1385028310}
+  - {fileID: 385926634}
+  - {fileID: 1117666935}
+  - {fileID: 1328968283}
+  CheckPeriod: 10
+  CheckTimer: 0
+  AgentGroup: {fileID: 318463721}
   AgentPrefab: {fileID: 1176701525979821633, guid: f37c859dbc1b42c4e8c3cff0f2710e1c, type: 3}
-  EntityDish:
-  - {fileID: 514236436}
-  - {fileID: 1615754910}
-  - {fileID: 807004899}
-  - {fileID: 98805199}
-  - {fileID: 745134666}
-  - {fileID: 2030421669}
-  - {fileID: 278867913}
-  - {fileID: 1853901539}
-  - {fileID: 46933315}
-  - {fileID: 1865707027}
-  - {fileID: 1084073322}
-  - {fileID: 1216484488}
-  - {fileID: 1807784112}
-  - {fileID: 1029417124}
-  - {fileID: 987003988}
-  - {fileID: 1940985215}
---- !u!4 &987003988 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9133491521631472139, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
-  m_PrefabInstance: {fileID: 704867958}
+--- !u!114 &948178038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 948178034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 642f6ee1e1b0c7146b47fa5f5f61308f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gamePausePanel: {fileID: 1754126427}
 --- !u!1001 &990136541
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1469,7 +1612,11 @@ PrefabInstance:
     - target: {fileID: 3235977683919609443, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 1615754910}
+      objectReference: {fileID: 0}
+    - target: {fileID: 3235977683919609443, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 1680425199}
     - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: SlotNo
       value: 1
@@ -1477,10 +1624,14 @@ PrefabInstance:
     - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 1615754910}
+      objectReference: {fileID: 0}
+    - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 1680425199}
     - target: {fileID: 4618703097165997650, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_Name
-      value: EntityDish (1)
+      value: EntityList (1)
       objectReference: {fileID: 0}
     - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: SlotNo
@@ -1489,7 +1640,11 @@ PrefabInstance:
     - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 1615754910}
+      objectReference: {fileID: 0}
+    - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 1680425199}
     - target: {fileID: 6397329840306338455, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_Name
       value: Arena (1)
@@ -1501,7 +1656,11 @@ PrefabInstance:
     - target: {fileID: 7283710791424492856, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 1615754910}
+      objectReference: {fileID: 0}
+    - target: {fileID: 7283710791424492856, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 1680425199}
     - target: {fileID: 7604529432980039782, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 100
@@ -1547,11 +1706,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
---- !u!4 &1029417124 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9133491521631472139, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
-  m_PrefabInstance: {fileID: 1066079052}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1066079052
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1567,7 +1721,11 @@ PrefabInstance:
     - target: {fileID: 3235977683919609443, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 1029417124}
+      objectReference: {fileID: 0}
+    - target: {fileID: 3235977683919609443, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 385926634}
     - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: SlotNo
       value: 13
@@ -1575,10 +1733,14 @@ PrefabInstance:
     - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 1029417124}
+      objectReference: {fileID: 0}
+    - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 385926634}
     - target: {fileID: 4618703097165997650, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_Name
-      value: EntityDish (13)
+      value: EntityList (13)
       objectReference: {fileID: 0}
     - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: SlotNo
@@ -1587,7 +1749,11 @@ PrefabInstance:
     - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 1029417124}
+      objectReference: {fileID: 0}
+    - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 385926634}
     - target: {fileID: 6397329840306338455, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_Name
       value: Arena (13)
@@ -1599,7 +1765,11 @@ PrefabInstance:
     - target: {fileID: 7283710791424492856, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 1029417124}
+      objectReference: {fileID: 0}
+    - target: {fileID: 7283710791424492856, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 385926634}
     - target: {fileID: 7604529432980039782, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 100
@@ -1645,10 +1815,10 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
---- !u!4 &1084073322 stripped
+--- !u!4 &1117666935 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 9133491521631472139, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
-  m_PrefabInstance: {fileID: 1802413129}
+  m_CorrespondingSourceObject: {fileID: 7604529432980039782, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+  m_PrefabInstance: {fileID: 704867958}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1178646348
 GameObject:
@@ -1718,11 +1888,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1718832740}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1216484488 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9133491521631472139, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
-  m_PrefabInstance: {fileID: 1521418676}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1289139128
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1738,7 +1903,11 @@ PrefabInstance:
     - target: {fileID: 3235977683919609443, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 807004899}
+      objectReference: {fileID: 0}
+    - target: {fileID: 3235977683919609443, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 1441416335}
     - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: SlotNo
       value: 2
@@ -1746,10 +1915,14 @@ PrefabInstance:
     - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 807004899}
+      objectReference: {fileID: 0}
+    - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 1441416335}
     - target: {fileID: 4618703097165997650, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_Name
-      value: EntityDish (2)
+      value: EntityList (2)
       objectReference: {fileID: 0}
     - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: SlotNo
@@ -1758,7 +1931,11 @@ PrefabInstance:
     - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 807004899}
+      objectReference: {fileID: 0}
+    - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 1441416335}
     - target: {fileID: 6397329840306338455, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_Name
       value: Arena (2)
@@ -1770,7 +1947,11 @@ PrefabInstance:
     - target: {fileID: 7283710791424492856, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 807004899}
+      objectReference: {fileID: 0}
+    - target: {fileID: 7283710791424492856, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 1441416335}
     - target: {fileID: 7604529432980039782, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 200
@@ -1816,6 +1997,16 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+--- !u!4 &1328968283 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7604529432980039782, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+  m_PrefabInstance: {fileID: 1432816217}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1350979618 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7604529432980039782, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+  m_PrefabInstance: {fileID: 942896321}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1384555457
 GameObject:
   m_ObjectHideFlags: 0
@@ -1950,6 +2141,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1384555457}
   m_CullTransparentMesh: 1
+--- !u!4 &1385028310 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7604529432980039782, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+  m_PrefabInstance: {fileID: 938995921}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1392629052
 GameObject:
   m_ObjectHideFlags: 0
@@ -2033,9 +2229,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: HumanGameManager, Assembly-CSharp
-        m_MethodName: ChangeToMenuScene
+      - m_Target: {fileID: 948178038}
+        m_TargetAssemblyTypeName: GamePauseMenePopup, Assembly-CSharp
+        m_MethodName: ChangeToMainMenuScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2098,7 +2294,11 @@ PrefabInstance:
     - target: {fileID: 3235977683919609443, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 1940985215}
+      objectReference: {fileID: 0}
+    - target: {fileID: 3235977683919609443, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 1328968283}
     - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: SlotNo
       value: 15
@@ -2106,10 +2306,14 @@ PrefabInstance:
     - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 1940985215}
+      objectReference: {fileID: 0}
+    - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 1328968283}
     - target: {fileID: 4618703097165997650, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_Name
-      value: EntityDish (15)
+      value: EntityList (15)
       objectReference: {fileID: 0}
     - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: SlotNo
@@ -2118,7 +2322,11 @@ PrefabInstance:
     - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 1940985215}
+      objectReference: {fileID: 0}
+    - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 1328968283}
     - target: {fileID: 6397329840306338455, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_Name
       value: Arena (15)
@@ -2130,7 +2338,11 @@ PrefabInstance:
     - target: {fileID: 7283710791424492856, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 1940985215}
+      objectReference: {fileID: 0}
+    - target: {fileID: 7283710791424492856, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 1328968283}
     - target: {fileID: 7604529432980039782, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 300
@@ -2176,6 +2388,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+--- !u!4 &1441416335 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7604529432980039782, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+  m_PrefabInstance: {fileID: 1289139128}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1456057675
 GameObject:
   m_ObjectHideFlags: 0
@@ -2266,7 +2483,11 @@ PrefabInstance:
     - target: {fileID: 3235977683919609443, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 1216484488}
+      objectReference: {fileID: 0}
+    - target: {fileID: 3235977683919609443, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 490658862}
     - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: SlotNo
       value: 11
@@ -2274,10 +2495,14 @@ PrefabInstance:
     - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 1216484488}
+      objectReference: {fileID: 0}
+    - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 490658862}
     - target: {fileID: 4618703097165997650, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_Name
-      value: EntityDish (11)
+      value: EntityList (1)
       objectReference: {fileID: 0}
     - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: SlotNo
@@ -2286,7 +2511,11 @@ PrefabInstance:
     - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 1216484488}
+      objectReference: {fileID: 0}
+    - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 490658862}
     - target: {fileID: 6397329840306338455, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_Name
       value: Arena (11)
@@ -2298,7 +2527,11 @@ PrefabInstance:
     - target: {fileID: 7283710791424492856, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 1216484488}
+      objectReference: {fileID: 0}
+    - target: {fileID: 7283710791424492856, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 490658862}
     - target: {fileID: 7604529432980039782, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 300
@@ -2344,9 +2577,14 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
---- !u!4 &1615754910 stripped
+--- !u!4 &1563129229 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 9133491521631472139, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7604529432980039782, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+  m_PrefabInstance: {fileID: 2026573170}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1680425199 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7604529432980039782, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
   m_PrefabInstance: {fileID: 990136541}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1718832736
@@ -2505,7 +2743,11 @@ PrefabInstance:
     - target: {fileID: 3235977683919609443, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 1084073322}
+      objectReference: {fileID: 0}
+    - target: {fileID: 3235977683919609443, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 774141864}
     - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: SlotNo
       value: 10
@@ -2513,7 +2755,11 @@ PrefabInstance:
     - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 1084073322}
+      objectReference: {fileID: 0}
+    - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 774141864}
     - target: {fileID: 4618703097165997650, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_Name
       value: EntityDish (10)
@@ -2525,7 +2771,11 @@ PrefabInstance:
     - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 1084073322}
+      objectReference: {fileID: 0}
+    - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 774141864}
     - target: {fileID: 6397329840306338455, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_Name
       value: Arena (10)
@@ -2537,7 +2787,11 @@ PrefabInstance:
     - target: {fileID: 7283710791424492856, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 1084073322}
+      objectReference: {fileID: 0}
+    - target: {fileID: 7283710791424492856, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 774141864}
     - target: {fileID: 7604529432980039782, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 200
@@ -2583,21 +2837,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
---- !u!4 &1807784112 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9133491521631472139, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
-  m_PrefabInstance: {fileID: 938995921}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1853901539 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9133491521631472139, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
-  m_PrefabInstance: {fileID: 652329144}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1865707027 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9133491521631472139, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
-  m_PrefabInstance: {fileID: 211344155}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1924739295
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2613,7 +2852,11 @@ PrefabInstance:
     - target: {fileID: 3235977683919609443, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 2030421669}
+      objectReference: {fileID: 0}
+    - target: {fileID: 3235977683919609443, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 85774328}
     - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: SlotNo
       value: 5
@@ -2621,10 +2864,14 @@ PrefabInstance:
     - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 2030421669}
+      objectReference: {fileID: 0}
+    - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 85774328}
     - target: {fileID: 4618703097165997650, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_Name
-      value: EntityDish (5)
+      value: EntityList (5)
       objectReference: {fileID: 0}
     - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: SlotNo
@@ -2633,7 +2880,11 @@ PrefabInstance:
     - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 2030421669}
+      objectReference: {fileID: 0}
+    - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 85774328}
     - target: {fileID: 6397329840306338455, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_Name
       value: Arena (5)
@@ -2645,7 +2896,11 @@ PrefabInstance:
     - target: {fileID: 7283710791424492856, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 2030421669}
+      objectReference: {fileID: 0}
+    - target: {fileID: 7283710791424492856, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 85774328}
     - target: {fileID: 7604529432980039782, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 100
@@ -2691,10 +2946,10 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
---- !u!4 &1940985215 stripped
+--- !u!4 &1983517382 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 9133491521631472139, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
-  m_PrefabInstance: {fileID: 1432816217}
+  m_CorrespondingSourceObject: {fileID: 7604529432980039782, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+  m_PrefabInstance: {fileID: 414660699}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2026573170
 PrefabInstance:
@@ -2711,7 +2966,11 @@ PrefabInstance:
     - target: {fileID: 3235977683919609443, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 745134666}
+      objectReference: {fileID: 0}
+    - target: {fileID: 3235977683919609443, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 1563129229}
     - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: SlotNo
       value: 4
@@ -2719,10 +2978,14 @@ PrefabInstance:
     - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 745134666}
+      objectReference: {fileID: 0}
+    - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 1563129229}
     - target: {fileID: 4618703097165997650, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_Name
-      value: EntityDish (4)
+      value: EntityList (4)
       objectReference: {fileID: 0}
     - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: SlotNo
@@ -2731,7 +2994,11 @@ PrefabInstance:
     - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 745134666}
+      objectReference: {fileID: 0}
+    - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 1563129229}
     - target: {fileID: 6397329840306338455, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_Name
       value: Arena (4)
@@ -2743,7 +3010,11 @@ PrefabInstance:
     - target: {fileID: 7283710791424492856, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: EntityDish
       value: 
-      objectReference: {fileID: 745134666}
+      objectReference: {fileID: 0}
+    - target: {fileID: 7283710791424492856, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: EntityGroup
+      value: 
+      objectReference: {fileID: 1563129229}
     - target: {fileID: 7604529432980039782, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2789,10 +3060,10 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
---- !u!4 &2030421669 stripped
+--- !u!4 &2069310044 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 9133491521631472139, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
-  m_PrefabInstance: {fileID: 1924739295}
+  m_CorrespondingSourceObject: {fileID: 7604529432980039782, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+  m_PrefabInstance: {fileID: 211344155}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7592019036839378137
 PrefabInstance:
@@ -2803,29 +3074,25 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3235977683919609443, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
-      propertyPath: EntityDish
+      propertyPath: EntityGroup
       value: 
-      objectReference: {fileID: 514236436}
+      objectReference: {fileID: 745533537}
     - target: {fileID: 4392406134049117807, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
-      propertyPath: EntityDish
+      propertyPath: EntityGroup
       value: 
-      objectReference: {fileID: 514236436}
-    - target: {fileID: 4618703097165997650, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
-      propertyPath: m_Name
-      value: EntityDish (0)
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 745533537}
     - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
-      propertyPath: EntityDish
+      propertyPath: EntityGroup
       value: 
-      objectReference: {fileID: 514236436}
+      objectReference: {fileID: 745533537}
     - target: {fileID: 6397329840306338455, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_Name
       value: Arena (0)
       objectReference: {fileID: 0}
     - target: {fileID: 7283710791424492856, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
-      propertyPath: EntityDish
+      propertyPath: EntityGroup
       value: 
-      objectReference: {fileID: 514236436}
+      objectReference: {fileID: 745533537}
     - target: {fileID: 7604529432980039782, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2880,6 +3147,7 @@ SceneRoots:
   - {fileID: 1718832740}
   - {fileID: 948178036}
   - {fileID: 592730744}
+  - {fileID: 318463721}
   - {fileID: 7592019036839378137}
   - {fileID: 990136541}
   - {fileID: 1289139128}

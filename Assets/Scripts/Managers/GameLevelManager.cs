@@ -27,7 +27,7 @@ public class GameLevelManager : MonoBehaviour {
         Time.timeScale = 1f;
     }
     private void Start() {
-        Globals.intance.ResetAllStatus();
+        Globals.instance.ResetAllStatus();
     }
 
     public void Update() {
@@ -44,7 +44,7 @@ public class GameLevelManager : MonoBehaviour {
     public void GameOver() {
 
         gameOverPanel.SetActive(true);
-        scoreText.text = $"Score: {Globals.intance.GetScore(0)}";
+        scoreText.text = $"Score: {Globals.instance.GetScore(0)}";
     }
     public void ReplayGame() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

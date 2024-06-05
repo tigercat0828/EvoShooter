@@ -41,8 +41,8 @@ public class Spitter : MonoBehaviour, IEntity {
         _state = Estate.Wander;
     }
     private void Update() {
+        if (!AwareAgent()) return;
         _fireTimer -= Time.deltaTime;
-        AwareAgent();
 
         Quaternion targetRotation = new();
         if (_state == Estate.TargetFound) {
@@ -100,7 +100,7 @@ public class Spitter : MonoBehaviour, IEntity {
         _CurrentHP -= amount;
         if (_CurrentHP < 0) {
             Destroy(gameObject);
-            Globals.intance.AddScore(SlotNo, GameSettings.options.Score_Spitter);
+            Globals.instance.AddScore(SlotNo, GameSettings.options.Score_Spitter);
         }
     }
 
@@ -114,10 +114,10 @@ public class Spitter : MonoBehaviour, IEntity {
     public void KnockBack(Vector2 direction, float strength) {
         _rigidbody.AddForce(direction * strength, ForceMode2D.Impulse);
     }
-    protected void AwareAgent() {
-        if (Globals.intance.ArenaClosed[SlotNo]) {
+    protected bool AwareAgent() {
+        if (Globals.instance.ArenaClosed[SlotNo]) {
             Destroy(gameObject);
-            return;
+            return false;
         }
         if (Vector2.Distance(transform.position, _target.position) < ViewDistance) {
             _state = Estate.TargetFound;
@@ -125,6 +125,7 @@ public class Spitter : MonoBehaviour, IEntity {
         else {
             _state = Estate.Wander;
         }
+        return true;
     }
     protected void ChangeWanderDirection() {
         float angle = Random.Range(0, 360) * Mathf.Deg2Rad;
