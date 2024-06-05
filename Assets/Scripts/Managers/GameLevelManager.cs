@@ -15,7 +15,7 @@ public class GameLevelManager : MonoBehaviour {
     private float previousTimeScale;
 
     private void Awake() {
-        Globals.ResetScores();
+        Globals.ResetAllStatus();
         manager = this;
         SystemIO.Initialize();
         data = new SaveData(0);

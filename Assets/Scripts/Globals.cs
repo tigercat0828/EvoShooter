@@ -1,18 +1,21 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
+
 
 public static class Globals
 {
     private const int MAX_SLOT_NUM = 16;
-    private  static int[] scores;
+    private static int[] scores;
+    private static bool[] ArenaActives;
+
     static Globals() {
         scores = new int[MAX_SLOT_NUM];
+        ArenaActives = new bool[MAX_SLOT_NUM];
     }
-    public static void ResetScores() {
+    public static void ResetAllStatus() {
+        // reset score
         Array.Fill(scores, 0);
+        // reset arena active status
+        Array.Fill(ArenaActives, false);
     }
 
     public static int GetScore(int slot) {

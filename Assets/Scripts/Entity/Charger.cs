@@ -89,6 +89,16 @@ public class Charger : MonoBehaviour, IEntity {
             TurnBack();
         }
     }
+    private void TurnBack() {
+        // Reverse direction by rotating 180 degrees
+        transform.Rotate(0f, 0f, 180f);
+
+        // Optionally change wander direction to avoid getting stuck
+        ChangeWanderDirection();
+
+        // Reset any forces applied during charge
+        _rigidbody.velocity = Vector2.zero;
+    }
     private void FixedUpdate() {
         // 進入射程不會再向Agent靠近
         if ((_state == Estate.TargetFound && Vector2.Distance(transform.position, _target.position) > _distanceToStop)
@@ -128,17 +138,9 @@ public class Charger : MonoBehaviour, IEntity {
     public void KnockBack(Vector2 direction, float strength) {
         _rigidbody.AddForce(direction * strength, ForceMode2D.Impulse);
     }
-    private void TurnBack() {
-        // Reverse direction by rotating 180 degrees
-        transform.Rotate(0f, 0f, 180f);
-
-        // Optionally change wander direction to avoid getting stuck
-        ChangeWanderDirection();
-
-        // Reset any forces applied during charge
-        _rigidbody.velocity = Vector2.zero;
-    }
+    
     protected void AwareAgent() {
+        
         if (Vector2.Distance(transform.position, _target.position) < ViewDistance) {
             _state = Estate.TargetFound;
         }

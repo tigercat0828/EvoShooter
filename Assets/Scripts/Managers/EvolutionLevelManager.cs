@@ -5,26 +5,20 @@ using UnityEngine.SceneManagement;
 public class EvolutionLevelManager : MonoBehaviour {
 
     public static EvolutionLevelManager manager;
-    public GameObject gameOverPanel;
     public GameObject gamePausePanel;
-    public TextMeshProUGUI scoreText;
-    public SaveData data;
+    public TextMeshProUGUI TimerText;
+    public TextMeshProUGUI GenerationText;
 
 
     private bool isPaused = false;
     private float previousTimeScale;
 
     private void Awake() {
-        Globals.ResetScores();
+        Globals.ResetAllStatus();
         manager = this;
-        SystemIO.Initialize();
-        data = new SaveData(0);
         GameSettings.LoadSettings();
-
-        gameOverPanel.SetActive(false);
         gamePausePanel.SetActive(false);
         Time.timeScale = 1f;
-
     }
 
     public void Update() {
@@ -38,11 +32,11 @@ public class EvolutionLevelManager : MonoBehaviour {
             }
         }
     }
-    public void GameOver() {
 
-        gameOverPanel.SetActive(true);
-        scoreText.text = $"Score: {Globals.GetScore(0)}";
-    }
+
+
+    // Scene Control
+    // ==============================================================================================================
     public void ReplayGame() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }

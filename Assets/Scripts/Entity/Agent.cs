@@ -8,6 +8,8 @@ public class Agent : MonoBehaviour, IEntity {
     // 視野內敵人如果距離過近 => 遠離敵人並開火
     // 視野內敵人如果距離過遠 => 追擊敵人並開火?
     // 視野內無敵人 => Wander
+    public bool IsInEvoScene = false;
+
     [SerializeField] private int SlotNo = 0;
     int IEntity.SlotNo => SlotNo;
     [SerializeField] Estate _state;
@@ -129,7 +131,10 @@ public class Agent : MonoBehaviour, IEntity {
         _CurrentHP -= amount;
         if (_CurrentHP < 0) {
             Destroy(gameObject);
-            GameLevelManager.manager.GameOver();
+            if (!IsInEvoScene) {
+                GameLevelManager.manager.GameOver();    // TODO : fix here
+            }
+            
         }
     }
     public void TakeHeal(int amount) {
@@ -153,6 +158,22 @@ public class Agent : MonoBehaviour, IEntity {
                 break;
             }
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other) {
+        if (other.gameObject.CompareTag("Wall") && _state == Estate.Wander) {
+            TurnBack();
+        }
+    }
+    private void TurnBack() {
+        // Reverse direction by rotating 180 degrees
+        transform.Rotate(0f, 0f, 180f);
+
+        // Optionally change wander direction to avoid getting stuck
+        ChangeWanderDirection();
+
+        // Reset any forces applied during charge
+        _rigidbody.velocity = Vector2.zero;
     }
     private void FindTarget() {
         Collider2D[] colliders =  Physics2D.OverlapCircleAll(transform.position, gViewDistance);
