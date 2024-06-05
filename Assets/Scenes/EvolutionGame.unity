@@ -1566,10 +1566,10 @@ MonoBehaviour:
   GenerationText: {fileID: 0}
   GenTimer: 0
   CurrentGeneration: 0
-  GenerationPeriod: 5
+  GenerationPeriod: 100
   POPULATIONS: 16
   MUTATION_RATE: 0.05
-  MAX_GENERATIONS: 3
+  MAX_GENERATIONS: 10
   CheckPeriod: 5
   AgentList: []
   AgentGroup: {fileID: 318463721}
