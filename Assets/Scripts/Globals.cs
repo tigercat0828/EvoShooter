@@ -8,11 +8,14 @@ public enum EvoGameState {
 public class Globals : MonoBehaviour 
 {
     private const int MAX_SLOT_NUM = 16;
+
+    [SerializeField]
+    public StatsticFile StatFile;
     public int[] scores = new int[MAX_SLOT_NUM];
     public bool[] ArenaClosed = new bool[MAX_SLOT_NUM];
 
     public EvoGameState State;
-    public StatsticFile StatFile;
+
     public static Globals instance;
     
     public void ResetAllStatus() { 

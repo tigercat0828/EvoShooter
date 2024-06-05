@@ -116,7 +116,7 @@ public class EvolutionLevelManager : MonoBehaviour {
         Globals.instance.StatFile.BestFitness.Add(infos.First().fitness);
         Globals.instance.StatFile.WorstFitness.Add(infos.Last().fitness);
 
-        double stdv = infos.Sum(x => Math.Pow(x.fitness - mean, 2))/POPULATIONS;
+        double stdv = Math.Sqrt(infos.Sum(x => Math.Pow(x.fitness - mean, 2)) / POPULATIONS);
         Globals.instance.StatFile.StdvFitness.Add((float)stdv);
 
         int gnebestIndex = infos.First().index;

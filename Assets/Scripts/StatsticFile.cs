@@ -1,8 +1,10 @@
 
+using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
+[Serializable]
 public class StatsticFile {
     public int Generations;
     // record each generation
@@ -22,11 +24,11 @@ public class StatsticFile {
         using (StreamWriter sw = new(filename, false)) {
             sw.WriteLine("Generation, AverageFitness, BestFitness, WorstFitness, StdFitness");
             
-            for (int i = 0; i < Generations; i++) {
+            for (int i = 0; i < Generations-1; i++) {
                 sw.WriteLine($"{i},{AverageFitness[i]},{BestFitness[i]},{WorstFitness[i]},{StdvFitness[i]}");
             }
-
-            for (int i = 0; i < Generations; i++) {
+            sw.WriteLine($"Fitness ,HealthPoint,AttackPoint,FireRate,MagazineSize,ReloadTime,BulletSpeed,MoveSpeed,RotateSpeed,ViewDistance");
+            for (int i = 0; i < Generations-1; i++) {
                 sw.WriteLine(BestFitness[i]+","+ GenBestAgent[i].ToString());
             }
             //sw.WriteLine("LastestAgentGene");

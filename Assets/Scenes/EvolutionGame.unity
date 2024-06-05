@@ -970,6 +970,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9f4c73d9e20b4045a5d213020fc9bcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StatFile:
+    Generations: 0
+    AverageFitness: []
+    BestFitness: 
+    WorstFitness: 
+    StdvFitness: []
+    LastestAgent:
+      HealthPoint: 0
+      AttackPoint: 0
+      FireRate: 0
+      MagazineSize: 0
+      ReloadTime: 0
+      BulletSpeed: 0
+      MoveSpeed: 0
+      RotateSpeed: 0
+      ViewDistance: 0
+    BestAgent:
+      HealthPoint: 0
+      AttackPoint: 0
+      FireRate: 0
+      MagazineSize: 0
+      ReloadTime: 0
+      BulletSpeed: 0
+      MoveSpeed: 0
+      RotateSpeed: 0
+      ViewDistance: 0
+    GenBestAgent: []
   scores: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   ArenaClosed: 00000000000000000000000000000000
   State: 0
@@ -1566,7 +1593,7 @@ MonoBehaviour:
   GenerationText: {fileID: 0}
   GenTimer: 0
   CurrentGeneration: 0
-  GenerationPeriod: 100
+  GenerationPeriod: 50
   POPULATIONS: 16
   MUTATION_RATE: 0.05
   MAX_GENERATIONS: 10
