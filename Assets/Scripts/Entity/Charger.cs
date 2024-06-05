@@ -124,7 +124,7 @@ public class Charger : MonoBehaviour, IEntity {
         if (_CurrentHP < 0) {
             Destroy(gameObject);
             
-            Globals.AddScore(SlotNo, GameSettings.options.Score_Charger);
+            Globals.intance.AddScore(SlotNo, GameSettings.options.Score_Charger);
         }
     }
 
@@ -140,7 +140,11 @@ public class Charger : MonoBehaviour, IEntity {
     }
     
     protected void AwareAgent() {
-        
+        if (Globals.intance.ArenaClosed[SlotNo]) {
+            Destroy(gameObject);
+            return;
+        }
+
         if (Vector2.Distance(transform.position, _target.position) < ViewDistance) {
             _state = Estate.TargetFound;
         }

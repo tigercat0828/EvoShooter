@@ -1,30 +1,33 @@
 using System;
+using UnityEngine;
 
 
-public static class Globals
+public class Globals : MonoBehaviour 
 {
     private const int MAX_SLOT_NUM = 16;
-    private static int[] scores;
-    private static bool[] ArenaActives;
+    public int[] scores = new int[MAX_SLOT_NUM];
+    public bool[] ArenaClosed = new bool[MAX_SLOT_NUM];
 
-    static Globals() {
-        scores = new int[MAX_SLOT_NUM];
-        ArenaActives = new bool[MAX_SLOT_NUM];
-    }
-    public static void ResetAllStatus() {
+    
+    public static Globals intance;
+
+    public void ResetAllStatus() { 
         // reset score
         Array.Fill(scores, 0);
         // reset arena active status
-        Array.Fill(ArenaActives, false);
+        Array.Fill(ArenaClosed, false);
     }
-
-    public static int GetScore(int slot) {
+    public void Awake() {
+        intance = this;
+        ResetAllStatus();
+    }
+    public int GetScore(int slot) {
         return scores[slot];
     }
-    public static void AddScore(int slot, int score) {
+    public  void AddScore(int slot, int score) {
         scores[slot] += score;
     }
-    public static void Minus(int slot, int score) {
+    public  void Minus(int slot, int score) {
         scores[slot] -= score;
     }
 }

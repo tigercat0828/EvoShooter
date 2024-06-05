@@ -15,16 +15,19 @@ public class GameLevelManager : MonoBehaviour {
     private float previousTimeScale;
 
     private void Awake() {
-        Globals.ResetAllStatus();
         manager = this;
-        SystemIO.Initialize();
-        data = new SaveData(0);
+     
+        
+        //SystemIO.Initialize();
+        //data = new SaveData(0);
 
         gameOverPanel.SetActive(false);
         gamePausePanel.SetActive(false);
         GameSettings.LoadSettings();
         Time.timeScale = 1f;
-
+    }
+    private void Start() {
+        Globals.intance.ResetAllStatus();
     }
 
     public void Update() {
@@ -41,7 +44,7 @@ public class GameLevelManager : MonoBehaviour {
     public void GameOver() {
 
         gameOverPanel.SetActive(true);
-        scoreText.text = $"Score: {Globals.GetScore(0)}";
+        scoreText.text = $"Score: {Globals.intance.GetScore(0)}";
     }
     public void ReplayGame() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

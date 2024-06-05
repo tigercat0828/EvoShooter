@@ -172,6 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97a94b59f53d47141ae75e8e0c71e8f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SlotNo: 0
   _state: 0
   HealthPoint: 200
   AttackPoint: 20
@@ -179,7 +180,8 @@ MonoBehaviour:
   RotateSpeed: 25
   ViewDistance: 10
   _CurrentHP: 0
-  KnockResistance: 0.5
+  _KnockResistance: 0.2
+  _target: {fileID: 0}
   _WanderDirectionChangeInterval: 6
 --- !u!114 &7826092210329596175
 MonoBehaviour:
@@ -188,9 +190,10 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 589438462195610092}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 95413b3f04023414283c612281038689, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 0
+  color: {r: 1, g: 0, b: 0, a: 1}

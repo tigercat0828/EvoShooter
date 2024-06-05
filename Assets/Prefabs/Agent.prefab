@@ -93,6 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 974116717e41c8a41beb1d8c708bf254, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsInEvoScene: 0
   SlotNo: 0
   _state: 0
   Fitness: 0
@@ -107,7 +108,7 @@ MonoBehaviour:
   gViewDistance: 10
   KeepAwayFactor: 0.8
   DodgeFactor: 0.2
-  _dodgeStrength: 3
+  _dodgeStrength: 0.3
   _wanderDirectionChangeInterval: 6
   _CurrentHP: 0
   _remainingBullet: 0
@@ -129,6 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 0
+  color: {r: 1, g: 0, b: 0, a: 1}
 --- !u!4 &4947451000628956522 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7652657765033211419, guid: 98f83e14515de3e478b00a66a28d979e, type: 3}

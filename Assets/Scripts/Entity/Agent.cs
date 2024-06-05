@@ -1,14 +1,11 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Rendering;
-
-
 
 public class Agent : MonoBehaviour, IEntity {
     // 視野內敵人如果距離過近 => 遠離敵人並開火
     // 視野內敵人如果距離過遠 => 追擊敵人並開火?
     // 視野內無敵人 => Wander
-    public bool IsInEvoScene = false;
+    public bool IsInEvoScene = true;
 
     [SerializeField] private int SlotNo = 0;
     int IEntity.SlotNo => SlotNo;
@@ -134,6 +131,9 @@ public class Agent : MonoBehaviour, IEntity {
             if (!IsInEvoScene) {
                 GameLevelManager.manager.GameOver();    // TODO : fix here
             }
+            Fitness = Globals.intance.GetScore(SlotNo);
+            Globals.intance.ArenaClosed[SlotNo] = true;
+
             
         }
     }
@@ -153,7 +153,6 @@ public class Agent : MonoBehaviour, IEntity {
                 if(Vector3.Dot(directionToSpit, dodgeDirection) > 0 ) {
                     dodgeDirection = -dodgeDirection;
                 }
-                Debug.Log("Dodging bullet");
                 _rigidbody.AddForce(dodgeDirection * _dodgeStrength, ForceMode2D.Impulse);
                 break;
             }

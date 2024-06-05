@@ -123,6 +123,52 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &53398013
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 53398015}
+  - component: {fileID: 53398014}
+  m_Layer: 0
+  m_Name: Globals
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &53398014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 53398013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9f4c73d9e20b4045a5d213020fc9bcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scores: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  ArenaClosed: 00000000000000000000000000000000
+--- !u!4 &53398015
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 53398013}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 359.0083, y: 364.00766, z: -2.6823666}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &80081070
 GameObject:
   m_ObjectHideFlags: 0
@@ -2228,6 +2274,10 @@ PrefabInstance:
       propertyPath: enemyPrefab.Array.data[3]
       value: 
       objectReference: {fileID: 589438462195610092, guid: 6a66d1d510724904aa2f34ccc573847c, type: 3}
+    - target: {fileID: 6109283344321578938, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6397329840306338455, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_Name
       value: Arena
@@ -2297,5 +2347,6 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 1718832740}
   - {fileID: 948178036}
+  - {fileID: 53398015}
   - {fileID: 7592019036839378137}
   - {fileID: 5717843587366273469}

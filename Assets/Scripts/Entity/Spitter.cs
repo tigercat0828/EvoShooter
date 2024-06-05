@@ -100,7 +100,7 @@ public class Spitter : MonoBehaviour, IEntity {
         _CurrentHP -= amount;
         if (_CurrentHP < 0) {
             Destroy(gameObject);
-            Globals.AddScore(SlotNo, GameSettings.options.Score_Spitter);
+            Globals.intance.AddScore(SlotNo, GameSettings.options.Score_Spitter);
         }
     }
 
@@ -115,6 +115,10 @@ public class Spitter : MonoBehaviour, IEntity {
         _rigidbody.AddForce(direction * strength, ForceMode2D.Impulse);
     }
     protected void AwareAgent() {
+        if (Globals.intance.ArenaClosed[SlotNo]) {
+            Destroy(gameObject);
+            return;
+        }
         if (Vector2.Distance(transform.position, _target.position) < ViewDistance) {
             _state = Estate.TargetFound;
         }

@@ -14,7 +14,7 @@ public class Tank : MonoBehaviour, IEntity {
 
     [SerializeField] private int _CurrentHP;
     [SerializeField] private float _KnockResistance = 0.2f;
-    private Transform _target;
+    [SerializeField] private Transform _target;
     private Rigidbody2D _rigidbody;
 
     // wander
@@ -70,7 +70,16 @@ public class Tank : MonoBehaviour, IEntity {
             TurnBack();
         }
     }
+    private void TurnBack() {
+        // Reverse direction by rotating 180 degrees
+        transform.Rotate(0f, 0f, 180f);
 
+        // Optionally change wander direction to avoid getting stuck
+        ChangeWanderDirection();
+
+        // Reset any forces applied during charge
+        _rigidbody.velocity = Vector2.zero;
+    }
     public void LocateTarget(int group) {
         //_target = GameObject.FindGameObjectWithTag("Player").transform;
 
@@ -87,7 +96,7 @@ public class Tank : MonoBehaviour, IEntity {
         _CurrentHP -= amount;
         if (_CurrentHP < 0) {
             Destroy(gameObject);
-            Globals.AddScore(SlotNo, GameSettings.options.Score_Tank);
+            Globals.intance.AddScore(SlotNo, GameSettings.options.Score_Tank);
         }
     }
 
@@ -102,6 +111,10 @@ public class Tank : MonoBehaviour, IEntity {
     }
 
     protected void AwareAgent() {
+        if (Globals.intance.ArenaClosed[SlotNo]) {
+            Destroy(gameObject);
+            return;
+        }
         if (Vector2.Distance(transform.position, _target.position) < ViewDistance) {
             _state = Estate.TargetFound;
         }
@@ -114,16 +127,7 @@ public class Tank : MonoBehaviour, IEntity {
         _wanderDirection = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
     }
 
-    private void TurnBack() {
-        // Reverse direction by rotating 180 degrees
-        transform.Rotate(0f, 0f, 180f);
-
-        // Optionally change wander direction to avoid getting stuck
-        ChangeWanderDirection();
-
-        // Reset any forces applied during charge
-        _rigidbody.velocity = Vector2.zero;
-    }
+   
 
     public void LoadGameSettings() {
         GameSettings.LoadSettings();

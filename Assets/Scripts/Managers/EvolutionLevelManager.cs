@@ -1,9 +1,11 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 public class EvolutionLevelManager : MonoBehaviour {
 
+    private const int MAX_SLOTS_NUM =2;
     public static EvolutionLevelManager manager;
     public GameObject gamePausePanel;
     public TextMeshProUGUI TimerText;
@@ -13,14 +15,21 @@ public class EvolutionLevelManager : MonoBehaviour {
     private bool isPaused = false;
     private float previousTimeScale;
 
+
+    public GameObject AgentPrefab;
+    public Transform[] EntityDish = new Transform[MAX_SLOTS_NUM];
+
     private void Awake() {
-        Globals.ResetAllStatus();
         manager = this;
+       
         GameSettings.LoadSettings();
         gamePausePanel.SetActive(false);
         Time.timeScale = 1f;
     }
-
+    private void Start() {
+        Globals.intance.ResetAllStatus();
+        SpawnAgents();
+    }
     public void Update() {
         // click ESC so can pause the game
         if (Input.GetKeyDown(KeyCode.Escape)) {
@@ -32,7 +41,13 @@ public class EvolutionLevelManager : MonoBehaviour {
             }
         }
     }
-
+    public void SpawnAgents() {
+        for (int i = 0; i < EntityDish.Length; i++) {
+            Agent agent = Instantiate(AgentPrefab, EntityDish[i].position, Quaternion.identity, EntityDish[i]).GetComponent<Agent>();
+            agent.SetSlot(i);
+            agent.IsInEvoScene = true;
+        }
+    }
 
 
     // Scene Control

@@ -31,6 +31,11 @@ public class Zombie : MonoBehaviour, IEntity {
         LocateTarget(0);
     }
     private void Update() {
+        if (Globals.intance.ArenaClosed[SlotNo]) {
+            Destroy(gameObject);
+            return;
+        }
+
         Vector2 targetDirection = _target.position - transform.position;
         float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg - 90;
         Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
@@ -47,7 +52,17 @@ public class Zombie : MonoBehaviour, IEntity {
             player.TakeDamage(AttackPoint);
             player.KnockBack(transform.up, 8);
         }
-      
+        else if (other.gameObject.CompareTag("Wall")) {
+            TurnBack();
+        }
+    }
+
+    
+    private void TurnBack() {
+        // Reverse direction by rotating 180 degrees
+        transform.Rotate(0f, 0f, 180f);
+        // Reset any forces applied during charge
+        _rigidbody.velocity = Vector2.zero;
     }
     public void LocateTarget(int group) {
         //_target = GameObject.FindGameObjectWithTag("Player").transform;
@@ -64,7 +79,7 @@ public class Zombie : MonoBehaviour, IEntity {
         _CurrentHP -= amount;
         if (_CurrentHP < 0) {
             Destroy(gameObject);
-            Globals.AddScore(SlotNo, GameSettings.options.Score_Zombie);
+            Globals.intance.AddScore(SlotNo, GameSettings.options.Score_Zombie);
         }
     }
     public void TakeHeal(int amount) {
