@@ -40,9 +40,19 @@ public class Spitter : MonoBehaviour, IEntity {
         LocateTarget(0);
         _state = Estate.Wander;
     }
-    private void Update() {
+
+    private void Shoot() {
+        float angle = Vector2.Angle(transform.up, _target.position - transform.position);
+
+        if (_fireTimer < 0f && angle < 30) {
+            _fireTimer = _fireInterval;
+            Bullet bullet = Instantiate(_bulletPrefab, _FirePoint.position, _FirePoint.rotation);
+            bullet.SetStatus(AttackPoint, 10, BulletType.Enemy);
+        }
+    }
+    private void FixedUpdate() {
         if (!AwareAgent()) return;
-        _fireTimer -= Time.deltaTime;
+        _fireTimer -= Time.fixedDeltaTime;
 
         Quaternion targetRotation = new();
         if (_state == Estate.TargetFound) {
@@ -60,19 +70,7 @@ public class Spitter : MonoBehaviour, IEntity {
             }
             targetRotation = Quaternion.LookRotation(Vector3.forward, _wanderDirection);
         }
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, RotateSpeed * Time.deltaTime);
-    }
-
-    private void Shoot() {
-        float angle = Vector2.Angle(transform.up, _target.position - transform.position);
-
-        if (_fireTimer < 0f && angle < 30) {
-            _fireTimer = _fireInterval;
-            Bullet bullet = Instantiate(_bulletPrefab, _FirePoint.position, _FirePoint.rotation);
-            bullet.SetStatus(AttackPoint, 10, BulletType.Enemy);
-        }
-    }
-    private void FixedUpdate() {
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, RotateSpeed * Time.fixedDeltaTime);
         // 進入射程不會再向Agent靠近
         if ((_state == Estate.TargetFound && Vector2.Distance(transform.position, _target.position) > _distanceToStop)
             || _state == Estate.Wander) {

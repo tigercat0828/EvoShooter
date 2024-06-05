@@ -36,26 +36,26 @@ public class Tank : MonoBehaviour, IEntity {
     private void Start() {
         LocateTarget(0);
     }
-    private void Update() {
-        if(!AwareAgent()) return;
+
+    private void FixedUpdate() {
+        if (!AwareAgent()) return;
         Quaternion targetRotation = new();
         if (_state == Estate.TargetFound) {
             Vector2 targetDirection = _target.position - transform.position;
             float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg - 90;
             targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, RotateSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, RotateSpeed * Time.fixedDeltaTime);
         }
         if (_state == Estate.Wander) {
-            _WanderDirectionChangeTimer -= Time.deltaTime;
+            _WanderDirectionChangeTimer -= Time.fixedDeltaTime;
             if (_WanderDirectionChangeTimer <= 0) {
                 _WanderDirectionChangeTimer = _WanderDirectionChangeInterval;
                 ChangeWanderDirection();
             }
             targetRotation = Quaternion.LookRotation(Vector3.forward, _wanderDirection);
         }
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, RotateSpeed * Time.deltaTime);
-    }
-    private void FixedUpdate() {
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, RotateSpeed * Time.fixedDeltaTime);
+
         _rigidbody.AddForce(transform.up * MoveSpeed);
     }
 

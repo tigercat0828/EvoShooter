@@ -20,8 +20,9 @@ public class Bullet : MonoBehaviour {
     private void Start() {
         Destroy(gameObject, lifeTime);
     }
-    private void Update() {
-        transform.position += Speed * Time.deltaTime * transform.up;
+
+    private void FixedUpdate() {
+        transform.position += Speed * Time.fixedDeltaTime * transform.up;
     }
     public void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.CompareTag("Wall")) {

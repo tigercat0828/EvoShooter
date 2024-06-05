@@ -70,9 +70,10 @@ public class Agent : MonoBehaviour, IEntity {
         _distanceToDodge = gViewDistance * DodgeFactor;
         reloadingSprite.gameObject.SetActive(false);
     }
-    private void Update() {
 
-        _fireTimer -= Time.deltaTime;
+    private void FixedUpdate() {
+
+        _fireTimer -= Time.fixedDeltaTime;
         FindTarget();
         DodgeBullet();
         Quaternion targetRotation = new();
@@ -87,16 +88,15 @@ public class Agent : MonoBehaviour, IEntity {
             if (_remainingBullet != gMagazineSize) {
                 StartCoroutine(Reload());
             }
-            _wanderDirectionChangeTimer -= Time.deltaTime;
+            _wanderDirectionChangeTimer -= Time.fixedDeltaTime;
             if (_wanderDirectionChangeTimer <= 0) {
                 _wanderDirectionChangeTimer = _wanderDirectionChangeInterval;
                 ChangeWanderDirection();
             }
             targetRotation = Quaternion.LookRotation(Vector3.forward, _wanderDirection);
         }
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, gRotateSpeed * Time.deltaTime);
-    }
-    private void FixedUpdate() {
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, gRotateSpeed * Time.fixedDeltaTime);
+
         // 進入射程不會再向target靠近
         if (_state == Estate.Pursue || _state == Estate.Wander) {
             _rigidbody.AddForce(transform.up * gMoveSpeed);

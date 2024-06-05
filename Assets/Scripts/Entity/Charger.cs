@@ -47,9 +47,9 @@ public class Charger : MonoBehaviour, IEntity {
         LocateTarget(0);
         _state = Estate.Wander;
     }
-    private void Update() {
+    private void FixedUpdate() {
         if (!AwareAgent()) return;
-        _fireTimer -= Time.deltaTime;
+        _fireTimer -= Time.fixedDeltaTime;
 
         Quaternion targetRotation = new();
         if (_state == Estate.TargetFound) {
@@ -60,16 +60,20 @@ public class Charger : MonoBehaviour, IEntity {
             targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
         }
         if (_state == Estate.Wander) {
-            _wanderDirectionChangeTimer -= Time.deltaTime;
+            _wanderDirectionChangeTimer -= Time.fixedDeltaTime;
             if (_wanderDirectionChangeTimer <= 0) {
                 _wanderDirectionChangeTimer = _wanderDirectionChangeInterval;
                 ChangeWanderDirection();
             }
             targetRotation = Quaternion.LookRotation(Vector3.forward, _wanderDirection);
         }
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, RotateSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, RotateSpeed * Time.fixedDeltaTime);
+        // 進入射程不會再向Agent靠近
+        if ((_state == Estate.TargetFound && Vector2.Distance(transform.position, _target.position) > _distanceToStop)
+            || _state == Estate.Wander) {
+            _rigidbody.AddForce(transform.up * MoveSpeed);
+        }
     }
-
     private void Charge() {
 
         float angle = Vector2.Angle(transform.up, _target.position - transform.position);
@@ -99,13 +103,7 @@ public class Charger : MonoBehaviour, IEntity {
         // Reset any forces applied during charge
         _rigidbody.velocity = Vector2.zero;
     }
-    private void FixedUpdate() {
-        // 進入射程不會再向Agent靠近
-        if ((_state == Estate.TargetFound && Vector2.Distance(transform.position, _target.position) > _distanceToStop)
-            || _state == Estate.Wander) {
-            _rigidbody.AddForce(transform.up * MoveSpeed);
-        }
-    }
+
     protected void LocateTarget(int group) {
         //_target = GameObject.FindGameObjectWithTag("Player").transform;
         GameObject[] objectsWithTag = GameObject.FindGameObjectsWithTag("Player");

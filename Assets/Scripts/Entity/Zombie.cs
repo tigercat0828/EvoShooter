@@ -31,18 +31,18 @@ public class Zombie : MonoBehaviour, IEntity {
         LocateTarget(0);
     }
     private void Update() {
+     
+
+    }
+    private void FixedUpdate() {
         if (Globals.instance.ArenaClosed[SlotNo]) {
             Destroy(gameObject);
             return;
         }
-
         Vector2 targetDirection = _target.position - transform.position;
         float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg - 90;
         Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, RotateSpeed * Time.deltaTime);
-
-    }
-    private void FixedUpdate() {
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, RotateSpeed * Time.fixedDeltaTime);
         _rigidbody.AddForce(transform.up * MoveSpeed);
     }
 
