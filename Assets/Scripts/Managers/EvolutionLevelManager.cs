@@ -2,11 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using Unity.Mathematics;
-using Unity.Properties;
 using UnityEngine;
-using UnityEngine.UIElements;
-using static UnityEngine.Rendering.DebugUI;
 
 public class EvolutionLevelManager : MonoBehaviour {
 
@@ -129,37 +125,65 @@ public class EvolutionLevelManager : MonoBehaviour {
         // Truncation by 50 %
         for (int i = 0; i < POPULATIONS/2; i++) {
             int index = infos[i].index;
+            
+            selectedGenes.Add(AgentGenes[index]);
             selectedGenes.Add(AgentGenes[index]);
         }
         Globals.instance.ResetAllStatus();
         AgentList.Clear();
         AgentGenes.Clear();
 
-        // create new generation 
-        for (int i = 0; i < 8; i++) {
+        // inherit
+        List<Gene> newGenGenes = new();
+        
+        for (int i = 0; i < POPULATIONS; i += 2) {
+            (Gene a, Gene b) = Gene.CrossOver(selectedGenes[i], selectedGenes[i + 1]);
+            newGenGenes.Add(a);
+            newGenGenes.Add(b);
+        }
+        for (int i = 0; i < newGenGenes.Count; i++) {
+            if (UnityEngine.Random.Range(0f, 1f) < MUTATION_RATE) {
+                newGenGenes[i] = Gene.Mutate(newGenGenes[i]);
+            }
+        }
+        for (int i = 0; i < 16; i++) {
             Agent agent = Instantiate(AgentPrefab, EntityGroup[i].position, Quaternion.identity, AgentGroup).GetComponent<Agent>();
             agent.SetSlot(i);
             agent.IsInEvoScene = true;
             agent.name = $"Agent ({i})";
-            agent.SetGene(selectedGenes[i]);
+            agent.SetGene(newGenGenes[i]);
             AgentList.Add(agent);
-            AgentGenes.Add(new(selectedGenes[i]));
+            AgentGenes.Add(new(newGenGenes[i]));
         }
 
-        for (int i = 8; i < 16; i++) {
-            Agent agent = Instantiate(AgentPrefab, EntityGroup[i].position, Quaternion.identity, AgentGroup).GetComponent<Agent>();
-            agent.SetSlot(i);
-            agent.IsInEvoScene = true;
-            agent.name = $"Agent ({i})";
-            Gene gene = Gene.GenRandomGene();
-            agent.SetGene(gene);
-            AgentList.Add(agent);
-            AgentGenes.Add(gene);
-        }
-        Globals.instance.State = EvoGameState.Evolving;
+
+        //// random search 
+        //for (int i = 0; i < 8; i++) {
+        //    Agent agent = Instantiate(AgentPrefab, EntityGroup[i].position, Quaternion.identity, AgentGroup).GetComponent<Agent>();
+        //    agent.SetSlot(i);
+        //    agent.IsInEvoScene = true;
+        //    agent.name = $"Agent ({i})";
+        //    agent.SetGene(selectedGenes[i]);
+        //    AgentList.Add(agent);
+        //    AgentGenes.Add(new(selectedGenes[i]));
+        //}
+
+        //for (int i = 8; i < 16; i++) {
+        //    Agent agent = Instantiate(AgentPrefab, EntityGroup[i].position, Quaternion.identity, AgentGroup).GetComponent<Agent>();
+        //    agent.SetSlot(i);
+        //    agent.IsInEvoScene = true;
+        //    agent.name = $"Agent ({i})";
+        //    Gene gene = Gene.GenRandomGene();
+        //    agent.SetGene(gene);
+        //    AgentList.Add(agent);
+        //    AgentGenes.Add(gene);
+        //}
 
 
         selectedGenes.Clear();
+        Globals.instance.State = EvoGameState.Evolving;
+        GenTimer = 0;
+
     }
 
     private bool CheckAllArenaAreClosed() {
