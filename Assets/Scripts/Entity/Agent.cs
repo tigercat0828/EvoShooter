@@ -139,8 +139,6 @@ public class Agent : MonoBehaviour, IEntity {
             }
             Fitness = Globals.instance.GetScore(SlotNo);
             Globals.instance.ArenaClosed[SlotNo] = true;
-
-            
         }
     }
     public void TakeHeal(int amount) {
@@ -244,7 +242,7 @@ public class Agent : MonoBehaviour, IEntity {
         gMoveSpeed += gene.MoveSpeed * GameSettings.options.Ability_MoveSpeed;
         gRotateSpeed += gene.RotateSpeed * GameSettings.options.Ability_RotateSpeed;
         gFireRate += gene.FireRate * GameSettings.options.Ability_FireRate;
-        gReloadTime += gene.ReloadTime * GameSettings.options.Ability_ReloadTime;
+        gReloadTime -= gene.ReloadTime * GameSettings.options.Ability_ReloadTime;
         gBulletSpeed += gene.BulletSpeed * GameSettings.options.Ability_BulletSpeed;
         gMagazineSize += gene.MagazineSize * GameSettings.options.Ability_MagazineSize;
         gViewDistance += gene.ViewDistance * GameSettings.options.Ability_ViewDistance;

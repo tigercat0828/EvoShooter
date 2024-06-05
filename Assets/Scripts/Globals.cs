@@ -1,6 +1,9 @@
 using System;
 using UnityEngine;
 
+public enum EvoGameState {
+    Evolving, Calculating, Finish
+}
 
 public class Globals : MonoBehaviour 
 {
@@ -8,9 +11,10 @@ public class Globals : MonoBehaviour
     public int[] scores = new int[MAX_SLOT_NUM];
     public bool[] ArenaClosed = new bool[MAX_SLOT_NUM];
 
-    
+    public EvoGameState State;
+    public StatsticFile StatFile;
     public static Globals instance;
-
+    
     public void ResetAllStatus() { 
         // reset score
         Array.Fill(scores, 0);
@@ -20,6 +24,10 @@ public class Globals : MonoBehaviour
     public void Awake() {
         instance = this;
         ResetAllStatus();
+        
+    }
+    private void Start() {
+        State = EvoGameState.Evolving;
     }
     public int GetScore(int slot) {
         return scores[slot];

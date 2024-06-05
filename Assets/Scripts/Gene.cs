@@ -23,7 +23,20 @@ public class Gene {
         RotateSpeed = rotateSpeed;
         ViewDistance = viewDistance;
     }
-
+    public Gene(Gene other) {
+        HealthPoint = other.HealthPoint;
+        AttackPoint = other.AttackPoint;
+        FireRate = other.FireRate;
+        MagazineSize = other.MagazineSize;
+        ReloadTime = other.ReloadTime;
+        BulletSpeed = other.BulletSpeed;
+        MoveSpeed = other.MoveSpeed;
+        RotateSpeed = other.RotateSpeed;
+        ViewDistance = other.ViewDistance;
+    }
+    public override string ToString() {
+        return $"{HealthPoint},{AttackPoint},{FireRate},{MagazineSize},{ReloadTime},{BulletSpeed},{MoveSpeed}, {RotateSpeed},{ViewDistance}";
+    }
     public static Gene GenRandomGene() {
 
         int[] stats = new int[9];
@@ -58,6 +71,5 @@ public class Gene {
              stats[7] ,
              stats[8] 
             );
-
     }
 }

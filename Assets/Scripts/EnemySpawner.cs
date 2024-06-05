@@ -28,7 +28,10 @@ public class EnemySpawner : MonoBehaviour {
         StartCoroutine(SpawnEnemyAfterDelay(3f));
     }
     private void Update() {
-        if (!Globals.instance.ArenaClosed[SlotNo]) {
+
+        bool arenaClosed = Globals.instance.ArenaClosed[SlotNo];
+        EvoGameState state = Globals.instance.State;
+        if (!arenaClosed && state == EvoGameState.Evolving) {
 
             if (spawnTimer > SpawnTime) {
                 spawnTimer = 0;
