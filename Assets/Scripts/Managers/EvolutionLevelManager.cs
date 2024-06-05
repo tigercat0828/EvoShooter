@@ -116,7 +116,7 @@ public class EvolutionLevelManager : MonoBehaviour {
         Globals.instance.StatFile.StdvFitness.Add((float)stdv);
 
         int gnebestIndex = infos.First().index;
-        Globals.instance.StatFile.GenBestAgent.Add(AgentGenes[gnebestIndex]);
+        Globals.instance.StatFile.GenBestAgent.Add(new(AgentGenes[gnebestIndex]));
         
 
 
