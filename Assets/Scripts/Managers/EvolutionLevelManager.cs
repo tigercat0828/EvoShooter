@@ -129,6 +129,8 @@ public class EvolutionLevelManager : MonoBehaviour {
             selectedGenes.Add(AgentGenes[index]);
             selectedGenes.Add(AgentGenes[index]);
         }
+
+        ShuffleList(selectedGenes);
         Globals.instance.ResetAllStatus();
         AgentList.Clear();
         AgentGenes.Clear();
@@ -185,7 +187,16 @@ public class EvolutionLevelManager : MonoBehaviour {
         GenTimer = 0;
 
     }
+    public void ShuffleList(List<Gene> list) {
+        System.Random rng = new System.Random();
 
+        int n = list.Count;
+        while (n > 1) {
+            n--;
+            int k = rng.Next(n + 1);
+            (list[n], list[k]) = (list[k], list[n]);
+        }
+    }
     private bool CheckAllArenaAreClosed() {
         for (int i = 0; i < POPULATIONS; i++) {
             if (!Globals.instance.ArenaClosed[i]) {
