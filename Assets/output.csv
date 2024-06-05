@@ -1,6 +1,6 @@
 Generation, AverageFitness, BestFitness, WorstFitness, StdFitness
-0,8.9375,27,4,5.320582
-1,5.5,28,0,7.483315
+0,23.5625,32,12,4.974545
+1,21.5,27,6,5.012485
 Fitness ,HealthPoint,AttackPoint,FireRate,MagazineSize,ReloadTime,BulletSpeed,MoveSpeed,RotateSpeed,ViewDistance
-27,20,12,21,1,0,11,0, 18,17
-28,20,12,21,1,0,11,0, 18,17
+32,11,7,13,11,5,11,12, 11,19
+27,14,11,15,17,8,16,5, 1,13
