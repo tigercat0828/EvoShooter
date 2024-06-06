@@ -6,9 +6,11 @@
 
 人口 16人
 
-遊玩時間 300秒
+遊玩時間 300秒 (時間尺度:20倍)
 
 ### 第一組資料分析：
+
+環境：AMD Ryzen R5/RTX3050/16GB
 
 Orange Line : Best Fitness
 
@@ -70,6 +72,9 @@ Blue Line : View Distance
 
 ### 第二組資料分析：
 
+時間尺度:放大為100倍
+環境：i9-13900K/RTX4090/16GB RAM
+
 Orange Line : Best Fitness
 Blue Line : Average Fitness
 
@@ -88,6 +93,8 @@ Blue Line : 各人口Fitness值之Error Bar
 
 
 ### 第三組資料分析：
+時間尺度:100倍
+環境：同第二組
 
 Orange Line : Best Fitness
 Blue Line : Average Fitness
