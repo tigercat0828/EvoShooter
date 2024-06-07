@@ -129,8 +129,8 @@ public class EvolutionLevelManager : MonoBehaviour {
             selectedGenes.Add(AgentGenes[index]);
             selectedGenes.Add(AgentGenes[index]);
         }
-
         ShuffleList(selectedGenes);
+
         Globals.instance.ResetAllStatus();
         AgentList.Clear();
         AgentGenes.Clear();
