@@ -58,7 +58,6 @@ public class EnemySpawner : MonoBehaviour {
                 break;
             }
         }
-
         IEntity entity = Instantiate(enemyToSpawn, transform.position, Quaternion.identity, EntityGroup).GetComponent<IEntity>();
         entity.SetSlot(SlotNo);
     }

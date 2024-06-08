@@ -30,10 +30,7 @@ public class Zombie : MonoBehaviour, IEntity {
     private void Start() {
         LocateTarget(0);
     }
-    private void Update() {
-     
 
-    }
     private void FixedUpdate() {
         if (Globals.instance.ArenaClosed[SlotNo]) {
             Destroy(gameObject);

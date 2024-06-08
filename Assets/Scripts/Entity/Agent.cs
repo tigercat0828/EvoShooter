@@ -6,8 +6,6 @@ public class Agent : MonoBehaviour, IEntity {
     // 視野內敵人如果距離過遠 => 追擊敵人並開火?
     // 視野內無敵人 => Wander
 
-
-
     [SerializeField] private int SlotNo = 0;
     int IEntity.SlotNo => SlotNo;
     [SerializeField] Estate _state;
@@ -26,8 +24,7 @@ public class Agent : MonoBehaviour, IEntity {
     public float    gViewDistance = 10;
     
     public float    KeepAwayFactor = 0.8f;
-    public float    DodgeFactor = 0.2f;
-    
+    public float    DodgeFactor = 0.25f;
     
     private float _fireTimer;
     private float _fireInterval;
@@ -36,7 +33,7 @@ public class Agent : MonoBehaviour, IEntity {
 
     
     public bool IsInEvoScene = true;
-    [SerializeField] private float _dodgeStrength = 3;
+    [SerializeField] private float _dodgeStrength = 1;
 
 
     // wander

@@ -1843,6 +1843,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1011044517}
     m_Modifications:
+    - target: {fileID: 802262358825687941, guid: f37c859dbc1b42c4e8c3cff0f2710e1c, type: 3}
+      propertyPath: DodgeFactor
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 802262358825687941, guid: f37c859dbc1b42c4e8c3cff0f2710e1c, type: 3}
+      propertyPath: _dodgeStrength
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 802262358825687941, guid: f37c859dbc1b42c4e8c3cff0f2710e1c, type: 3}
+      propertyPath: Gene.stats.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1176701525979821633, guid: f37c859dbc1b42c4e8c3cff0f2710e1c, type: 3}
       propertyPath: m_Name
       value: Agent
@@ -2642,8 +2654,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9f4c73d9e20b4045a5d213020fc9bcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StatFile:
+    Generations: 0
+    AverageFitness: []
+    BestFitness: 
+    WorstFitness: 
+    StdvFitness: []
+    LastestAgent:
+      stats: 
+    BestAgent:
+      stats: 
+    GenBestAgent: []
   scores: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   ArenaClosed: 00000000000000000000000000000000
+  State: 0
 --- !u!4 &1534829516
 Transform:
   m_ObjectHideFlags: 0
@@ -3499,7 +3523,7 @@ PrefabInstance:
       objectReference: {fileID: 589438462195610092, guid: 6a66d1d510724904aa2f34ccc573847c, type: 3}
     - target: {fileID: 5921642915621801607, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5957112659796901888, guid: 904e2d58fd532114fbe2752cbba718d9, type: 3}
       propertyPath: SlotNo

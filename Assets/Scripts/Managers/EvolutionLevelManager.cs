@@ -117,15 +117,11 @@ public class EvolutionLevelManager : MonoBehaviour {
 
         int gnebestIndex = infos.First().index;
         Globals.instance.StatFile.GenBestAgent.Add(new(AgentGenes[gnebestIndex]));
-        
-
-
 
         List<Gene> selectedGenes = new();
         // Truncation by 50 %
         for (int i = 0; i < POPULATIONS/2; i++) {
             int index = infos[i].index;
-            
             selectedGenes.Add(AgentGenes[index]);
             selectedGenes.Add(AgentGenes[index]);
         }
@@ -137,7 +133,6 @@ public class EvolutionLevelManager : MonoBehaviour {
 
         // inherit
         List<Gene> newGenGenes = new();
-        
         for (int i = 0; i < POPULATIONS; i += 2) {
             (Gene a, Gene b) = Gene.CrossOver(selectedGenes[i], selectedGenes[i + 1]);
             newGenGenes.Add(a);
@@ -158,34 +153,50 @@ public class EvolutionLevelManager : MonoBehaviour {
             AgentGenes.Add(new(newGenGenes[i]));
         }
 
-
-        //// random search 
-        //for (int i = 0; i < 8; i++) {
-        //    Agent agent = Instantiate(AgentPrefab, EntityGroup[i].position, Quaternion.identity, AgentGroup).GetComponent<Agent>();
-        //    agent.SetSlot(i);
-        //    agent.IsInEvoScene = true;
-        //    agent.name = $"Agent ({i})";
-        //    agent.SetGene(selectedGenes[i]);
-        //    AgentList.Add(agent);
-        //    AgentGenes.Add(new(selectedGenes[i]));
-        //}
-
-        //for (int i = 8; i < 16; i++) {
-        //    Agent agent = Instantiate(AgentPrefab, EntityGroup[i].position, Quaternion.identity, AgentGroup).GetComponent<Agent>();
-        //    agent.SetSlot(i);
-        //    agent.IsInEvoScene = true;
-        //    agent.name = $"Agent ({i})";
-        //    Gene gene = Gene.GenRandomGene();
-        //    agent.SetGene(gene);
-        //    AgentList.Add(agent);
-        //    AgentGenes.Add(gene);
-        //}
-
-
         selectedGenes.Clear();
         Globals.instance.State = EvoGameState.Evolving;
         GenTimer = 0;
 
+    }
+    private void Evolution() {
+
+    }
+    private void TruncationRandomSearch() {
+        List<AgentInfo> infos = new();
+        // record gene of agents
+        for (int i = 0; i < POPULATIONS; i++) {
+            infos.Add(new(i, Globals.instance.scores[i]));
+        }
+        infos = infos.OrderByDescending(ainfo => ainfo.fitness).ToList();
+        List<Gene> selectedGenes = new();
+        // Truncation by 50 %
+        for (int i = 0; i < POPULATIONS / 2; i++) {
+            int index = infos[i].index;
+            selectedGenes.Add(AgentGenes[index]);
+            selectedGenes.Add(AgentGenes[index]);
+        }
+        ShuffleList(selectedGenes);
+        // random search 
+        for (int i = 0; i < 8; i++) {
+            Agent agent = Instantiate(AgentPrefab, EntityGroup[i].position, Quaternion.identity, AgentGroup).GetComponent<Agent>();
+            agent.SetSlot(i);
+            agent.IsInEvoScene = true;
+            agent.name = $"Agent ({i})";
+            agent.SetGene(selectedGenes[i]);
+            AgentList.Add(agent);
+            AgentGenes.Add(new(selectedGenes[i]));
+        }
+
+        for (int i = 8; i < 16; i++) {
+            Agent agent = Instantiate(AgentPrefab, EntityGroup[i].position, Quaternion.identity, AgentGroup).GetComponent<Agent>();
+            agent.SetSlot(i);
+            agent.IsInEvoScene = true;
+            agent.name = $"Agent ({i})";
+            Gene gene = Gene.GenRandomGene();
+            agent.SetGene(gene);
+            AgentList.Add(agent);
+            AgentGenes.Add(gene);
+        }
     }
     public void ShuffleList(List<Gene> list) {
         System.Random rng = new System.Random();
